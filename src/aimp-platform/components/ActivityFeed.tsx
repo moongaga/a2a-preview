@@ -1,0 +1,2 @@
+import React from 'react';
+export function ActivityFeed({ notices }: { notices: Array<{ type: string; title: string }> }) { return <section className="content-panel activity-feed"><div className="panel-heading"><h2>业务动态</h2></div>{notices.map((notice, index) => <div key={`${notice.title}-${index}`} className={`activity-item ${notice.type}`}><span>●</span><div><strong>{notice.title}</strong><small>{index + 1} 小时前 · 已进入当前版本上下文</small></div></div>)}</section>; }

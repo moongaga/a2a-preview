@@ -1,0 +1,2 @@
+import React from 'react';
+export function LeadStrategyPanel({ lead, onAction }: { lead: { name: string; score: number; status: string }; onAction: (action: string) => void }) { return <section className="lead-panel"><span className="eyebrow">策略工作台</span><h3>{lead.name}</h3><p>AI 建议：优先安排企业微信触达，置信度 {lead.score > 80 ? '高' : '中'}</p><button type="button" onClick={() => onAction('recommend')}>生成跟进建议</button></section>; }

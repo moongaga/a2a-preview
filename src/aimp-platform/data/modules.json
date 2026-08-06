@@ -1,0 +1,4765 @@
+[
+  {
+    "id": "workspace",
+    "code": "WORKSPACE",
+    "name": "工作空间",
+    "domainId": "personal-work",
+    "versionId": "v1",
+    "maturity": "implementation",
+    "primaryObject": "task",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "task-center",
+      "agents",
+      "dynamic-plan"
+    ],
+    "pages": [
+      {
+        "id": "todos",
+        "name": "我的待办",
+        "kind": "list",
+        "purpose": "处理工作空间中的我的待办，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "WORKSPACE-FR-001",
+          "WORKSPACE-FR-002"
+        ]
+      },
+      {
+        "id": "scenarios",
+        "name": "场景工作区",
+        "kind": "list",
+        "purpose": "处理工作空间中的场景工作区，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "WORKSPACE-FR-003",
+          "WORKSPACE-FR-004"
+        ]
+      },
+      {
+        "id": "agent-chat",
+        "name": "Agent 协作会话",
+        "kind": "list",
+        "purpose": "处理工作空间中的Agent 协作会话，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "WORKSPACE-FR-005",
+          "WORKSPACE-FR-006"
+        ]
+      },
+      {
+        "id": "project-context",
+        "name": "项目上下文",
+        "kind": "detail",
+        "purpose": "处理工作空间中的项目上下文，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "WORKSPACE-FR-007",
+          "WORKSPACE-FR-008"
+        ]
+      },
+      {
+        "id": "decisions",
+        "name": "决策记录",
+        "kind": "records",
+        "purpose": "处理工作空间中的决策记录，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "WORKSPACE-FR-009",
+          "WORKSPACE-FR-010"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "工作空间审计",
+        "kind": "audit",
+        "purpose": "追踪工作空间的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "WORKSPACE-FR-011",
+          "WORKSPACE-FR-012"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "task-center",
+    "code": "TASK_CENTER",
+    "name": "任务中心",
+    "domainId": "task-planning",
+    "versionId": "v1",
+    "maturity": "implementation",
+    "primaryObject": "task",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "workspace",
+      "agents",
+      "permissions",
+      "orchestration",
+      "analytics"
+    ],
+    "pages": [
+      {
+        "id": "pool",
+        "name": "任务池",
+        "kind": "list",
+        "purpose": "集中查看、筛选并下钻任务中心的任务池",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "TASK_CENTER-FR-001",
+          "TASK_CENTER-FR-002"
+        ]
+      },
+      {
+        "id": "create",
+        "name": "创建任务",
+        "kind": "create",
+        "purpose": "完成任务中心的创建任务并校验依赖与权限",
+        "primaryActions": [
+          "创建并保存",
+          "提交审核"
+        ],
+        "requirementIds": [
+          "TASK_CENTER-FR-003",
+          "TASK_CENTER-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "任务中心详情",
+        "kind": "detail",
+        "purpose": "查看任务中心核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "TASK_CENTER-FR-005",
+          "TASK_CENTER-FR-006"
+        ]
+      },
+      {
+        "id": "approvals",
+        "name": "审批队列",
+        "kind": "process",
+        "purpose": "依据规则与证据完成审批队列并记录结论",
+        "primaryActions": [
+          "通过",
+          "驳回",
+          "要求补充"
+        ],
+        "requirementIds": [
+          "TASK_CENTER-FR-007",
+          "TASK_CENTER-FR-008"
+        ]
+      },
+      {
+        "id": "runs",
+        "name": "执行跟踪",
+        "kind": "process",
+        "purpose": "执行执行跟踪并追踪状态、异常、证据和结果",
+        "primaryActions": [
+          "执行",
+          "暂停",
+          "查看结果"
+        ],
+        "requirementIds": [
+          "TASK_CENTER-FR-009",
+          "TASK_CENTER-FR-010"
+        ]
+      },
+      {
+        "id": "handoffs",
+        "name": "人工接管",
+        "kind": "process",
+        "purpose": "处理任务中心中的人工接管，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "TASK_CENTER-FR-011",
+          "TASK_CENTER-FR-012"
+        ]
+      },
+      {
+        "id": "acceptance",
+        "name": "结果验收",
+        "kind": "process",
+        "purpose": "依据规则与证据完成结果验收并记录结论",
+        "primaryActions": [
+          "通过",
+          "驳回",
+          "要求补充"
+        ],
+        "requirementIds": [
+          "TASK_CENTER-FR-013",
+          "TASK_CENTER-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "任务中心审计",
+        "kind": "audit",
+        "purpose": "追踪任务中心的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "TASK_CENTER-FR-015",
+          "TASK_CENTER-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "agents",
+    "code": "AGENTS",
+    "name": "Agent 注册中心",
+    "domainId": "agent-engineering",
+    "versionId": "v1",
+    "maturity": "implementation",
+    "primaryObject": "agent",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "permissions",
+      "admin",
+      "skills",
+      "tools",
+      "prompts",
+      "knowledge-base",
+      "agent-testing"
+    ],
+    "pages": [
+      {
+        "id": "catalog",
+        "name": "Agent 目录",
+        "kind": "list",
+        "purpose": "集中查看、筛选并下钻Agent 注册中心的Agent 目录",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AGENTS-FR-001",
+          "AGENTS-FR-002"
+        ]
+      },
+      {
+        "id": "register",
+        "name": "注册向导",
+        "kind": "create",
+        "purpose": "完成Agent 注册中心的注册向导并校验依赖与权限",
+        "primaryActions": [
+          "创建并保存",
+          "提交审核"
+        ],
+        "requirementIds": [
+          "AGENTS-FR-003",
+          "AGENTS-FR-004"
+        ]
+      },
+      {
+        "id": "capabilities",
+        "name": "能力绑定",
+        "kind": "list",
+        "purpose": "处理Agent 注册中心中的能力绑定，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AGENTS-FR-005",
+          "AGENTS-FR-006"
+        ]
+      },
+      {
+        "id": "versions",
+        "name": "版本详情",
+        "kind": "detail",
+        "purpose": "处理Agent 注册中心中的版本详情，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AGENTS-FR-007",
+          "AGENTS-FR-008"
+        ]
+      },
+      {
+        "id": "instances",
+        "name": "运行实例",
+        "kind": "process",
+        "purpose": "执行运行实例并追踪状态、异常、证据和结果",
+        "primaryActions": [
+          "执行",
+          "暂停",
+          "查看结果"
+        ],
+        "requirementIds": [
+          "AGENTS-FR-009",
+          "AGENTS-FR-010"
+        ]
+      },
+      {
+        "id": "availability",
+        "name": "启停降级",
+        "kind": "list",
+        "purpose": "处理Agent 注册中心中的启停降级，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AGENTS-FR-011",
+          "AGENTS-FR-012"
+        ]
+      },
+      {
+        "id": "contracts",
+        "name": "输入输出契约",
+        "kind": "create",
+        "purpose": "定义 Agent 输入、输出、错误结构和兼容策略",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AGENTS-FR-013",
+          "AGENTS-FR-014"
+        ]
+      },
+      {
+        "id": "testing",
+        "name": "测试与风险门禁",
+        "kind": "process",
+        "purpose": "运行功能、回归、对抗和风险测试并形成发布结论",
+        "primaryActions": [
+          "通过",
+          "驳回",
+          "要求补充"
+        ],
+        "requirementIds": [
+          "AGENTS-FR-015",
+          "AGENTS-FR-016"
+        ]
+      },
+      {
+        "id": "release",
+        "name": "发布审批",
+        "kind": "process",
+        "purpose": "核对依赖、测试、风险和影响范围后审批发布",
+        "primaryActions": [
+          "通过",
+          "驳回",
+          "要求补充"
+        ],
+        "requirementIds": [
+          "AGENTS-FR-017",
+          "AGENTS-FR-018"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "Agent 注册中心审计",
+        "kind": "audit",
+        "purpose": "追踪Agent 注册中心的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "AGENTS-FR-019",
+          "AGENTS-FR-020"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orchestration",
+    "code": "ORCHESTRATION",
+    "name": "Agent 编排引擎",
+    "domainId": "task-planning",
+    "versionId": "v2",
+    "maturity": "implementation",
+    "primaryObject": "workflowRun",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "agents",
+      "dynamic-plan",
+      "task-center",
+      "tools"
+    ],
+    "pages": [
+      {
+        "id": "catalog",
+        "name": "流程目录",
+        "kind": "list",
+        "purpose": "集中查看、筛选并下钻Agent 编排引擎的流程目录",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "ORCHESTRATION-FR-001",
+          "ORCHESTRATION-FR-002"
+        ]
+      },
+      {
+        "id": "canvas",
+        "name": "编排画布",
+        "kind": "process",
+        "purpose": "处理Agent 编排引擎中的编排画布，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "ORCHESTRATION-FR-003",
+          "ORCHESTRATION-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "Agent 编排引擎详情",
+        "kind": "detail",
+        "purpose": "查看Agent 编排引擎核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "ORCHESTRATION-FR-005",
+          "ORCHESTRATION-FR-006"
+        ]
+      },
+      {
+        "id": "nodes",
+        "name": "节点配置",
+        "kind": "create",
+        "purpose": "完成Agent 编排引擎的节点配置并校验依赖与权限",
+        "primaryActions": [
+          "编辑",
+          "校验",
+          "保存"
+        ],
+        "requirementIds": [
+          "ORCHESTRATION-FR-007",
+          "ORCHESTRATION-FR-008"
+        ]
+      },
+      {
+        "id": "branches",
+        "name": "分支规则",
+        "kind": "list",
+        "purpose": "处理Agent 编排引擎中的分支规则，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "ORCHESTRATION-FR-009",
+          "ORCHESTRATION-FR-010"
+        ]
+      },
+      {
+        "id": "runs",
+        "name": "运行追踪",
+        "kind": "process",
+        "purpose": "执行运行追踪并追踪状态、异常、证据和结果",
+        "primaryActions": [
+          "执行",
+          "暂停",
+          "查看结果"
+        ],
+        "requirementIds": [
+          "ORCHESTRATION-FR-011",
+          "ORCHESTRATION-FR-012"
+        ]
+      },
+      {
+        "id": "recovery",
+        "name": "失败恢复",
+        "kind": "process",
+        "purpose": "执行失败恢复并追踪状态、异常、证据和结果",
+        "primaryActions": [
+          "执行",
+          "暂停",
+          "查看结果"
+        ],
+        "requirementIds": [
+          "ORCHESTRATION-FR-013",
+          "ORCHESTRATION-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "Agent 编排引擎审计",
+        "kind": "audit",
+        "purpose": "追踪Agent 编排引擎的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "ORCHESTRATION-FR-015",
+          "ORCHESTRATION-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dynamic-plan",
+    "code": "DYNAMIC_PLAN",
+    "name": "动态计划",
+    "domainId": "task-planning",
+    "versionId": "v1",
+    "maturity": "implementation",
+    "primaryObject": "goal",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "agents",
+      "task-center",
+      "orchestration",
+      "analytics"
+    ],
+    "pages": [
+      {
+        "id": "plans",
+        "name": "计划列表",
+        "kind": "list",
+        "purpose": "集中查看、筛选并下钻动态计划的计划列表",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "DYNAMIC_PLAN-FR-001",
+          "DYNAMIC_PLAN-FR-002"
+        ]
+      },
+      {
+        "id": "decomposition",
+        "name": "目标拆解",
+        "kind": "list",
+        "purpose": "处理动态计划中的目标拆解，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "DYNAMIC_PLAN-FR-003",
+          "DYNAMIC_PLAN-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "动态计划详情",
+        "kind": "detail",
+        "purpose": "查看动态计划核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "DYNAMIC_PLAN-FR-005",
+          "DYNAMIC_PLAN-FR-006"
+        ]
+      },
+      {
+        "id": "resources",
+        "name": "资源分配",
+        "kind": "list",
+        "purpose": "完成动态计划的资源分配并校验依赖与权限",
+        "primaryActions": [
+          "编辑",
+          "校验",
+          "保存"
+        ],
+        "requirementIds": [
+          "DYNAMIC_PLAN-FR-007",
+          "DYNAMIC_PLAN-FR-008"
+        ]
+      },
+      {
+        "id": "adjustments",
+        "name": "动态调整",
+        "kind": "list",
+        "purpose": "处理动态计划中的动态调整，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "DYNAMIC_PLAN-FR-009",
+          "DYNAMIC_PLAN-FR-010"
+        ]
+      },
+      {
+        "id": "timeline",
+        "name": "执行时间线",
+        "kind": "process",
+        "purpose": "执行执行时间线并追踪状态、异常、证据和结果",
+        "primaryActions": [
+          "执行",
+          "暂停",
+          "查看结果"
+        ],
+        "requirementIds": [
+          "DYNAMIC_PLAN-FR-011",
+          "DYNAMIC_PLAN-FR-012"
+        ]
+      },
+      {
+        "id": "variance",
+        "name": "偏差分析",
+        "kind": "result",
+        "purpose": "分析偏差分析并下钻到来源对象与改进动作",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "DYNAMIC_PLAN-FR-013",
+          "DYNAMIC_PLAN-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "动态计划审计",
+        "kind": "audit",
+        "purpose": "追踪动态计划的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "DYNAMIC_PLAN-FR-015",
+          "DYNAMIC_PLAN-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "skills",
+    "code": "SKILLS",
+    "name": "Skill 技能库",
+    "domainId": "agent-engineering",
+    "versionId": "v1",
+    "maturity": "implementation",
+    "primaryObject": "capabilityAsset",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "agents",
+      "permissions",
+      "agent-testing",
+      "prompts",
+      "tools"
+    ],
+    "pages": [
+      {
+        "id": "catalog",
+        "name": "Skill 目录",
+        "kind": "list",
+        "purpose": "集中查看、筛选并下钻Skill 技能库的Skill 目录",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "SKILLS-FR-001",
+          "SKILLS-FR-002"
+        ]
+      },
+      {
+        "id": "editor",
+        "name": "创建编辑",
+        "kind": "create",
+        "purpose": "完成Skill 技能库的创建编辑并校验依赖与权限",
+        "primaryActions": [
+          "创建并保存",
+          "提交审核"
+        ],
+        "requirementIds": [
+          "SKILLS-FR-003",
+          "SKILLS-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "Skill 技能库详情",
+        "kind": "detail",
+        "purpose": "查看Skill 技能库核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "SKILLS-FR-005",
+          "SKILLS-FR-006"
+        ]
+      },
+      {
+        "id": "io-contract",
+        "name": "输入输出",
+        "kind": "list",
+        "purpose": "处理Skill 技能库中的输入输出，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "SKILLS-FR-007",
+          "SKILLS-FR-008"
+        ]
+      },
+      {
+        "id": "versions",
+        "name": "版本管理",
+        "kind": "list",
+        "purpose": "处理Skill 技能库中的版本管理，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "SKILLS-FR-009",
+          "SKILLS-FR-010"
+        ]
+      },
+      {
+        "id": "test-sets",
+        "name": "测试集",
+        "kind": "list",
+        "purpose": "处理Skill 技能库中的测试集，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "SKILLS-FR-011",
+          "SKILLS-FR-012"
+        ]
+      },
+      {
+        "id": "reuse",
+        "name": "复用统计",
+        "kind": "result",
+        "purpose": "分析复用统计并下钻到来源对象与改进动作",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "SKILLS-FR-013",
+          "SKILLS-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "Skill 技能库审计",
+        "kind": "audit",
+        "purpose": "追踪Skill 技能库的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "SKILLS-FR-015",
+          "SKILLS-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tools",
+    "code": "TOOLS",
+    "name": "Tools 工具集",
+    "domainId": "agent-engineering",
+    "versionId": "v1",
+    "maturity": "implementation",
+    "primaryObject": "capabilityAsset",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "agents",
+      "permissions",
+      "admin",
+      "ticket-system"
+    ],
+    "pages": [
+      {
+        "id": "catalog",
+        "name": "Tool 目录",
+        "kind": "list",
+        "purpose": "集中查看、筛选并下钻Tools 工具集的Tool 目录",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "TOOLS-FR-001",
+          "TOOLS-FR-002"
+        ]
+      },
+      {
+        "id": "connection",
+        "name": "接入配置",
+        "kind": "create",
+        "purpose": "完成Tools 工具集的接入配置并校验依赖与权限",
+        "primaryActions": [
+          "编辑",
+          "校验",
+          "保存"
+        ],
+        "requirementIds": [
+          "TOOLS-FR-003",
+          "TOOLS-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "Tools 工具集详情",
+        "kind": "detail",
+        "purpose": "查看Tools 工具集核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "TOOLS-FR-005",
+          "TOOLS-FR-006"
+        ]
+      },
+      {
+        "id": "authorization",
+        "name": "授权范围",
+        "kind": "list",
+        "purpose": "完成Tools 工具集的授权范围并校验依赖与权限",
+        "primaryActions": [
+          "编辑",
+          "校验",
+          "保存"
+        ],
+        "requirementIds": [
+          "TOOLS-FR-007",
+          "TOOLS-FR-008"
+        ]
+      },
+      {
+        "id": "health",
+        "name": "健康检查",
+        "kind": "list",
+        "purpose": "处理Tools 工具集中的健康检查，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "TOOLS-FR-009",
+          "TOOLS-FR-010"
+        ]
+      },
+      {
+        "id": "calls",
+        "name": "调用日志",
+        "kind": "records",
+        "purpose": "执行调用日志并追踪状态、异常、证据和结果",
+        "primaryActions": [
+          "执行",
+          "暂停",
+          "查看结果"
+        ],
+        "requirementIds": [
+          "TOOLS-FR-011",
+          "TOOLS-FR-012"
+        ]
+      },
+      {
+        "id": "circuit-breakers",
+        "name": "熔断记录",
+        "kind": "records",
+        "purpose": "处理Tools 工具集中的熔断记录，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "TOOLS-FR-013",
+          "TOOLS-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "Tools 工具集审计",
+        "kind": "audit",
+        "purpose": "追踪Tools 工具集的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "TOOLS-FR-015",
+          "TOOLS-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "prompts",
+    "code": "PROMPTS",
+    "name": "Prompt 工程平台",
+    "domainId": "agent-engineering",
+    "versionId": "v1",
+    "maturity": "implementation",
+    "primaryObject": "capabilityAsset",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "agents",
+      "task-center",
+      "skills",
+      "knowledge-base",
+      "agent-testing"
+    ],
+    "pages": [
+      {
+        "id": "catalog",
+        "name": "Prompt 目录",
+        "kind": "list",
+        "purpose": "集中查看、筛选并下钻Prompt 工程平台的Prompt 目录",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "PROMPTS-FR-001",
+          "PROMPTS-FR-002"
+        ]
+      },
+      {
+        "id": "editor",
+        "name": "版本编辑",
+        "kind": "create",
+        "purpose": "完成Prompt 工程平台的版本编辑并校验依赖与权限",
+        "primaryActions": [
+          "编辑",
+          "校验",
+          "保存"
+        ],
+        "requirementIds": [
+          "PROMPTS-FR-003",
+          "PROMPTS-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "Prompt 工程平台详情",
+        "kind": "detail",
+        "purpose": "查看Prompt 工程平台核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "PROMPTS-FR-005",
+          "PROMPTS-FR-006"
+        ]
+      },
+      {
+        "id": "variables",
+        "name": "变量配置",
+        "kind": "create",
+        "purpose": "完成Prompt 工程平台的变量配置并校验依赖与权限",
+        "primaryActions": [
+          "编辑",
+          "校验",
+          "保存"
+        ],
+        "requirementIds": [
+          "PROMPTS-FR-007",
+          "PROMPTS-FR-008"
+        ]
+      },
+      {
+        "id": "evaluation",
+        "name": "评测对比",
+        "kind": "list",
+        "purpose": "处理Prompt 工程平台中的评测对比，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "PROMPTS-FR-009",
+          "PROMPTS-FR-010"
+        ]
+      },
+      {
+        "id": "release",
+        "name": "审批发布",
+        "kind": "process",
+        "purpose": "依据规则与证据完成审批发布并记录结论",
+        "primaryActions": [
+          "通过",
+          "驳回",
+          "要求补充"
+        ],
+        "requirementIds": [
+          "PROMPTS-FR-011",
+          "PROMPTS-FR-012"
+        ]
+      },
+      {
+        "id": "rollback",
+        "name": "回滚记录",
+        "kind": "process",
+        "purpose": "执行回滚记录并追踪状态、异常、证据和结果",
+        "primaryActions": [
+          "执行",
+          "暂停",
+          "查看结果"
+        ],
+        "requirementIds": [
+          "PROMPTS-FR-013",
+          "PROMPTS-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "Prompt 工程平台审计",
+        "kind": "audit",
+        "purpose": "追踪Prompt 工程平台的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "PROMPTS-FR-015",
+          "PROMPTS-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "knowledge-base",
+    "code": "KNOWLEDGE_BASE",
+    "name": "知识库",
+    "domainId": "knowledge-content",
+    "versionId": "v1",
+    "maturity": "implementation",
+    "primaryObject": "knowledgeAsset",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "permissions",
+      "agents",
+      "prompts",
+      "knowledge"
+    ],
+    "pages": [
+      {
+        "id": "spaces",
+        "name": "知识空间",
+        "kind": "list",
+        "purpose": "集中查看、筛选并下钻知识库的知识空间",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE_BASE-FR-001",
+          "KNOWLEDGE_BASE-FR-002"
+        ]
+      },
+      {
+        "id": "ingestion",
+        "name": "资产采集",
+        "kind": "create",
+        "purpose": "处理知识库中的资产采集，保留上下文与完整时间线",
+        "primaryActions": [
+          "创建并保存",
+          "提交审核"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE_BASE-FR-003",
+          "KNOWLEDGE_BASE-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "知识库详情",
+        "kind": "detail",
+        "purpose": "查看知识库核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE_BASE-FR-005",
+          "KNOWLEDGE_BASE-FR-006"
+        ]
+      },
+      {
+        "id": "processing",
+        "name": "清洗切分",
+        "kind": "list",
+        "purpose": "处理知识库中的清洗切分，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE_BASE-FR-007",
+          "KNOWLEDGE_BASE-FR-008"
+        ]
+      },
+      {
+        "id": "publishing",
+        "name": "审核发布",
+        "kind": "process",
+        "purpose": "依据规则与证据完成审核发布并记录结论",
+        "primaryActions": [
+          "通过",
+          "驳回",
+          "要求补充"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE_BASE-FR-009",
+          "KNOWLEDGE_BASE-FR-010"
+        ]
+      },
+      {
+        "id": "packages",
+        "name": "知识包",
+        "kind": "list",
+        "purpose": "处理知识库中的知识包，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE_BASE-FR-011",
+          "KNOWLEDGE_BASE-FR-012"
+        ]
+      },
+      {
+        "id": "retrieval",
+        "name": "检索验证",
+        "kind": "list",
+        "purpose": "处理知识库中的检索验证，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE_BASE-FR-013",
+          "KNOWLEDGE_BASE-FR-014"
+        ]
+      },
+      {
+        "id": "citations",
+        "name": "引用反馈",
+        "kind": "records",
+        "purpose": "处理知识库中的引用反馈，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE_BASE-FR-015",
+          "KNOWLEDGE_BASE-FR-016"
+        ]
+      },
+      {
+        "id": "editor",
+        "name": "知识编辑器",
+        "kind": "create",
+        "purpose": "编辑正文、元数据、标签、责任人和有效期",
+        "primaryActions": [
+          "编辑",
+          "校验",
+          "保存"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE_BASE-FR-017",
+          "KNOWLEDGE_BASE-FR-018"
+        ]
+      },
+      {
+        "id": "review",
+        "name": "知识审核中心",
+        "kind": "process",
+        "purpose": "比较版本差异、核对证据并完成发布审核",
+        "primaryActions": [
+          "通过",
+          "驳回",
+          "要求补充"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE_BASE-FR-019",
+          "KNOWLEDGE_BASE-FR-020"
+        ]
+      },
+      {
+        "id": "expiry",
+        "name": "过期治理",
+        "kind": "process",
+        "purpose": "识别到期资产并执行续期、替换、下架或归档",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE_BASE-FR-021",
+          "KNOWLEDGE_BASE-FR-022"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "知识库审计",
+        "kind": "audit",
+        "purpose": "追踪知识库的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE_BASE-FR-023",
+          "KNOWLEDGE_BASE-FR-024"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ai-products",
+    "code": "AI_PRODUCTS",
+    "name": "AI 产品目录",
+    "domainId": "ai-product-delivery",
+    "versionId": "v2",
+    "maturity": "implementation",
+    "primaryObject": "capabilityAsset",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "delivery",
+      "client-portal",
+      "agents",
+      "analytics"
+    ],
+    "pages": [
+      {
+        "id": "portfolio",
+        "name": "产品组合",
+        "kind": "workspace",
+        "purpose": "集中查看、筛选并下钻AI 产品目录的产品组合",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AI_PRODUCTS-FR-001",
+          "AI_PRODUCTS-FR-002"
+        ]
+      },
+      {
+        "id": "assembly",
+        "name": "能力装配",
+        "kind": "list",
+        "purpose": "完成AI 产品目录的能力装配并校验依赖与权限",
+        "primaryActions": [
+          "编辑",
+          "校验",
+          "保存"
+        ],
+        "requirementIds": [
+          "AI_PRODUCTS-FR-003",
+          "AI_PRODUCTS-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "AI 产品目录详情",
+        "kind": "detail",
+        "purpose": "查看AI 产品目录核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "AI_PRODUCTS-FR-005",
+          "AI_PRODUCTS-FR-006"
+        ]
+      },
+      {
+        "id": "packages",
+        "name": "服务包",
+        "kind": "list",
+        "purpose": "处理AI 产品目录中的服务包，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AI_PRODUCTS-FR-007",
+          "AI_PRODUCTS-FR-008"
+        ]
+      },
+      {
+        "id": "pricing",
+        "name": "定价",
+        "kind": "list",
+        "purpose": "处理AI 产品目录中的定价，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AI_PRODUCTS-FR-009",
+          "AI_PRODUCTS-FR-010"
+        ]
+      },
+      {
+        "id": "release",
+        "name": "发布审批",
+        "kind": "process",
+        "purpose": "依据规则与证据完成发布审批并记录结论",
+        "primaryActions": [
+          "通过",
+          "驳回",
+          "要求补充"
+        ],
+        "requirementIds": [
+          "AI_PRODUCTS-FR-011",
+          "AI_PRODUCTS-FR-012"
+        ]
+      },
+      {
+        "id": "usage",
+        "name": "客户使用情况",
+        "kind": "list",
+        "purpose": "处理AI 产品目录中的客户使用情况，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AI_PRODUCTS-FR-013",
+          "AI_PRODUCTS-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "AI 产品目录审计",
+        "kind": "audit",
+        "purpose": "追踪AI 产品目录的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "AI_PRODUCTS-FR-015",
+          "AI_PRODUCTS-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "delivery",
+    "code": "DELIVERY",
+    "name": "交付管理",
+    "domainId": "ai-product-delivery",
+    "versionId": "v4",
+    "maturity": "implementation",
+    "primaryObject": "tenant",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "ai-products",
+      "mkt-tenant",
+      "client-portal",
+      "ticket-system"
+    ],
+    "pages": [
+      {
+        "id": "projects",
+        "name": "交付项目",
+        "kind": "list",
+        "purpose": "处理交付管理中的交付项目，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "DELIVERY-FR-001",
+          "DELIVERY-FR-002"
+        ]
+      },
+      {
+        "id": "contract-scope",
+        "name": "合同范围",
+        "kind": "list",
+        "purpose": "处理交付管理中的合同范围，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "DELIVERY-FR-003",
+          "DELIVERY-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "交付管理详情",
+        "kind": "detail",
+        "purpose": "查看交付管理核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "DELIVERY-FR-005",
+          "DELIVERY-FR-006"
+        ]
+      },
+      {
+        "id": "milestones",
+        "name": "里程碑",
+        "kind": "list",
+        "purpose": "处理交付管理中的里程碑，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "DELIVERY-FR-007",
+          "DELIVERY-FR-008"
+        ]
+      },
+      {
+        "id": "tenant-opening",
+        "name": "租户开通",
+        "kind": "create",
+        "purpose": "完成交付管理的租户开通并校验依赖与权限",
+        "primaryActions": [
+          "创建并保存",
+          "提交审核"
+        ],
+        "requirementIds": [
+          "DELIVERY-FR-009",
+          "DELIVERY-FR-010"
+        ]
+      },
+      {
+        "id": "migration",
+        "name": "数据迁移",
+        "kind": "list",
+        "purpose": "处理交付管理中的数据迁移，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "DELIVERY-FR-011",
+          "DELIVERY-FR-012"
+        ]
+      },
+      {
+        "id": "acceptance",
+        "name": "验收",
+        "kind": "process",
+        "purpose": "依据规则与证据完成验收并记录结论",
+        "primaryActions": [
+          "通过",
+          "驳回",
+          "要求补充"
+        ],
+        "requirementIds": [
+          "DELIVERY-FR-013",
+          "DELIVERY-FR-014"
+        ]
+      },
+      {
+        "id": "sla",
+        "name": "SLA 运营",
+        "kind": "list",
+        "purpose": "处理交付管理中的SLA 运营，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "DELIVERY-FR-015",
+          "DELIVERY-FR-016"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "交付管理审计",
+        "kind": "audit",
+        "purpose": "追踪交付管理的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "DELIVERY-FR-017",
+          "DELIVERY-FR-018"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ai-org",
+    "code": "AI_ORG",
+    "name": "数字组织架构",
+    "domainId": "digital-organization",
+    "versionId": "v2",
+    "maturity": "implementation",
+    "primaryObject": "goal",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "position-ai",
+      "agents",
+      "permissions",
+      "task-center"
+    ],
+    "pages": [
+      {
+        "id": "org-chart",
+        "name": "人机组织图",
+        "kind": "list",
+        "purpose": "处理数字组织架构中的人机组织图，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AI_ORG-FR-001",
+          "AI_ORG-FR-002"
+        ]
+      },
+      {
+        "id": "units",
+        "name": "职责单元",
+        "kind": "list",
+        "purpose": "处理数字组织架构中的职责单元，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AI_ORG-FR-003",
+          "AI_ORG-FR-004"
+        ]
+      },
+      {
+        "id": "positions",
+        "name": "岗位详情",
+        "kind": "detail",
+        "purpose": "处理数字组织架构中的岗位详情，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AI_ORG-FR-005",
+          "AI_ORG-FR-006"
+        ]
+      },
+      {
+        "id": "agent-positions",
+        "name": "Agent 岗位",
+        "kind": "list",
+        "purpose": "处理数字组织架构中的Agent 岗位，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AI_ORG-FR-007",
+          "AI_ORG-FR-008"
+        ]
+      },
+      {
+        "id": "collaboration",
+        "name": "协作关系",
+        "kind": "detail",
+        "purpose": "处理数字组织架构中的协作关系，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AI_ORG-FR-009",
+          "AI_ORG-FR-010"
+        ]
+      },
+      {
+        "id": "conflicts",
+        "name": "责任冲突",
+        "kind": "list",
+        "purpose": "处理数字组织架构中的责任冲突，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AI_ORG-FR-011",
+          "AI_ORG-FR-012"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "数字组织架构审计",
+        "kind": "audit",
+        "purpose": "追踪数字组织架构的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "AI_ORG-FR-013",
+          "AI_ORG-FR-014"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "position-ai",
+    "code": "POSITION_AI",
+    "name": "岗位 AI 化追踪",
+    "domainId": "digital-organization",
+    "versionId": "v2",
+    "maturity": "implementation",
+    "primaryObject": "goal",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "ai-org",
+      "agents",
+      "workspace",
+      "analytics"
+    ],
+    "pages": [
+      {
+        "id": "baselines",
+        "name": "岗位基线",
+        "kind": "list",
+        "purpose": "处理岗位 AI 化追踪中的岗位基线，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "POSITION_AI-FR-001",
+          "POSITION_AI-FR-002"
+        ]
+      },
+      {
+        "id": "task-analysis",
+        "name": "任务拆解",
+        "kind": "list",
+        "purpose": "处理岗位 AI 化追踪中的任务拆解，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "POSITION_AI-FR-003",
+          "POSITION_AI-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "岗位 AI 化追踪详情",
+        "kind": "detail",
+        "purpose": "查看岗位 AI 化追踪核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "POSITION_AI-FR-005",
+          "POSITION_AI-FR-006"
+        ]
+      },
+      {
+        "id": "opportunities",
+        "name": "AI 化机会",
+        "kind": "list",
+        "purpose": "处理岗位 AI 化追踪中的AI 化机会，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "POSITION_AI-FR-007",
+          "POSITION_AI-FR-008"
+        ]
+      },
+      {
+        "id": "pilot",
+        "name": "试运行",
+        "kind": "process",
+        "purpose": "执行试运行并追踪状态、异常、证据和结果",
+        "primaryActions": [
+          "执行",
+          "暂停",
+          "查看结果"
+        ],
+        "requirementIds": [
+          "POSITION_AI-FR-009",
+          "POSITION_AI-FR-010"
+        ]
+      },
+      {
+        "id": "training",
+        "name": "培训",
+        "kind": "list",
+        "purpose": "处理岗位 AI 化追踪中的培训，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "POSITION_AI-FR-011",
+          "POSITION_AI-FR-012"
+        ]
+      },
+      {
+        "id": "adoption",
+        "name": "采用率",
+        "kind": "result",
+        "purpose": "分析采用率并下钻到来源对象与改进动作",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "POSITION_AI-FR-013",
+          "POSITION_AI-FR-014"
+        ]
+      },
+      {
+        "id": "people-impact",
+        "name": "人员影响",
+        "kind": "list",
+        "purpose": "处理岗位 AI 化追踪中的人员影响，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "POSITION_AI-FR-015",
+          "POSITION_AI-FR-016"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "岗位 AI 化追踪审计",
+        "kind": "audit",
+        "purpose": "追踪岗位 AI 化追踪的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "POSITION_AI-FR-017",
+          "POSITION_AI-FR-018"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "admin",
+    "code": "ADMIN",
+    "name": "基础管理",
+    "domainId": "platform-governance",
+    "versionId": "v1",
+    "maturity": "implementation",
+    "primaryObject": "auditEvent",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "permissions",
+      "tools",
+      "mf-model-registry",
+      "security"
+    ],
+    "pages": [
+      {
+        "id": "model-gateway",
+        "name": "模型网关",
+        "kind": "list",
+        "purpose": "处理基础管理中的模型网关，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "ADMIN-FR-001",
+          "ADMIN-FR-002"
+        ]
+      },
+      {
+        "id": "routing",
+        "name": "供应商路由",
+        "kind": "list",
+        "purpose": "处理基础管理中的供应商路由，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "ADMIN-FR-003",
+          "ADMIN-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "基础管理详情",
+        "kind": "detail",
+        "purpose": "查看基础管理核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "ADMIN-FR-005",
+          "ADMIN-FR-006"
+        ]
+      },
+      {
+        "id": "parameters",
+        "name": "系统参数",
+        "kind": "list",
+        "purpose": "处理基础管理中的系统参数，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "ADMIN-FR-007",
+          "ADMIN-FR-008"
+        ]
+      },
+      {
+        "id": "billing",
+        "name": "计费策略",
+        "kind": "list",
+        "purpose": "完成基础管理的计费策略并校验依赖与权限",
+        "primaryActions": [
+          "编辑",
+          "校验",
+          "保存"
+        ],
+        "requirementIds": [
+          "ADMIN-FR-009",
+          "ADMIN-FR-010"
+        ]
+      },
+      {
+        "id": "rate-limits",
+        "name": "队列限流",
+        "kind": "list",
+        "purpose": "处理基础管理中的队列限流，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "ADMIN-FR-011",
+          "ADMIN-FR-012"
+        ]
+      },
+      {
+        "id": "changes",
+        "name": "变更记录",
+        "kind": "records",
+        "purpose": "处理基础管理中的变更记录，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "ADMIN-FR-013",
+          "ADMIN-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "基础管理审计",
+        "kind": "audit",
+        "purpose": "追踪基础管理的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "ADMIN-FR-015",
+          "ADMIN-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "permissions",
+    "code": "PERMISSIONS",
+    "name": "权限管理",
+    "domainId": "platform-governance",
+    "versionId": "v1",
+    "maturity": "implementation",
+    "primaryObject": "auditEvent",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "admin",
+      "security",
+      "mkt-tenant",
+      "mkt-ethics"
+    ],
+    "pages": [
+      {
+        "id": "roles",
+        "name": "用户角色",
+        "kind": "list",
+        "purpose": "处理权限管理中的用户角色，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "PERMISSIONS-FR-001",
+          "PERMISSIONS-FR-002"
+        ]
+      },
+      {
+        "id": "policies",
+        "name": "资源策略",
+        "kind": "list",
+        "purpose": "完成权限管理的资源策略并校验依赖与权限",
+        "primaryActions": [
+          "编辑",
+          "校验",
+          "保存"
+        ],
+        "requirementIds": [
+          "PERMISSIONS-FR-003",
+          "PERMISSIONS-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "权限管理详情",
+        "kind": "detail",
+        "purpose": "查看权限管理核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "PERMISSIONS-FR-005",
+          "PERMISSIONS-FR-006"
+        ]
+      },
+      {
+        "id": "requests",
+        "name": "权限申请",
+        "kind": "list",
+        "purpose": "处理权限管理中的权限申请，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "PERMISSIONS-FR-007",
+          "PERMISSIONS-FR-008"
+        ]
+      },
+      {
+        "id": "conflicts",
+        "name": "冲突检测",
+        "kind": "list",
+        "purpose": "处理权限管理中的冲突检测，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "PERMISSIONS-FR-009",
+          "PERMISSIONS-FR-010"
+        ]
+      },
+      {
+        "id": "reviews",
+        "name": "复核",
+        "kind": "list",
+        "purpose": "依据规则与证据完成复核并记录结论",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "PERMISSIONS-FR-011",
+          "PERMISSIONS-FR-012"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "访问审计",
+        "kind": "audit",
+        "purpose": "处理权限管理中的访问审计，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "PERMISSIONS-FR-013",
+          "PERMISSIONS-FR-014"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "client-portal",
+    "code": "CLIENT_PORTAL",
+    "name": "客户门户",
+    "domainId": "ai-product-delivery",
+    "versionId": "v4",
+    "maturity": "implementation",
+    "primaryObject": "tenant",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "delivery",
+      "analytics",
+      "ai-products",
+      "ticket-system"
+    ],
+    "pages": [
+      {
+        "id": "home",
+        "name": "客户首页",
+        "kind": "workspace",
+        "purpose": "集中查看、筛选并下钻客户门户的客户首页",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "CLIENT_PORTAL-FR-001",
+          "CLIENT_PORTAL-FR-002"
+        ]
+      },
+      {
+        "id": "products",
+        "name": "已购产品",
+        "kind": "list",
+        "purpose": "处理客户门户中的已购产品，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "CLIENT_PORTAL-FR-003",
+          "CLIENT_PORTAL-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "客户门户详情",
+        "kind": "detail",
+        "purpose": "查看客户门户核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "CLIENT_PORTAL-FR-005",
+          "CLIENT_PORTAL-FR-006"
+        ]
+      },
+      {
+        "id": "delivery",
+        "name": "交付进度",
+        "kind": "list",
+        "purpose": "处理客户门户中的交付进度，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "CLIENT_PORTAL-FR-007",
+          "CLIENT_PORTAL-FR-008"
+        ]
+      },
+      {
+        "id": "outcomes",
+        "name": "业务结果",
+        "kind": "result",
+        "purpose": "处理客户门户中的业务结果，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "CLIENT_PORTAL-FR-009",
+          "CLIENT_PORTAL-FR-010"
+        ]
+      },
+      {
+        "id": "sla",
+        "name": "SLA",
+        "kind": "list",
+        "purpose": "处理客户门户中的SLA，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "CLIENT_PORTAL-FR-011",
+          "CLIENT_PORTAL-FR-012"
+        ]
+      },
+      {
+        "id": "requests",
+        "name": "服务请求",
+        "kind": "list",
+        "purpose": "处理客户门户中的服务请求，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "CLIENT_PORTAL-FR-013",
+          "CLIENT_PORTAL-FR-014"
+        ]
+      },
+      {
+        "id": "feedback",
+        "name": "反馈",
+        "kind": "records",
+        "purpose": "处理客户门户中的反馈，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "CLIENT_PORTAL-FR-015",
+          "CLIENT_PORTAL-FR-016"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "客户门户审计",
+        "kind": "audit",
+        "purpose": "追踪客户门户的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "CLIENT_PORTAL-FR-017",
+          "CLIENT_PORTAL-FR-018"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "agent-testing",
+    "code": "AGENT_TESTING",
+    "name": "Agent 测试沙箱",
+    "domainId": "agent-engineering",
+    "versionId": "v4",
+    "maturity": "implementation",
+    "primaryObject": "workflowRun",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "agents",
+      "prompts",
+      "skills",
+      "mkt-agent-market"
+    ],
+    "pages": [
+      {
+        "id": "plans",
+        "name": "测试计划",
+        "kind": "list",
+        "purpose": "处理Agent 测试沙箱中的测试计划，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AGENT_TESTING-FR-001",
+          "AGENT_TESTING-FR-002"
+        ]
+      },
+      {
+        "id": "sets",
+        "name": "测试集",
+        "kind": "list",
+        "purpose": "处理Agent 测试沙箱中的测试集，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AGENT_TESTING-FR-003",
+          "AGENT_TESTING-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "Agent 测试沙箱详情",
+        "kind": "detail",
+        "purpose": "查看Agent 测试沙箱核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "AGENT_TESTING-FR-005",
+          "AGENT_TESTING-FR-006"
+        ]
+      },
+      {
+        "id": "regression",
+        "name": "回归运行",
+        "kind": "process",
+        "purpose": "执行回归运行并追踪状态、异常、证据和结果",
+        "primaryActions": [
+          "执行",
+          "暂停",
+          "查看结果"
+        ],
+        "requirementIds": [
+          "AGENT_TESTING-FR-007",
+          "AGENT_TESTING-FR-008"
+        ]
+      },
+      {
+        "id": "adversarial",
+        "name": "对抗测试",
+        "kind": "list",
+        "purpose": "处理Agent 测试沙箱中的对抗测试，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AGENT_TESTING-FR-009",
+          "AGENT_TESTING-FR-010"
+        ]
+      },
+      {
+        "id": "failures",
+        "name": "失败分析",
+        "kind": "result",
+        "purpose": "分析失败分析并下钻到来源对象与改进动作",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "AGENT_TESTING-FR-011",
+          "AGENT_TESTING-FR-012"
+        ]
+      },
+      {
+        "id": "release-gate",
+        "name": "发布门禁",
+        "kind": "process",
+        "purpose": "依据规则与证据完成发布门禁并记录结论",
+        "primaryActions": [
+          "通过",
+          "驳回",
+          "要求补充"
+        ],
+        "requirementIds": [
+          "AGENT_TESTING-FR-013",
+          "AGENT_TESTING-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "Agent 测试沙箱审计",
+        "kind": "audit",
+        "purpose": "追踪Agent 测试沙箱的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "AGENT_TESTING-FR-015",
+          "AGENT_TESTING-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ticket-system",
+    "code": "TICKET_SYSTEM",
+    "name": "异常工单中心",
+    "domainId": "quality-operations",
+    "versionId": "v4",
+    "maturity": "implementation",
+    "primaryObject": "incident",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "task-center",
+      "tools",
+      "mf-model-monitor",
+      "evolution"
+    ],
+    "pages": [
+      {
+        "id": "dashboard",
+        "name": "异常看板",
+        "kind": "workspace",
+        "purpose": "集中查看、筛选并下钻异常工单中心的异常看板",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "TICKET_SYSTEM-FR-001",
+          "TICKET_SYSTEM-FR-002"
+        ]
+      },
+      {
+        "id": "queue",
+        "name": "工单队列",
+        "kind": "list",
+        "purpose": "处理异常工单中心中的工单队列，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "TICKET_SYSTEM-FR-003",
+          "TICKET_SYSTEM-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "异常工单中心详情",
+        "kind": "detail",
+        "purpose": "查看异常工单中心核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "TICKET_SYSTEM-FR-005",
+          "TICKET_SYSTEM-FR-006"
+        ]
+      },
+      {
+        "id": "triage",
+        "name": "分级派单",
+        "kind": "list",
+        "purpose": "处理异常工单中心中的分级派单，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "TICKET_SYSTEM-FR-007",
+          "TICKET_SYSTEM-FR-008"
+        ]
+      },
+      {
+        "id": "handling",
+        "name": "处理工作台",
+        "kind": "workspace",
+        "purpose": "处理异常工单中心中的处理工作台，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "TICKET_SYSTEM-FR-009",
+          "TICKET_SYSTEM-FR-010"
+        ]
+      },
+      {
+        "id": "recovery",
+        "name": "恢复验证",
+        "kind": "process",
+        "purpose": "执行恢复验证并追踪状态、异常、证据和结果",
+        "primaryActions": [
+          "执行",
+          "暂停",
+          "查看结果"
+        ],
+        "requirementIds": [
+          "TICKET_SYSTEM-FR-011",
+          "TICKET_SYSTEM-FR-012"
+        ]
+      },
+      {
+        "id": "root-causes",
+        "name": "根因沉淀",
+        "kind": "list",
+        "purpose": "处理异常工单中心中的根因沉淀，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "TICKET_SYSTEM-FR-013",
+          "TICKET_SYSTEM-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "异常工单中心审计",
+        "kind": "audit",
+        "purpose": "追踪异常工单中心的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "TICKET_SYSTEM-FR-015",
+          "TICKET_SYSTEM-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mf-data-factory",
+    "code": "MF_DATA_FACTORY",
+    "name": "训练数据工厂",
+    "domainId": "model-factory",
+    "versionId": "v5",
+    "maturity": "implementation",
+    "primaryObject": "modelAsset",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "mf-experiment",
+      "evolution",
+      "knowledge",
+      "security"
+    ],
+    "pages": [
+      {
+        "id": "datasets",
+        "name": "数据集目录",
+        "kind": "list",
+        "purpose": "集中查看、筛选并下钻训练数据工厂的数据集目录",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_DATA_FACTORY-FR-001",
+          "MF_DATA_FACTORY-FR-002"
+        ]
+      },
+      {
+        "id": "collection",
+        "name": "样本采集",
+        "kind": "create",
+        "purpose": "处理训练数据工厂中的样本采集，保留上下文与完整时间线",
+        "primaryActions": [
+          "创建并保存",
+          "提交审核"
+        ],
+        "requirementIds": [
+          "MF_DATA_FACTORY-FR-003",
+          "MF_DATA_FACTORY-FR-004"
+        ]
+      },
+      {
+        "id": "labeling",
+        "name": "标注任务",
+        "kind": "list",
+        "purpose": "处理训练数据工厂中的标注任务，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_DATA_FACTORY-FR-005",
+          "MF_DATA_FACTORY-FR-006"
+        ]
+      },
+      {
+        "id": "quality",
+        "name": "质检",
+        "kind": "list",
+        "purpose": "依据规则与证据完成质检并记录结论",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_DATA_FACTORY-FR-007",
+          "MF_DATA_FACTORY-FR-008"
+        ]
+      },
+      {
+        "id": "freeze",
+        "name": "版本冻结",
+        "kind": "list",
+        "purpose": "处理训练数据工厂中的版本冻结，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_DATA_FACTORY-FR-009",
+          "MF_DATA_FACTORY-FR-010"
+        ]
+      },
+      {
+        "id": "lineage",
+        "name": "血缘",
+        "kind": "detail",
+        "purpose": "处理训练数据工厂中的血缘，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_DATA_FACTORY-FR-011",
+          "MF_DATA_FACTORY-FR-012"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "训练数据工厂审计",
+        "kind": "audit",
+        "purpose": "追踪训练数据工厂的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "MF_DATA_FACTORY-FR-013",
+          "MF_DATA_FACTORY-FR-014"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mf-experiment",
+    "code": "MF_EXPERIMENT",
+    "name": "实验追踪",
+    "domainId": "model-factory",
+    "versionId": "v5",
+    "maturity": "implementation",
+    "primaryObject": "modelAsset",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "mf-data-factory",
+      "mf-model-registry",
+      "mf-model-monitor",
+      "evolution"
+    ],
+    "pages": [
+      {
+        "id": "experiments",
+        "name": "实验列表",
+        "kind": "list",
+        "purpose": "集中查看、筛选并下钻实验追踪的实验列表",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_EXPERIMENT-FR-001",
+          "MF_EXPERIMENT-FR-002"
+        ]
+      },
+      {
+        "id": "parameters",
+        "name": "参数配置",
+        "kind": "create",
+        "purpose": "完成实验追踪的参数配置并校验依赖与权限",
+        "primaryActions": [
+          "编辑",
+          "校验",
+          "保存"
+        ],
+        "requirementIds": [
+          "MF_EXPERIMENT-FR-003",
+          "MF_EXPERIMENT-FR-004"
+        ]
+      },
+      {
+        "id": "runs",
+        "name": "运行详情",
+        "kind": "detail",
+        "purpose": "执行运行详情并追踪状态、异常、证据和结果",
+        "primaryActions": [
+          "执行",
+          "暂停",
+          "查看结果"
+        ],
+        "requirementIds": [
+          "MF_EXPERIMENT-FR-005",
+          "MF_EXPERIMENT-FR-006"
+        ]
+      },
+      {
+        "id": "comparison",
+        "name": "指标对比",
+        "kind": "result",
+        "purpose": "分析指标对比并下钻到来源对象与改进动作",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_EXPERIMENT-FR-007",
+          "MF_EXPERIMENT-FR-008"
+        ]
+      },
+      {
+        "id": "baseline",
+        "name": "基线评估",
+        "kind": "list",
+        "purpose": "处理实验追踪中的基线评估，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_EXPERIMENT-FR-009",
+          "MF_EXPERIMENT-FR-010"
+        ]
+      },
+      {
+        "id": "candidate",
+        "name": "候选提交",
+        "kind": "list",
+        "purpose": "处理实验追踪中的候选提交，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_EXPERIMENT-FR-011",
+          "MF_EXPERIMENT-FR-012"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "实验追踪审计",
+        "kind": "audit",
+        "purpose": "追踪实验追踪的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "MF_EXPERIMENT-FR-013",
+          "MF_EXPERIMENT-FR-014"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mf-model-registry",
+    "code": "MF_MODEL_REGISTRY",
+    "name": "模型注册中心",
+    "domainId": "model-factory",
+    "versionId": "v5",
+    "maturity": "implementation",
+    "primaryObject": "modelAsset",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "mf-experiment",
+      "mf-pipeline",
+      "mf-model-monitor",
+      "admin"
+    ],
+    "pages": [
+      {
+        "id": "models",
+        "name": "模型目录",
+        "kind": "list",
+        "purpose": "集中查看、筛选并下钻模型注册中心的模型目录",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_MODEL_REGISTRY-FR-001",
+          "MF_MODEL_REGISTRY-FR-002"
+        ]
+      },
+      {
+        "id": "lineage",
+        "name": "版本血缘",
+        "kind": "detail",
+        "purpose": "处理模型注册中心中的版本血缘，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_MODEL_REGISTRY-FR-003",
+          "MF_MODEL_REGISTRY-FR-004"
+        ]
+      },
+      {
+        "id": "security-review",
+        "name": "安全评审",
+        "kind": "process",
+        "purpose": "依据规则与证据完成安全评审并记录结论",
+        "primaryActions": [
+          "通过",
+          "驳回",
+          "要求补充"
+        ],
+        "requirementIds": [
+          "MF_MODEL_REGISTRY-FR-005",
+          "MF_MODEL_REGISTRY-FR-006"
+        ]
+      },
+      {
+        "id": "deployment",
+        "name": "部署审批",
+        "kind": "process",
+        "purpose": "依据规则与证据完成部署审批并记录结论",
+        "primaryActions": [
+          "通过",
+          "驳回",
+          "要求补充"
+        ],
+        "requirementIds": [
+          "MF_MODEL_REGISTRY-FR-007",
+          "MF_MODEL_REGISTRY-FR-008"
+        ]
+      },
+      {
+        "id": "canary",
+        "name": "灰度",
+        "kind": "list",
+        "purpose": "处理模型注册中心中的灰度，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_MODEL_REGISTRY-FR-009",
+          "MF_MODEL_REGISTRY-FR-010"
+        ]
+      },
+      {
+        "id": "rollback",
+        "name": "回滚",
+        "kind": "process",
+        "purpose": "执行回滚并追踪状态、异常、证据和结果",
+        "primaryActions": [
+          "执行",
+          "暂停",
+          "查看结果"
+        ],
+        "requirementIds": [
+          "MF_MODEL_REGISTRY-FR-011",
+          "MF_MODEL_REGISTRY-FR-012"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "模型注册中心审计",
+        "kind": "audit",
+        "purpose": "追踪模型注册中心的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "MF_MODEL_REGISTRY-FR-013",
+          "MF_MODEL_REGISTRY-FR-014"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mf-feature-store",
+    "code": "MF_FEATURE_STORE",
+    "name": "特征平台",
+    "domainId": "model-factory",
+    "versionId": "v5",
+    "maturity": "implementation",
+    "primaryObject": "modelAsset",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "mf-data-factory",
+      "mf-pipeline",
+      "mf-model-monitor",
+      "data-methodology"
+    ],
+    "pages": [
+      {
+        "id": "features",
+        "name": "特征目录",
+        "kind": "list",
+        "purpose": "集中查看、筛选并下钻特征平台的特征目录",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_FEATURE_STORE-FR-001",
+          "MF_FEATURE_STORE-FR-002"
+        ]
+      },
+      {
+        "id": "entities",
+        "name": "实体定义",
+        "kind": "list",
+        "purpose": "完成特征平台的实体定义并校验依赖与权限",
+        "primaryActions": [
+          "编辑",
+          "校验",
+          "保存"
+        ],
+        "requirementIds": [
+          "MF_FEATURE_STORE-FR-003",
+          "MF_FEATURE_STORE-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "特征平台详情",
+        "kind": "detail",
+        "purpose": "查看特征平台核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "MF_FEATURE_STORE-FR-005",
+          "MF_FEATURE_STORE-FR-006"
+        ]
+      },
+      {
+        "id": "compute",
+        "name": "计算任务",
+        "kind": "list",
+        "purpose": "处理特征平台中的计算任务，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_FEATURE_STORE-FR-007",
+          "MF_FEATURE_STORE-FR-008"
+        ]
+      },
+      {
+        "id": "sync",
+        "name": "离在线同步",
+        "kind": "list",
+        "purpose": "处理特征平台中的离在线同步，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_FEATURE_STORE-FR-009",
+          "MF_FEATURE_STORE-FR-010"
+        ]
+      },
+      {
+        "id": "consistency",
+        "name": "一致性验证",
+        "kind": "list",
+        "purpose": "分析一致性验证并下钻到来源对象与改进动作",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_FEATURE_STORE-FR-011",
+          "MF_FEATURE_STORE-FR-012"
+        ]
+      },
+      {
+        "id": "usage",
+        "name": "使用分析",
+        "kind": "result",
+        "purpose": "分析使用分析并下钻到来源对象与改进动作",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_FEATURE_STORE-FR-013",
+          "MF_FEATURE_STORE-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "特征平台审计",
+        "kind": "audit",
+        "purpose": "追踪特征平台的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "MF_FEATURE_STORE-FR-015",
+          "MF_FEATURE_STORE-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mf-model-monitor",
+    "code": "MF_MODEL_MONITOR",
+    "name": "模型监控",
+    "domainId": "model-factory",
+    "versionId": "v5",
+    "maturity": "implementation",
+    "primaryObject": "modelAsset",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "mf-model-registry",
+      "mf-experiment",
+      "ticket-system",
+      "evolution"
+    ],
+    "pages": [
+      {
+        "id": "dashboard",
+        "name": "模型看板",
+        "kind": "workspace",
+        "purpose": "集中查看、筛选并下钻模型监控的模型看板",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_MODEL_MONITOR-FR-001",
+          "MF_MODEL_MONITOR-FR-002"
+        ]
+      },
+      {
+        "id": "baselines",
+        "name": "指标基线",
+        "kind": "result",
+        "purpose": "分析指标基线并下钻到来源对象与改进动作",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_MODEL_MONITOR-FR-003",
+          "MF_MODEL_MONITOR-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "模型监控详情",
+        "kind": "detail",
+        "purpose": "查看模型监控核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "MF_MODEL_MONITOR-FR-005",
+          "MF_MODEL_MONITOR-FR-006"
+        ]
+      },
+      {
+        "id": "drift",
+        "name": "漂移告警",
+        "kind": "list",
+        "purpose": "处理模型监控中的漂移告警，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_MODEL_MONITOR-FR-007",
+          "MF_MODEL_MONITOR-FR-008"
+        ]
+      },
+      {
+        "id": "impact",
+        "name": "影响分析",
+        "kind": "result",
+        "purpose": "分析影响分析并下钻到来源对象与改进动作",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_MODEL_MONITOR-FR-009",
+          "MF_MODEL_MONITOR-FR-010"
+        ]
+      },
+      {
+        "id": "remediation",
+        "name": "处置",
+        "kind": "list",
+        "purpose": "执行处置并追踪状态、异常、证据和结果",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_MODEL_MONITOR-FR-011",
+          "MF_MODEL_MONITOR-FR-012"
+        ]
+      },
+      {
+        "id": "recovery",
+        "name": "恢复观察",
+        "kind": "process",
+        "purpose": "执行恢复观察并追踪状态、异常、证据和结果",
+        "primaryActions": [
+          "执行",
+          "暂停",
+          "查看结果"
+        ],
+        "requirementIds": [
+          "MF_MODEL_MONITOR-FR-013",
+          "MF_MODEL_MONITOR-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "模型监控审计",
+        "kind": "audit",
+        "purpose": "追踪模型监控的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "MF_MODEL_MONITOR-FR-015",
+          "MF_MODEL_MONITOR-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mf-pipeline",
+    "code": "MF_PIPELINE",
+    "name": "数据管道调度",
+    "domainId": "model-factory",
+    "versionId": "v5",
+    "maturity": "implementation",
+    "primaryObject": "workflowRun",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "mf-data-factory",
+      "mf-feature-store",
+      "mf-model-registry",
+      "ticket-system"
+    ],
+    "pages": [
+      {
+        "id": "pipelines",
+        "name": "管道目录",
+        "kind": "list",
+        "purpose": "集中查看、筛选并下钻数据管道调度的管道目录",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_PIPELINE-FR-001",
+          "MF_PIPELINE-FR-002"
+        ]
+      },
+      {
+        "id": "canvas",
+        "name": "节点画布",
+        "kind": "process",
+        "purpose": "处理数据管道调度中的节点画布，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_PIPELINE-FR-003",
+          "MF_PIPELINE-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "数据管道调度详情",
+        "kind": "detail",
+        "purpose": "查看数据管道调度核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "MF_PIPELINE-FR-005",
+          "MF_PIPELINE-FR-006"
+        ]
+      },
+      {
+        "id": "schedules",
+        "name": "调度配置",
+        "kind": "create",
+        "purpose": "完成数据管道调度的调度配置并校验依赖与权限",
+        "primaryActions": [
+          "执行",
+          "暂停",
+          "查看结果"
+        ],
+        "requirementIds": [
+          "MF_PIPELINE-FR-007",
+          "MF_PIPELINE-FR-008"
+        ]
+      },
+      {
+        "id": "runs",
+        "name": "运行实例",
+        "kind": "process",
+        "purpose": "执行运行实例并追踪状态、异常、证据和结果",
+        "primaryActions": [
+          "执行",
+          "暂停",
+          "查看结果"
+        ],
+        "requirementIds": [
+          "MF_PIPELINE-FR-009",
+          "MF_PIPELINE-FR-010"
+        ]
+      },
+      {
+        "id": "retries",
+        "name": "失败重试",
+        "kind": "list",
+        "purpose": "执行失败重试并追踪状态、异常、证据和结果",
+        "primaryActions": [
+          "执行",
+          "暂停",
+          "查看结果"
+        ],
+        "requirementIds": [
+          "MF_PIPELINE-FR-011",
+          "MF_PIPELINE-FR-012"
+        ]
+      },
+      {
+        "id": "freshness",
+        "name": "数据新鲜度",
+        "kind": "list",
+        "purpose": "分析数据新鲜度并下钻到来源对象与改进动作",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MF_PIPELINE-FR-013",
+          "MF_PIPELINE-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "数据管道调度审计",
+        "kind": "audit",
+        "purpose": "追踪数据管道调度的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "MF_PIPELINE-FR-015",
+          "MF_PIPELINE-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "data-methodology",
+    "code": "DATA_METHODOLOGY",
+    "name": "数据方法论",
+    "domainId": "data-intelligence",
+    "versionId": "v6",
+    "maturity": "planned",
+    "primaryObject": "knowledgeAsset",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "analytics",
+      "knowledge",
+      "mf-feature-store",
+      "evolution"
+    ],
+    "pages": [
+      {
+        "id": "questions",
+        "name": "业务问题库",
+        "kind": "list",
+        "purpose": "处理数据方法论中的业务问题库，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "DATA_METHODOLOGY-FR-001",
+          "DATA_METHODOLOGY-FR-002"
+        ]
+      },
+      {
+        "id": "metrics",
+        "name": "指标口径",
+        "kind": "result",
+        "purpose": "分析指标口径并下钻到来源对象与改进动作",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "DATA_METHODOLOGY-FR-003",
+          "DATA_METHODOLOGY-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "数据方法论详情",
+        "kind": "detail",
+        "purpose": "查看数据方法论核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "DATA_METHODOLOGY-FR-005",
+          "DATA_METHODOLOGY-FR-006"
+        ]
+      },
+      {
+        "id": "methods",
+        "name": "分析方法",
+        "kind": "result",
+        "purpose": "分析分析方法并下钻到来源对象与改进动作",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "DATA_METHODOLOGY-FR-007",
+          "DATA_METHODOLOGY-FR-008"
+        ]
+      },
+      {
+        "id": "validation",
+        "name": "验证记录",
+        "kind": "records",
+        "purpose": "处理数据方法论中的验证记录，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "DATA_METHODOLOGY-FR-009",
+          "DATA_METHODOLOGY-FR-010"
+        ]
+      },
+      {
+        "id": "publishing",
+        "name": "方法发布",
+        "kind": "process",
+        "purpose": "执行方法发布并追踪状态、异常、证据和结果",
+        "primaryActions": [
+          "执行",
+          "暂停",
+          "查看结果"
+        ],
+        "requirementIds": [
+          "DATA_METHODOLOGY-FR-011",
+          "DATA_METHODOLOGY-FR-012"
+        ]
+      },
+      {
+        "id": "cases",
+        "name": "复用案例",
+        "kind": "list",
+        "purpose": "处理数据方法论中的复用案例，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "DATA_METHODOLOGY-FR-013",
+          "DATA_METHODOLOGY-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "数据方法论审计",
+        "kind": "audit",
+        "purpose": "追踪数据方法论的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "DATA_METHODOLOGY-FR-015",
+          "DATA_METHODOLOGY-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "evolution",
+    "code": "EVOLUTION",
+    "name": "递归成长",
+    "domainId": "data-intelligence",
+    "versionId": "v6",
+    "maturity": "planned",
+    "primaryObject": "incident",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "agent-testing",
+      "mf-data-factory",
+      "mf-experiment",
+      "analytics"
+    ],
+    "pages": [
+      {
+        "id": "badcases",
+        "name": "Badcase 池",
+        "kind": "list",
+        "purpose": "集中查看、筛选并下钻递归成长的Badcase 池",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "EVOLUTION-FR-001",
+          "EVOLUTION-FR-002"
+        ]
+      },
+      {
+        "id": "gaps",
+        "name": "能力缺口",
+        "kind": "list",
+        "purpose": "处理递归成长中的能力缺口，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "EVOLUTION-FR-003",
+          "EVOLUTION-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "递归成长详情",
+        "kind": "detail",
+        "purpose": "查看递归成长核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "EVOLUTION-FR-005",
+          "EVOLUTION-FR-006"
+        ]
+      },
+      {
+        "id": "proposals",
+        "name": "改进提案",
+        "kind": "list",
+        "purpose": "处理递归成长中的改进提案，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "EVOLUTION-FR-007",
+          "EVOLUTION-FR-008"
+        ]
+      },
+      {
+        "id": "approval",
+        "name": "实验审批",
+        "kind": "process",
+        "purpose": "依据规则与证据完成实验审批并记录结论",
+        "primaryActions": [
+          "通过",
+          "驳回",
+          "要求补充"
+        ],
+        "requirementIds": [
+          "EVOLUTION-FR-009",
+          "EVOLUTION-FR-010"
+        ]
+      },
+      {
+        "id": "validation",
+        "name": "上线验证",
+        "kind": "list",
+        "purpose": "处理递归成长中的上线验证，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "EVOLUTION-FR-011",
+          "EVOLUTION-FR-012"
+        ]
+      },
+      {
+        "id": "benefits",
+        "name": "收益复盘",
+        "kind": "result",
+        "purpose": "处理递归成长中的收益复盘，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "EVOLUTION-FR-013",
+          "EVOLUTION-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "递归成长审计",
+        "kind": "audit",
+        "purpose": "追踪递归成长的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "EVOLUTION-FR-015",
+          "EVOLUTION-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mkt-agent-market",
+    "code": "MKT_AGENT_MARKET",
+    "name": "Agent 市场",
+    "domainId": "ecosystem-market",
+    "versionId": "v7",
+    "maturity": "planned",
+    "primaryObject": "agent",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "agents",
+      "agent-testing",
+      "permissions",
+      "mkt-tenant"
+    ],
+    "pages": [
+      {
+        "id": "discover",
+        "name": "Agent 发现",
+        "kind": "list",
+        "purpose": "处理Agent 市场中的Agent 发现，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_AGENT_MARKET-FR-001",
+          "MKT_AGENT_MARKET-FR-002"
+        ]
+      },
+      {
+        "id": "partners",
+        "name": "伙伴空间",
+        "kind": "list",
+        "purpose": "集中查看、筛选并下钻Agent 市场的伙伴空间",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_AGENT_MARKET-FR-003",
+          "MKT_AGENT_MARKET-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "Agent 市场详情",
+        "kind": "detail",
+        "purpose": "查看Agent 市场核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "MKT_AGENT_MARKET-FR-005",
+          "MKT_AGENT_MARKET-FR-006"
+        ]
+      },
+      {
+        "id": "listing-review",
+        "name": "上架审核",
+        "kind": "process",
+        "purpose": "依据规则与证据完成上架审核并记录结论",
+        "primaryActions": [
+          "通过",
+          "驳回",
+          "要求补充"
+        ],
+        "requirementIds": [
+          "MKT_AGENT_MARKET-FR-007",
+          "MKT_AGENT_MARKET-FR-008"
+        ]
+      },
+      {
+        "id": "sandbox",
+        "name": "沙箱测试",
+        "kind": "list",
+        "purpose": "处理Agent 市场中的沙箱测试，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_AGENT_MARKET-FR-009",
+          "MKT_AGENT_MARKET-FR-010"
+        ]
+      },
+      {
+        "id": "installation",
+        "name": "安装授权",
+        "kind": "list",
+        "purpose": "完成Agent 市场的安装授权并校验依赖与权限",
+        "primaryActions": [
+          "编辑",
+          "校验",
+          "保存"
+        ],
+        "requirementIds": [
+          "MKT_AGENT_MARKET-FR-011",
+          "MKT_AGENT_MARKET-FR-012"
+        ]
+      },
+      {
+        "id": "reviews",
+        "name": "评价复审",
+        "kind": "list",
+        "purpose": "处理Agent 市场中的评价复审，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_AGENT_MARKET-FR-013",
+          "MKT_AGENT_MARKET-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "Agent 市场审计",
+        "kind": "audit",
+        "purpose": "追踪Agent 市场的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "MKT_AGENT_MARKET-FR-015",
+          "MKT_AGENT_MARKET-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mkt-dr",
+    "code": "MKT_DR",
+    "name": "业务连续性灾备",
+    "domainId": "resilience-compliance",
+    "versionId": "v7",
+    "maturity": "planned",
+    "primaryObject": "incident",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "admin",
+      "security",
+      "ticket-system",
+      "mkt-tenant"
+    ],
+    "pages": [
+      {
+        "id": "critical-paths",
+        "name": "关键链路",
+        "kind": "list",
+        "purpose": "处理业务连续性灾备中的关键链路，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_DR-FR-001",
+          "MKT_DR-FR-002"
+        ]
+      },
+      {
+        "id": "objectives",
+        "name": "RPO/RTO 策略",
+        "kind": "list",
+        "purpose": "完成业务连续性灾备的RPO/RTO 策略并校验依赖与权限",
+        "primaryActions": [
+          "编辑",
+          "校验",
+          "保存"
+        ],
+        "requirementIds": [
+          "MKT_DR-FR-003",
+          "MKT_DR-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "业务连续性灾备详情",
+        "kind": "detail",
+        "purpose": "查看业务连续性灾备核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "MKT_DR-FR-005",
+          "MKT_DR-FR-006"
+        ]
+      },
+      {
+        "id": "standby",
+        "name": "备用资源",
+        "kind": "list",
+        "purpose": "处理业务连续性灾备中的备用资源，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_DR-FR-007",
+          "MKT_DR-FR-008"
+        ]
+      },
+      {
+        "id": "drills",
+        "name": "演练计划",
+        "kind": "list",
+        "purpose": "处理业务连续性灾备中的演练计划，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_DR-FR-009",
+          "MKT_DR-FR-010"
+        ]
+      },
+      {
+        "id": "switchovers",
+        "name": "切换记录",
+        "kind": "records",
+        "purpose": "执行切换记录并追踪状态、异常、证据和结果",
+        "primaryActions": [
+          "执行",
+          "暂停",
+          "查看结果"
+        ],
+        "requirementIds": [
+          "MKT_DR-FR-011",
+          "MKT_DR-FR-012"
+        ]
+      },
+      {
+        "id": "retrospective",
+        "name": "复盘",
+        "kind": "list",
+        "purpose": "处理业务连续性灾备中的复盘，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_DR-FR-013",
+          "MKT_DR-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "业务连续性灾备审计",
+        "kind": "audit",
+        "purpose": "追踪业务连续性灾备的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "MKT_DR-FR-015",
+          "MKT_DR-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mkt-ethics",
+    "code": "MKT_ETHICS",
+    "name": "Agent 伦理治理",
+    "domainId": "resilience-compliance",
+    "versionId": "v7",
+    "maturity": "planned",
+    "primaryObject": "auditEvent",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "agents",
+      "security",
+      "permissions",
+      "knowledge"
+    ],
+    "pages": [
+      {
+        "id": "risks",
+        "name": "风险登记",
+        "kind": "list",
+        "purpose": "处理Agent 伦理治理中的风险登记，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_ETHICS-FR-001",
+          "MKT_ETHICS-FR-002"
+        ]
+      },
+      {
+        "id": "evidence",
+        "name": "解释证据",
+        "kind": "list",
+        "purpose": "处理Agent 伦理治理中的解释证据，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_ETHICS-FR-003",
+          "MKT_ETHICS-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "Agent 伦理治理详情",
+        "kind": "detail",
+        "purpose": "查看Agent 伦理治理核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "MKT_ETHICS-FR-005",
+          "MKT_ETHICS-FR-006"
+        ]
+      },
+      {
+        "id": "expert-review",
+        "name": "专家审查",
+        "kind": "list",
+        "purpose": "处理Agent 伦理治理中的专家审查，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_ETHICS-FR-007",
+          "MKT_ETHICS-FR-008"
+        ]
+      },
+      {
+        "id": "remediation",
+        "name": "整改",
+        "kind": "list",
+        "purpose": "处理Agent 伦理治理中的整改，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_ETHICS-FR-009",
+          "MKT_ETHICS-FR-010"
+        ]
+      },
+      {
+        "id": "verification",
+        "name": "复核",
+        "kind": "list",
+        "purpose": "依据规则与证据完成复核并记录结论",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_ETHICS-FR-011",
+          "MKT_ETHICS-FR-012"
+        ]
+      },
+      {
+        "id": "disclosure",
+        "name": "结论公示",
+        "kind": "list",
+        "purpose": "处理Agent 伦理治理中的结论公示，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_ETHICS-FR-013",
+          "MKT_ETHICS-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "Agent 伦理治理审计",
+        "kind": "audit",
+        "purpose": "追踪Agent 伦理治理的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "MKT_ETHICS-FR-015",
+          "MKT_ETHICS-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mkt-tenant",
+    "code": "MKT_TENANT",
+    "name": "多租户管理",
+    "domainId": "ai-product-delivery",
+    "versionId": "v7",
+    "maturity": "planned",
+    "primaryObject": "tenant",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "delivery",
+      "client-portal",
+      "permissions",
+      "security"
+    ],
+    "pages": [
+      {
+        "id": "tenants",
+        "name": "租户目录",
+        "kind": "list",
+        "purpose": "集中查看、筛选并下钻多租户管理的租户目录",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_TENANT-FR-001",
+          "MKT_TENANT-FR-002"
+        ]
+      },
+      {
+        "id": "quotas",
+        "name": "资源配额",
+        "kind": "list",
+        "purpose": "处理多租户管理中的资源配额，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_TENANT-FR-003",
+          "MKT_TENANT-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "多租户管理详情",
+        "kind": "detail",
+        "purpose": "查看多租户管理核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "MKT_TENANT-FR-005",
+          "MKT_TENANT-FR-006"
+        ]
+      },
+      {
+        "id": "isolation",
+        "name": "隔离策略",
+        "kind": "list",
+        "purpose": "完成多租户管理的隔离策略并校验依赖与权限",
+        "primaryActions": [
+          "编辑",
+          "校验",
+          "保存"
+        ],
+        "requirementIds": [
+          "MKT_TENANT-FR-007",
+          "MKT_TENANT-FR-008"
+        ]
+      },
+      {
+        "id": "usage",
+        "name": "使用监控",
+        "kind": "list",
+        "purpose": "处理多租户管理中的使用监控，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_TENANT-FR-009",
+          "MKT_TENANT-FR-010"
+        ]
+      },
+      {
+        "id": "renewal",
+        "name": "续约",
+        "kind": "list",
+        "purpose": "处理多租户管理中的续约，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_TENANT-FR-011",
+          "MKT_TENANT-FR-012"
+        ]
+      },
+      {
+        "id": "offboarding",
+        "name": "资产导出与关闭",
+        "kind": "list",
+        "purpose": "处理多租户管理中的资产导出与关闭，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "MKT_TENANT-FR-013",
+          "MKT_TENANT-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "多租户管理审计",
+        "kind": "audit",
+        "purpose": "追踪多租户管理的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "MKT_TENANT-FR-015",
+          "MKT_TENANT-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "analytics",
+    "code": "ANALYTICS",
+    "name": "效果度量看板",
+    "domainId": "value-measurement",
+    "versionId": "v7",
+    "maturity": "planned",
+    "primaryObject": "metricSnapshot",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "task-center",
+      "client-portal",
+      "ai-products",
+      "evolution"
+    ],
+    "pages": [
+      {
+        "id": "business-value",
+        "name": "业务价值",
+        "kind": "result",
+        "purpose": "分析业务价值并下钻到来源对象与改进动作",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "ANALYTICS-FR-001",
+          "ANALYTICS-FR-002"
+        ]
+      },
+      {
+        "id": "agent-effectiveness",
+        "name": "Agent 效果",
+        "kind": "result",
+        "purpose": "分析Agent 效果并下钻到来源对象与改进动作",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "ANALYTICS-FR-003",
+          "ANALYTICS-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "效果度量看板详情",
+        "kind": "detail",
+        "purpose": "查看效果度量看板核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "ANALYTICS-FR-005",
+          "ANALYTICS-FR-006"
+        ]
+      },
+      {
+        "id": "productivity",
+        "name": "人效",
+        "kind": "list",
+        "purpose": "处理效果度量看板中的人效，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "ANALYTICS-FR-007",
+          "ANALYTICS-FR-008"
+        ]
+      },
+      {
+        "id": "cost",
+        "name": "成本",
+        "kind": "list",
+        "purpose": "处理效果度量看板中的成本，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "ANALYTICS-FR-009",
+          "ANALYTICS-FR-010"
+        ]
+      },
+      {
+        "id": "raas-revenue",
+        "name": "RaaS 收入",
+        "kind": "list",
+        "purpose": "处理效果度量看板中的RaaS 收入，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "ANALYTICS-FR-011",
+          "ANALYTICS-FR-012"
+        ]
+      },
+      {
+        "id": "roi",
+        "name": "ROI 归因",
+        "kind": "list",
+        "purpose": "处理效果度量看板中的ROI 归因，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "ANALYTICS-FR-013",
+          "ANALYTICS-FR-014"
+        ]
+      },
+      {
+        "id": "improvements",
+        "name": "改进事项",
+        "kind": "list",
+        "purpose": "处理效果度量看板中的改进事项，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "ANALYTICS-FR-015",
+          "ANALYTICS-FR-016"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "效果度量看板审计",
+        "kind": "audit",
+        "purpose": "追踪效果度量看板的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "ANALYTICS-FR-017",
+          "ANALYTICS-FR-018"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "security",
+    "code": "SECURITY",
+    "name": "安全与合规中心",
+    "domainId": "resilience-compliance",
+    "versionId": "v7",
+    "maturity": "planned",
+    "primaryObject": "auditEvent",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "permissions",
+      "mkt-ethics",
+      "mkt-dr",
+      "ticket-system"
+    ],
+    "pages": [
+      {
+        "id": "assets",
+        "name": "资产台账",
+        "kind": "list",
+        "purpose": "集中查看、筛选并下钻安全与合规中心的资产台账",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "SECURITY-FR-001",
+          "SECURITY-FR-002"
+        ]
+      },
+      {
+        "id": "risk-assessment",
+        "name": "风险评估",
+        "kind": "list",
+        "purpose": "处理安全与合规中心中的风险评估，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "SECURITY-FR-003",
+          "SECURITY-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "安全与合规中心详情",
+        "kind": "detail",
+        "purpose": "查看安全与合规中心核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "SECURITY-FR-005",
+          "SECURITY-FR-006"
+        ]
+      },
+      {
+        "id": "controls",
+        "name": "控制策略",
+        "kind": "list",
+        "purpose": "完成安全与合规中心的控制策略并校验依赖与权限",
+        "primaryActions": [
+          "编辑",
+          "校验",
+          "保存"
+        ],
+        "requirementIds": [
+          "SECURITY-FR-007",
+          "SECURITY-FR-008"
+        ]
+      },
+      {
+        "id": "incidents",
+        "name": "安全事件",
+        "kind": "list",
+        "purpose": "处理安全与合规中心中的安全事件，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "SECURITY-FR-009",
+          "SECURITY-FR-010"
+        ]
+      },
+      {
+        "id": "remediation",
+        "name": "整改",
+        "kind": "list",
+        "purpose": "处理安全与合规中心中的整改，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "SECURITY-FR-011",
+          "SECURITY-FR-012"
+        ]
+      },
+      {
+        "id": "evidence",
+        "name": "合规证据",
+        "kind": "list",
+        "purpose": "处理安全与合规中心中的合规证据，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "SECURITY-FR-013",
+          "SECURITY-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "安全与合规中心审计",
+        "kind": "audit",
+        "purpose": "追踪安全与合规中心的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "SECURITY-FR-015",
+          "SECURITY-FR-016"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "knowledge",
+    "code": "KNOWLEDGE",
+    "name": "知识资产平台",
+    "domainId": "knowledge-content",
+    "versionId": "v7",
+    "maturity": "planned",
+    "primaryObject": "knowledgeAsset",
+    "roles": [
+      "admin",
+      "business",
+      "trainer",
+      "employee"
+    ],
+    "dependencies": [
+      "knowledge-base",
+      "data-methodology",
+      "security",
+      "analytics"
+    ],
+    "pages": [
+      {
+        "id": "portfolio",
+        "name": "资产组合",
+        "kind": "workspace",
+        "purpose": "集中查看、筛选并下钻知识资产平台的资产组合",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE-FR-001",
+          "KNOWLEDGE-FR-002"
+        ]
+      },
+      {
+        "id": "graph",
+        "name": "知识图谱",
+        "kind": "list",
+        "purpose": "处理知识资产平台中的知识图谱，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE-FR-003",
+          "KNOWLEDGE-FR-004"
+        ]
+      },
+      {
+        "id": "detail",
+        "name": "知识资产平台详情",
+        "kind": "detail",
+        "purpose": "查看知识资产平台核心对象、上下游关系、状态与下一步动作",
+        "primaryActions": [
+          "查看关系",
+          "编辑信息",
+          "进入流程"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE-FR-005",
+          "KNOWLEDGE-FR-006"
+        ]
+      },
+      {
+        "id": "quality",
+        "name": "质量评估",
+        "kind": "list",
+        "purpose": "处理知识资产平台中的质量评估，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE-FR-007",
+          "KNOWLEDGE-FR-008"
+        ]
+      },
+      {
+        "id": "rights",
+        "name": "权属授权",
+        "kind": "list",
+        "purpose": "完成知识资产平台的权属授权并校验依赖与权限",
+        "primaryActions": [
+          "编辑",
+          "校验",
+          "保存"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE-FR-009",
+          "KNOWLEDGE-FR-010"
+        ]
+      },
+      {
+        "id": "value",
+        "name": "使用价值",
+        "kind": "result",
+        "purpose": "分析使用价值并下钻到来源对象与改进动作",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE-FR-011",
+          "KNOWLEDGE-FR-012"
+        ]
+      },
+      {
+        "id": "operations",
+        "name": "资产运营",
+        "kind": "list",
+        "purpose": "处理知识资产平台中的资产运营，保留上下文与完整时间线",
+        "primaryActions": [
+          "筛选",
+          "查看详情",
+          "导出"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE-FR-013",
+          "KNOWLEDGE-FR-014"
+        ]
+      },
+      {
+        "id": "audit",
+        "name": "知识资产平台审计",
+        "kind": "audit",
+        "purpose": "追踪知识资产平台的操作、状态变化、影响范围与责任人",
+        "primaryActions": [
+          "筛选事件",
+          "查看证据",
+          "导出记录"
+        ],
+        "requirementIds": [
+          "KNOWLEDGE-FR-015",
+          "KNOWLEDGE-FR-016"
+        ]
+      }
+    ]
+  }
+]

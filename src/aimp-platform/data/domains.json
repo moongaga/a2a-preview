@@ -1,0 +1,67 @@
+[
+  {
+    "id": "personal-work",
+    "name": "个人工作",
+    "purpose": "承载员工日常待办、协作和项目上下文"
+  },
+  {
+    "id": "task-planning",
+    "name": "任务与计划",
+    "purpose": "把业务目标转化为可执行任务、计划和工作流"
+  },
+  {
+    "id": "agent-engineering",
+    "name": "Agent 工程",
+    "purpose": "管理 Agent、Prompt、Skill、Tool 与测试发布"
+  },
+  {
+    "id": "knowledge-content",
+    "name": "知识与内容",
+    "purpose": "管理知识资产、知识包、检索和内容证据"
+  },
+  {
+    "id": "platform-governance",
+    "name": "平台治理",
+    "purpose": "管理模型网关、权限、参数、计费和审计"
+  },
+  {
+    "id": "ai-product-delivery",
+    "name": "AI 产品与交付",
+    "purpose": "管理 AI 产品、客户租户、交付和 SLA"
+  },
+  {
+    "id": "digital-organization",
+    "name": "数字组织",
+    "purpose": "管理人类与 Agent 的岗位、职责和转型"
+  },
+  {
+    "id": "quality-operations",
+    "name": "质量与运营",
+    "purpose": "管理测试门禁、异常工单和恢复闭环"
+  },
+  {
+    "id": "model-factory",
+    "name": "模型工厂",
+    "purpose": "管理训练数据、实验、模型、特征和管道"
+  },
+  {
+    "id": "data-intelligence",
+    "name": "数据智能",
+    "purpose": "沉淀数据方法、Badcase 和递归改进"
+  },
+  {
+    "id": "ecosystem-market",
+    "name": "生态市场",
+    "purpose": "管理 Agent 市场、伙伴和租户生态"
+  },
+  {
+    "id": "resilience-compliance",
+    "name": "韧性与合规",
+    "purpose": "管理灾备、伦理、安全和合规证据"
+  },
+  {
+    "id": "value-measurement",
+    "name": "价值度量",
+    "purpose": "衡量业务结果、成本、人效、收入和知识价值"
+  }
+]

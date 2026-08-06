@@ -1,0 +1,30 @@
+{
+  "sourceFile": "统一AI管控平台原型.html",
+  "tokens": {
+    "--bg-root": "#f1f5f9",
+    "--bg-surface": "#ffffff",
+    "--bg-card": "#ffffff",
+    "--bg-hover": "#f1f5f9",
+    "--border": "#e2e8f0",
+    "--border-light": "#f1f5f9",
+    "--text-primary": "#1e293b",
+    "--text-secondary": "#475569",
+    "--text-muted": "#94a3b8",
+    "--accent": "#3b82f6",
+    "--accent-light": "#2563eb",
+    "--accent-bg": "rgba(59,130,246,0.08)",
+    "--green": "#059669",
+    "--green-bg": "rgba(5,150,105,0.08)",
+    "--amber": "#d97706",
+    "--amber-bg": "rgba(217,119,6,0.08)",
+    "--purple": "#7c3aed",
+    "--purple-bg": "rgba(124,58,237,0.08)",
+    "--red": "#dc2626",
+    "--red-bg": "rgba(220,38,38,0.08)",
+    "--cyan": "#0891b2",
+    "--radius": "10px",
+    "--radius-sm": "6px",
+    "--shadow": "0 4px 24px rgba(0,0,0,0.06)",
+    "--transition": "0.2s ease"
+  }
+}

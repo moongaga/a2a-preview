@@ -1,0 +1,4511 @@
+[
+  {
+    "moduleId": "workspace",
+    "workbench": "task",
+    "objectName": "task",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "待办来源",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "业务场景",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "截止时间",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "协作Agent",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "人工确认点",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "工作空间名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "pending_approval",
+      "running",
+      "needs_human",
+      "completed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "handoff",
+      "complete",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交审批",
+        "to": "pending_approval"
+      },
+      {
+        "from": "pending_approval",
+        "action": "approve",
+        "label": "批准进入队列",
+        "to": "queued"
+      },
+      {
+        "from": "queued",
+        "action": "start",
+        "label": "开始执行",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "handoff",
+        "label": "转人工接管",
+        "to": "needs_human"
+      },
+      {
+        "from": "running",
+        "action": "complete",
+        "label": "确认完成",
+        "to": "completed"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "task-center",
+      "agents",
+      "dynamic-plan"
+    ],
+    "workflowSteps": [
+      "接收上下文",
+      "确认目标",
+      "人机协作",
+      "提交结果",
+      "沉淀决策"
+    ],
+    "resultMetrics": [
+      "个人任务完成率",
+      "Agent采用率",
+      "人工确认耗时"
+    ],
+    "exceptionCases": [
+      "上下文缺失",
+      "Agent结果需人工确认",
+      "跨项目权限不足"
+    ]
+  },
+  {
+    "moduleId": "task-center",
+    "workbench": "task",
+    "objectName": "task",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "任务中心名称",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "适用范围",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "责任人",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "优先级",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field5",
+        "label": "业务说明",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "pending_approval",
+      "running",
+      "needs_human",
+      "completed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "handoff",
+      "complete",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交审批",
+        "to": "pending_approval"
+      },
+      {
+        "from": "pending_approval",
+        "action": "approve",
+        "label": "批准进入队列",
+        "to": "queued"
+      },
+      {
+        "from": "queued",
+        "action": "start",
+        "label": "开始执行",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "handoff",
+        "label": "转人工接管",
+        "to": "needs_human"
+      },
+      {
+        "from": "running",
+        "action": "complete",
+        "label": "确认完成",
+        "to": "completed"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "workspace",
+      "agents",
+      "permissions",
+      "orchestration",
+      "analytics"
+    ],
+    "workflowSteps": [
+      "任务池",
+      "创建任务",
+      "任务中心详情",
+      "审批队列",
+      "执行跟踪"
+    ],
+    "resultMetrics": [
+      "任务中心完成率",
+      "任务中心质量",
+      "任务中心时效"
+    ],
+    "exceptionCases": [
+      "任务中心校验失败",
+      "任务中心权限不足"
+    ]
+  },
+  {
+    "moduleId": "agents",
+    "workbench": "asset",
+    "objectName": "agent",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "Agent 注册中心名称",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "适用范围",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "责任人",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "优先级",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field5",
+        "label": "业务说明",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "review",
+      "active",
+      "published",
+      "offline",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "publish",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交审核",
+        "to": "review"
+      },
+      {
+        "from": "review",
+        "action": "publish",
+        "label": "审核并发布",
+        "to": "published"
+      },
+      {
+        "from": "published",
+        "action": "offline",
+        "label": "停用",
+        "to": "offline"
+      },
+      {
+        "from": "offline",
+        "action": "restore",
+        "label": "恢复发布",
+        "to": "published"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "permissions",
+      "admin",
+      "skills",
+      "tools",
+      "prompts",
+      "knowledge-base",
+      "agent-testing"
+    ],
+    "workflowSteps": [
+      "Agent 目录",
+      "注册向导",
+      "能力绑定",
+      "版本详情",
+      "运行实例"
+    ],
+    "resultMetrics": [
+      "Agent 注册中心完成率",
+      "Agent 注册中心质量",
+      "Agent 注册中心时效"
+    ],
+    "exceptionCases": [
+      "Agent 注册中心校验失败",
+      "Agent 注册中心权限不足"
+    ]
+  },
+  {
+    "moduleId": "orchestration",
+    "workbench": "process",
+    "objectName": "workflowRun",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "流程版本",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "触发方式",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "参与Agent",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "人工节点",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "超时策略",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "Agent 编排引擎名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "queued",
+      "running",
+      "paused",
+      "completed",
+      "failed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "retry",
+      "complete",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "start",
+        "label": "启动流程",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "pause",
+        "label": "暂停",
+        "to": "paused"
+      },
+      {
+        "from": "paused",
+        "action": "resume",
+        "label": "恢复",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "complete",
+        "label": "完成并验收",
+        "to": "completed"
+      },
+      {
+        "from": "failed",
+        "action": "retry",
+        "label": "失败重试",
+        "to": "running"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "agents",
+      "dynamic-plan",
+      "task-center",
+      "tools"
+    ],
+    "workflowSteps": [
+      "定义节点",
+      "配置输入输出",
+      "设置分支",
+      "绑定人工节点",
+      "测试运行",
+      "发布"
+    ],
+    "resultMetrics": [
+      "流程成功率",
+      "节点P95耗时",
+      "人工接管率"
+    ],
+    "exceptionCases": [
+      "节点超时",
+      "Tool调用失败",
+      "分支条件冲突"
+    ]
+  },
+  {
+    "moduleId": "dynamic-plan",
+    "workbench": "task",
+    "objectName": "goal",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "业务目标",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "计划周期",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "资源预算",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "负责人",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "调整阈值",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "动态计划名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "pending_approval",
+      "running",
+      "needs_human",
+      "completed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "handoff",
+      "complete",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交审批",
+        "to": "pending_approval"
+      },
+      {
+        "from": "pending_approval",
+        "action": "approve",
+        "label": "批准进入队列",
+        "to": "queued"
+      },
+      {
+        "from": "queued",
+        "action": "start",
+        "label": "开始执行",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "handoff",
+        "label": "转人工接管",
+        "to": "needs_human"
+      },
+      {
+        "from": "running",
+        "action": "complete",
+        "label": "确认完成",
+        "to": "completed"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "agents",
+      "task-center",
+      "orchestration",
+      "analytics"
+    ],
+    "workflowSteps": [
+      "目标拆解",
+      "任务估算",
+      "资源分配",
+      "执行监测",
+      "动态调整",
+      "偏差复盘"
+    ],
+    "resultMetrics": [
+      "计划达成率",
+      "资源利用率",
+      "动态调整次数"
+    ],
+    "exceptionCases": [
+      "资源冲突",
+      "目标依赖未满足",
+      "实际偏差超阈值"
+    ]
+  },
+  {
+    "moduleId": "skills",
+    "workbench": "asset",
+    "objectName": "capabilityAsset",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "Skill名称",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "输入输出契约",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "适用Agent",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "版本",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "测试集",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "Skill 技能库名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "review",
+      "active",
+      "published",
+      "offline",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "publish",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交审核",
+        "to": "review"
+      },
+      {
+        "from": "review",
+        "action": "publish",
+        "label": "审核并发布",
+        "to": "published"
+      },
+      {
+        "from": "published",
+        "action": "offline",
+        "label": "停用",
+        "to": "offline"
+      },
+      {
+        "from": "offline",
+        "action": "restore",
+        "label": "恢复发布",
+        "to": "published"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "agents",
+      "permissions",
+      "agent-testing",
+      "prompts",
+      "tools"
+    ],
+    "workflowSteps": [
+      "创建技能",
+      "定义契约",
+      "编写说明",
+      "运行测试",
+      "审核版本",
+      "发布复用"
+    ],
+    "resultMetrics": [
+      "调用成功率",
+      "复用Agent数",
+      "版本缺陷率"
+    ],
+    "exceptionCases": [
+      "契约不兼容",
+      "测试集覆盖不足",
+      "依赖Tool失效"
+    ]
+  },
+  {
+    "moduleId": "tools",
+    "workbench": "asset",
+    "objectName": "capabilityAsset",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "连接方式",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "授权范围",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "凭据位置",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "限流策略",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "健康状态",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "Tools 工具集名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "review",
+      "active",
+      "published",
+      "offline",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "publish",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交审核",
+        "to": "review"
+      },
+      {
+        "from": "review",
+        "action": "publish",
+        "label": "审核并发布",
+        "to": "published"
+      },
+      {
+        "from": "published",
+        "action": "offline",
+        "label": "停用",
+        "to": "offline"
+      },
+      {
+        "from": "offline",
+        "action": "restore",
+        "label": "恢复发布",
+        "to": "published"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "agents",
+      "permissions",
+      "admin",
+      "ticket-system"
+    ],
+    "workflowSteps": [
+      "登记Tool",
+      "配置连接",
+      "授权资源",
+      "健康检查",
+      "试调用",
+      "启用"
+    ],
+    "resultMetrics": [
+      "调用成功率",
+      "P95延迟",
+      "熔断次数"
+    ],
+    "exceptionCases": [
+      "凭据过期",
+      "下游限流",
+      "返回结构变化"
+    ]
+  },
+  {
+    "moduleId": "prompts",
+    "workbench": "asset",
+    "objectName": "capabilityAsset",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "Prompt版本",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "变量",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "关联Agent",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "评测集",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "发布状态",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "Prompt 工程平台名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "review",
+      "active",
+      "published",
+      "offline",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "publish",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交审核",
+        "to": "review"
+      },
+      {
+        "from": "review",
+        "action": "publish",
+        "label": "审核并发布",
+        "to": "published"
+      },
+      {
+        "from": "published",
+        "action": "offline",
+        "label": "停用",
+        "to": "offline"
+      },
+      {
+        "from": "offline",
+        "action": "restore",
+        "label": "恢复发布",
+        "to": "published"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "agents",
+      "task-center",
+      "skills",
+      "knowledge-base",
+      "agent-testing"
+    ],
+    "workflowSteps": [
+      "创建草稿",
+      "配置变量",
+      "运行评测",
+      "比较版本",
+      "审批发布",
+      "监控回滚"
+    ],
+    "resultMetrics": [
+      "任务成功率",
+      "Badcase命中率",
+      "单次Token成本"
+    ],
+    "exceptionCases": [
+      "变量缺失",
+      "评测回退",
+      "发布后指标下降"
+    ]
+  },
+  {
+    "moduleId": "knowledge-base",
+    "workbench": "asset",
+    "objectName": "knowledgeAsset",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "知识库名称",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "适用范围",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "责任人",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "优先级",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field5",
+        "label": "业务说明",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "review",
+      "active",
+      "published",
+      "offline",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "publish",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交审核",
+        "to": "review"
+      },
+      {
+        "from": "review",
+        "action": "publish",
+        "label": "审核并发布",
+        "to": "published"
+      },
+      {
+        "from": "published",
+        "action": "offline",
+        "label": "停用",
+        "to": "offline"
+      },
+      {
+        "from": "offline",
+        "action": "restore",
+        "label": "恢复发布",
+        "to": "published"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "permissions",
+      "agents",
+      "prompts",
+      "knowledge"
+    ],
+    "workflowSteps": [
+      "知识空间",
+      "资产采集",
+      "知识库详情",
+      "清洗切分",
+      "审核发布"
+    ],
+    "resultMetrics": [
+      "知识库完成率",
+      "知识库质量",
+      "知识库时效"
+    ],
+    "exceptionCases": [
+      "知识库校验失败",
+      "知识库权限不足"
+    ]
+  },
+  {
+    "moduleId": "ai-products",
+    "workbench": "asset",
+    "objectName": "capabilityAsset",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "产品名称",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "目标场景",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "能力包",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "服务等级",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "定价方案",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "AI 产品目录名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "review",
+      "active",
+      "published",
+      "offline",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "publish",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交审核",
+        "to": "review"
+      },
+      {
+        "from": "review",
+        "action": "publish",
+        "label": "审核并发布",
+        "to": "published"
+      },
+      {
+        "from": "published",
+        "action": "offline",
+        "label": "停用",
+        "to": "offline"
+      },
+      {
+        "from": "offline",
+        "action": "restore",
+        "label": "恢复发布",
+        "to": "published"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "delivery",
+      "client-portal",
+      "agents",
+      "analytics"
+    ],
+    "workflowSteps": [
+      "定义客户价值",
+      "装配能力",
+      "配置服务包",
+      "定价测算",
+      "发布审批",
+      "客户使用"
+    ],
+    "resultMetrics": [
+      "产品采用客户数",
+      "RaaS收入",
+      "价值达成率"
+    ],
+    "exceptionCases": [
+      "能力依赖未发布",
+      "定价低于成本线",
+      "客户权限范围冲突"
+    ]
+  },
+  {
+    "moduleId": "delivery",
+    "workbench": "process",
+    "objectName": "tenant",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "客户租户",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "合同范围",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "交付版本",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "里程碑",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "验收标准",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "交付管理名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "queued",
+      "running",
+      "paused",
+      "completed",
+      "failed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "retry",
+      "complete",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "start",
+        "label": "启动流程",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "pause",
+        "label": "暂停",
+        "to": "paused"
+      },
+      {
+        "from": "paused",
+        "action": "resume",
+        "label": "恢复",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "complete",
+        "label": "完成并验收",
+        "to": "completed"
+      },
+      {
+        "from": "failed",
+        "action": "retry",
+        "label": "失败重试",
+        "to": "running"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "ai-products",
+      "mkt-tenant",
+      "client-portal",
+      "ticket-system"
+    ],
+    "workflowSteps": [
+      "确认合同",
+      "制定计划",
+      "开通租户",
+      "迁移数据",
+      "联调试运行",
+      "客户验收",
+      "SLA运营"
+    ],
+    "resultMetrics": [
+      "按期交付率",
+      "客户验收通过率",
+      "SLA达成率"
+    ],
+    "exceptionCases": [
+      "合同范围变更",
+      "数据迁移失败",
+      "客户验收不通过"
+    ]
+  },
+  {
+    "moduleId": "ai-org",
+    "workbench": "governance",
+    "objectName": "goal",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "组织单元",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "人类岗位",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "Agent岗位",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "职责边界",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "协作关系",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "数字组织架构名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "review",
+      "active",
+      "closed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "approve",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交评审",
+        "to": "review"
+      },
+      {
+        "from": "review",
+        "action": "approve",
+        "label": "批准生效",
+        "to": "active"
+      },
+      {
+        "from": "active",
+        "action": "close",
+        "label": "关闭",
+        "to": "closed"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "position-ai",
+      "agents",
+      "permissions",
+      "task-center"
+    ],
+    "workflowSteps": [
+      "建立组织基线",
+      "识别职责单元",
+      "配置Agent岗位",
+      "确认决策权",
+      "发布组织图",
+      "冲突治理"
+    ],
+    "resultMetrics": [
+      "人机协作覆盖率",
+      "职责冲突数",
+      "关键决策人工保留率"
+    ],
+    "exceptionCases": [
+      "职责重复",
+      "无人承担最终责任",
+      "Agent越过决策边界"
+    ]
+  },
+  {
+    "moduleId": "position-ai",
+    "workbench": "governance",
+    "objectName": "goal",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "岗位名称",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "任务清单",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "AI化机会",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "试运行范围",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "人员影响",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "岗位 AI 化追踪名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "review",
+      "active",
+      "closed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "approve",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交评审",
+        "to": "review"
+      },
+      {
+        "from": "review",
+        "action": "approve",
+        "label": "批准生效",
+        "to": "active"
+      },
+      {
+        "from": "active",
+        "action": "close",
+        "label": "关闭",
+        "to": "closed"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "ai-org",
+      "agents",
+      "workspace",
+      "analytics"
+    ],
+    "workflowSteps": [
+      "岗位基线",
+      "任务拆解",
+      "机会评估",
+      "试运行",
+      "培训转岗",
+      "采用率跟踪"
+    ],
+    "resultMetrics": [
+      "岗位AI化率",
+      "人均效率提升",
+      "员工采用率"
+    ],
+    "exceptionCases": [
+      "业务效果未达标",
+      "员工能力缺口",
+      "人员安置方案缺失"
+    ]
+  },
+  {
+    "moduleId": "admin",
+    "workbench": "governance",
+    "objectName": "auditEvent",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "模型供应商",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "路由策略",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "系统参数",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "计费策略",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "限流规则",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "基础管理名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "review",
+      "active",
+      "closed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "approve",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交评审",
+        "to": "review"
+      },
+      {
+        "from": "review",
+        "action": "approve",
+        "label": "批准生效",
+        "to": "active"
+      },
+      {
+        "from": "active",
+        "action": "close",
+        "label": "关闭",
+        "to": "closed"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "permissions",
+      "tools",
+      "mf-model-registry",
+      "security"
+    ],
+    "workflowSteps": [
+      "登记供应商",
+      "配置模型",
+      "设置路由",
+      "压测验证",
+      "发布变更",
+      "运行审计"
+    ],
+    "resultMetrics": [
+      "网关可用率",
+      "模型单位成本",
+      "路由切换成功率"
+    ],
+    "exceptionCases": [
+      "供应商不可用",
+      "预算超限",
+      "路由规则循环"
+    ]
+  },
+  {
+    "moduleId": "permissions",
+    "workbench": "governance",
+    "objectName": "auditEvent",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "主体角色",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "资源范围",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "动作权限",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "生效时间",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "复核周期",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "权限管理名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "review",
+      "active",
+      "closed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "approve",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交评审",
+        "to": "review"
+      },
+      {
+        "from": "review",
+        "action": "approve",
+        "label": "批准生效",
+        "to": "active"
+      },
+      {
+        "from": "active",
+        "action": "close",
+        "label": "关闭",
+        "to": "closed"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "admin",
+      "security",
+      "mkt-tenant",
+      "mkt-ethics"
+    ],
+    "workflowSteps": [
+      "提交申请",
+      "冲突检测",
+      "责任人审批",
+      "策略生效",
+      "访问审计",
+      "定期复核"
+    ],
+    "resultMetrics": [
+      "申请处理时长",
+      "越权拦截数",
+      "过期权限回收率"
+    ],
+    "exceptionCases": [
+      "职责分离冲突",
+      "跨租户授权",
+      "审批人离职"
+    ]
+  },
+  {
+    "moduleId": "client-portal",
+    "workbench": "insight",
+    "objectName": "tenant",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "客户租户",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "已购产品",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "交付状态",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "业务KPI",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "SLA状态",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "客户门户名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "active",
+      "published",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "publish",
+        "label": "发布视图",
+        "to": "published"
+      },
+      {
+        "from": "published",
+        "action": "update",
+        "label": "刷新数据",
+        "to": "published"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "delivery",
+      "analytics",
+      "ai-products",
+      "ticket-system"
+    ],
+    "workflowSteps": [
+      "客户登录",
+      "查看产品",
+      "跟踪交付",
+      "确认结果",
+      "提交服务请求",
+      "续约反馈"
+    ],
+    "resultMetrics": [
+      "客户活跃率",
+      "结果确认率",
+      "服务请求关闭率"
+    ],
+    "exceptionCases": [
+      "客户数据越界",
+      "指标延迟",
+      "SLA即将违约"
+    ]
+  },
+  {
+    "moduleId": "agent-testing",
+    "workbench": "experiment",
+    "objectName": "workflowRun",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "测试计划",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "目标版本",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "测试集",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "风险等级",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "门禁结论",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "Agent 测试沙箱名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "queued",
+      "running",
+      "completed",
+      "failed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "test",
+      "complete",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "start",
+        "label": "开始运行",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "complete",
+        "label": "固化结果",
+        "to": "completed"
+      },
+      {
+        "from": "running",
+        "action": "fail",
+        "label": "标记失败",
+        "to": "failed"
+      },
+      {
+        "from": "failed",
+        "action": "retry",
+        "label": "重新运行",
+        "to": "running"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "agents",
+      "prompts",
+      "skills",
+      "mkt-agent-market"
+    ],
+    "workflowSteps": [
+      "创建计划",
+      "选择用例",
+      "运行回归",
+      "执行对抗",
+      "分析失败",
+      "发布门禁"
+    ],
+    "resultMetrics": [
+      "测试通过率",
+      "回归缺陷数",
+      "风险拦截数"
+    ],
+    "exceptionCases": [
+      "测试环境不可用",
+      "基线数据失效",
+      "高危风险未关闭"
+    ]
+  },
+  {
+    "moduleId": "ticket-system",
+    "workbench": "task",
+    "objectName": "incident",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "异常等级",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "影响对象",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "责任团队",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "SLA",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "根因分类",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "异常工单中心名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "pending_approval",
+      "running",
+      "needs_human",
+      "completed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "handoff",
+      "complete",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交审批",
+        "to": "pending_approval"
+      },
+      {
+        "from": "pending_approval",
+        "action": "approve",
+        "label": "批准进入队列",
+        "to": "queued"
+      },
+      {
+        "from": "queued",
+        "action": "start",
+        "label": "开始执行",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "handoff",
+        "label": "转人工接管",
+        "to": "needs_human"
+      },
+      {
+        "from": "running",
+        "action": "complete",
+        "label": "确认完成",
+        "to": "completed"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "task-center",
+      "tools",
+      "mf-model-monitor",
+      "evolution"
+    ],
+    "workflowSteps": [
+      "异常发现",
+      "分级派单",
+      "处理诊断",
+      "恢复验证",
+      "关闭工单",
+      "根因沉淀"
+    ],
+    "resultMetrics": [
+      "平均恢复时间",
+      "SLA达成率",
+      "重复异常率"
+    ],
+    "exceptionCases": [
+      "影响范围扩大",
+      "责任团队拒收",
+      "恢复后再次失败"
+    ]
+  },
+  {
+    "moduleId": "mf-data-factory",
+    "workbench": "experiment",
+    "objectName": "modelAsset",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "数据集",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "样本来源",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "标注规范",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "质量阈值",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "版本",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "训练数据工厂名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "queued",
+      "running",
+      "completed",
+      "failed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "test",
+      "complete",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "start",
+        "label": "开始运行",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "complete",
+        "label": "固化结果",
+        "to": "completed"
+      },
+      {
+        "from": "running",
+        "action": "fail",
+        "label": "标记失败",
+        "to": "failed"
+      },
+      {
+        "from": "failed",
+        "action": "retry",
+        "label": "重新运行",
+        "to": "running"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "mf-experiment",
+      "evolution",
+      "knowledge",
+      "security"
+    ],
+    "workflowSteps": [
+      "样本采集",
+      "脱敏处理",
+      "任务标注",
+      "质量抽检",
+      "版本冻结",
+      "血缘发布"
+    ],
+    "resultMetrics": [
+      "有效样本率",
+      "标注一致率",
+      "返工率"
+    ],
+    "exceptionCases": [
+      "来源授权缺失",
+      "标注冲突",
+      "敏感信息泄露风险"
+    ]
+  },
+  {
+    "moduleId": "mf-experiment",
+    "workbench": "experiment",
+    "objectName": "modelAsset",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "实验目标",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "基线模型",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "数据版本",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "参数组合",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "主指标",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "实验追踪名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "queued",
+      "running",
+      "completed",
+      "failed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "test",
+      "complete",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "start",
+        "label": "开始运行",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "complete",
+        "label": "固化结果",
+        "to": "completed"
+      },
+      {
+        "from": "running",
+        "action": "fail",
+        "label": "标记失败",
+        "to": "failed"
+      },
+      {
+        "from": "failed",
+        "action": "retry",
+        "label": "重新运行",
+        "to": "running"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "mf-data-factory",
+      "mf-model-registry",
+      "mf-model-monitor",
+      "evolution"
+    ],
+    "workflowSteps": [
+      "创建实验",
+      "配置参数",
+      "运行训练",
+      "记录指标",
+      "比较基线",
+      "提交候选"
+    ],
+    "resultMetrics": [
+      "主指标提升",
+      "实验成功率",
+      "单位实验成本"
+    ],
+    "exceptionCases": [
+      "训练中断",
+      "指标不可比",
+      "数据版本漂移"
+    ]
+  },
+  {
+    "moduleId": "mf-model-registry",
+    "workbench": "asset",
+    "objectName": "modelAsset",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "模型名称",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "版本血缘",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "安全等级",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "部署环境",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "回滚版本",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "模型注册中心名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "review",
+      "active",
+      "published",
+      "offline",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "publish",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交审核",
+        "to": "review"
+      },
+      {
+        "from": "review",
+        "action": "publish",
+        "label": "审核并发布",
+        "to": "published"
+      },
+      {
+        "from": "published",
+        "action": "offline",
+        "label": "停用",
+        "to": "offline"
+      },
+      {
+        "from": "offline",
+        "action": "restore",
+        "label": "恢复发布",
+        "to": "published"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "mf-experiment",
+      "mf-pipeline",
+      "mf-model-monitor",
+      "admin"
+    ],
+    "workflowSteps": [
+      "登记模型",
+      "确认血缘",
+      "安全评审",
+      "部署审批",
+      "灰度发布",
+      "回滚归档"
+    ],
+    "resultMetrics": [
+      "模型发布成功率",
+      "回滚次数",
+      "版本可追溯率"
+    ],
+    "exceptionCases": [
+      "血缘缺失",
+      "安全评审不通过",
+      "灰度指标下降"
+    ]
+  },
+  {
+    "moduleId": "mf-feature-store",
+    "workbench": "experiment",
+    "objectName": "modelAsset",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "特征名称",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "业务实体",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "计算逻辑",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "更新频率",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "使用方",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "特征平台名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "queued",
+      "running",
+      "completed",
+      "failed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "test",
+      "complete",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "start",
+        "label": "开始运行",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "complete",
+        "label": "固化结果",
+        "to": "completed"
+      },
+      {
+        "from": "running",
+        "action": "fail",
+        "label": "标记失败",
+        "to": "failed"
+      },
+      {
+        "from": "failed",
+        "action": "retry",
+        "label": "重新运行",
+        "to": "running"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "mf-data-factory",
+      "mf-pipeline",
+      "mf-model-monitor",
+      "data-methodology"
+    ],
+    "workflowSteps": [
+      "定义实体",
+      "登记特征",
+      "配置计算",
+      "离在线同步",
+      "一致性验证",
+      "开放使用"
+    ],
+    "resultMetrics": [
+      "特征新鲜度",
+      "离在线一致率",
+      "复用模型数"
+    ],
+    "exceptionCases": [
+      "计算延迟",
+      "特征泄漏",
+      "离在线值不一致"
+    ]
+  },
+  {
+    "moduleId": "mf-model-monitor",
+    "workbench": "experiment",
+    "objectName": "modelAsset",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "监控模型",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "指标基线",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "漂移阈值",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "影响场景",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "处置策略",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "模型监控名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "queued",
+      "running",
+      "completed",
+      "failed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "test",
+      "complete",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "start",
+        "label": "开始运行",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "complete",
+        "label": "固化结果",
+        "to": "completed"
+      },
+      {
+        "from": "running",
+        "action": "fail",
+        "label": "标记失败",
+        "to": "failed"
+      },
+      {
+        "from": "failed",
+        "action": "retry",
+        "label": "重新运行",
+        "to": "running"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "mf-model-registry",
+      "mf-experiment",
+      "ticket-system",
+      "evolution"
+    ],
+    "workflowSteps": [
+      "建立基线",
+      "采集指标",
+      "识别漂移",
+      "分析影响",
+      "执行处置",
+      "恢复观察"
+    ],
+    "resultMetrics": [
+      "漂移发现时长",
+      "误报率",
+      "恢复时长"
+    ],
+    "exceptionCases": [
+      "监控数据中断",
+      "漂移影响扩大",
+      "自动处置失败"
+    ]
+  },
+  {
+    "moduleId": "mf-pipeline",
+    "workbench": "process",
+    "objectName": "workflowRun",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "管道名称",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "节点依赖",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "调度周期",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "数据SLA",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "重试策略",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "数据管道调度名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "queued",
+      "running",
+      "paused",
+      "completed",
+      "failed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "retry",
+      "complete",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "start",
+        "label": "启动流程",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "pause",
+        "label": "暂停",
+        "to": "paused"
+      },
+      {
+        "from": "paused",
+        "action": "resume",
+        "label": "恢复",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "complete",
+        "label": "完成并验收",
+        "to": "completed"
+      },
+      {
+        "from": "failed",
+        "action": "retry",
+        "label": "失败重试",
+        "to": "running"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "mf-data-factory",
+      "mf-feature-store",
+      "mf-model-registry",
+      "ticket-system"
+    ],
+    "workflowSteps": [
+      "设计节点",
+      "配置依赖",
+      "设置调度",
+      "试运行",
+      "发布管道",
+      "失败恢复"
+    ],
+    "resultMetrics": [
+      "管道成功率",
+      "数据新鲜度",
+      "平均恢复时长"
+    ],
+    "exceptionCases": [
+      "上游数据缺失",
+      "节点超时",
+      "重试耗尽"
+    ]
+  },
+  {
+    "moduleId": "data-methodology",
+    "workbench": "insight",
+    "objectName": "knowledgeAsset",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "业务问题",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "指标口径",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "分析方法",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "验证证据",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "适用范围",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "数据方法论名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "责任人",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "active",
+      "published",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "publish",
+        "label": "发布视图",
+        "to": "published"
+      },
+      {
+        "from": "published",
+        "action": "update",
+        "label": "刷新数据",
+        "to": "published"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "analytics",
+      "knowledge",
+      "mf-feature-store",
+      "evolution"
+    ],
+    "workflowSteps": [
+      "登记问题",
+      "定义口径",
+      "选择方法",
+      "数据验证",
+      "专家评审",
+      "发布复用"
+    ],
+    "resultMetrics": [
+      "方法复用次数",
+      "结论采纳率",
+      "口径争议数"
+    ],
+    "exceptionCases": [
+      "指标口径冲突",
+      "样本不足",
+      "结论不可复现"
+    ]
+  },
+  {
+    "moduleId": "evolution",
+    "workbench": "process",
+    "objectName": "incident",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "Badcase",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "能力缺口",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "改进提案",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "实验计划",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "预期收益",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "递归成长名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "queued",
+      "running",
+      "paused",
+      "completed",
+      "failed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "retry",
+      "complete",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "start",
+        "label": "启动流程",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "pause",
+        "label": "暂停",
+        "to": "paused"
+      },
+      {
+        "from": "paused",
+        "action": "resume",
+        "label": "恢复",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "complete",
+        "label": "完成并验收",
+        "to": "completed"
+      },
+      {
+        "from": "failed",
+        "action": "retry",
+        "label": "失败重试",
+        "to": "running"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "agent-testing",
+      "mf-data-factory",
+      "mf-experiment",
+      "analytics"
+    ],
+    "workflowSteps": [
+      "收集Badcase",
+      "归因缺口",
+      "生成提案",
+      "审批实验",
+      "上线验证",
+      "收益复盘"
+    ],
+    "resultMetrics": [
+      "Badcase关闭率",
+      "能力提升幅度",
+      "改进ROI"
+    ],
+    "exceptionCases": [
+      "问题无法复现",
+      "实验风险过高",
+      "上线后效果回退"
+    ]
+  },
+  {
+    "moduleId": "mkt-agent-market",
+    "workbench": "insight",
+    "objectName": "agent",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "Agent商品",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "提供方",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "能力声明",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "测试结论",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "安装权限",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "Agent 市场名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "active",
+      "published",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "publish",
+        "label": "发布视图",
+        "to": "published"
+      },
+      {
+        "from": "published",
+        "action": "update",
+        "label": "刷新数据",
+        "to": "published"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "agents",
+      "agent-testing",
+      "permissions",
+      "mkt-tenant"
+    ],
+    "workflowSteps": [
+      "伙伴入驻",
+      "提交上架",
+      "沙箱测试",
+      "平台审核",
+      "客户安装",
+      "评价复审"
+    ],
+    "resultMetrics": [
+      "上架Agent数",
+      "安装转化率",
+      "伙伴收入"
+    ],
+    "exceptionCases": [
+      "能力声明不实",
+      "沙箱测试失败",
+      "评价异常操纵"
+    ]
+  },
+  {
+    "moduleId": "mkt-dr",
+    "workbench": "process",
+    "objectName": "incident",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "关键链路",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "RPO",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "RTO",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "备用资源",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "演练计划",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "业务连续性灾备名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "queued",
+      "running",
+      "paused",
+      "completed",
+      "failed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "retry",
+      "complete",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "start",
+        "label": "启动流程",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "pause",
+        "label": "暂停",
+        "to": "paused"
+      },
+      {
+        "from": "paused",
+        "action": "resume",
+        "label": "恢复",
+        "to": "running"
+      },
+      {
+        "from": "running",
+        "action": "complete",
+        "label": "完成并验收",
+        "to": "completed"
+      },
+      {
+        "from": "failed",
+        "action": "retry",
+        "label": "失败重试",
+        "to": "running"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "admin",
+      "security",
+      "ticket-system",
+      "mkt-tenant"
+    ],
+    "workflowSteps": [
+      "识别关键链路",
+      "制定目标",
+      "准备备用资源",
+      "执行演练",
+      "切换恢复",
+      "复盘整改"
+    ],
+    "resultMetrics": [
+      "RTO达成率",
+      "演练通过率",
+      "恢复数据完整率"
+    ],
+    "exceptionCases": [
+      "备用资源不可用",
+      "数据同步落后",
+      "切换后业务异常"
+    ]
+  },
+  {
+    "moduleId": "mkt-ethics",
+    "workbench": "governance",
+    "objectName": "auditEvent",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "风险主题",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "影响人群",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "解释证据",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "专家结论",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "整改措施",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "Agent 伦理治理名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "review",
+      "active",
+      "closed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "approve",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交评审",
+        "to": "review"
+      },
+      {
+        "from": "review",
+        "action": "approve",
+        "label": "批准生效",
+        "to": "active"
+      },
+      {
+        "from": "active",
+        "action": "close",
+        "label": "关闭",
+        "to": "closed"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "agents",
+      "security",
+      "permissions",
+      "knowledge"
+    ],
+    "workflowSteps": [
+      "风险登记",
+      "收集证据",
+      "影响评估",
+      "专家审查",
+      "执行整改",
+      "结论公示"
+    ],
+    "resultMetrics": [
+      "伦理风险关闭率",
+      "解释覆盖率",
+      "复核通过率"
+    ],
+    "exceptionCases": [
+      "高风险歧视信号",
+      "证据不足",
+      "整改影响业务连续性"
+    ]
+  },
+  {
+    "moduleId": "mkt-tenant",
+    "workbench": "governance",
+    "objectName": "tenant",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "租户名称",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "隔离级别",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "资源配额",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "已购产品",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "续约日期",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "多租户管理名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "review",
+      "active",
+      "closed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "approve",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交评审",
+        "to": "review"
+      },
+      {
+        "from": "review",
+        "action": "approve",
+        "label": "批准生效",
+        "to": "active"
+      },
+      {
+        "from": "active",
+        "action": "close",
+        "label": "关闭",
+        "to": "closed"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "delivery",
+      "client-portal",
+      "permissions",
+      "security"
+    ],
+    "workflowSteps": [
+      "创建租户",
+      "配置隔离",
+      "分配配额",
+      "开通产品",
+      "监控使用",
+      "续约或关闭"
+    ],
+    "resultMetrics": [
+      "租户活跃率",
+      "资源利用率",
+      "续约率"
+    ],
+    "exceptionCases": [
+      "隔离策略冲突",
+      "配额耗尽",
+      "关闭前资产未导出"
+    ]
+  },
+  {
+    "moduleId": "analytics",
+    "workbench": "insight",
+    "objectName": "metricSnapshot",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "指标名称",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "业务口径",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "数据来源",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "目标值",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "归因模型",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "效果度量看板名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "active",
+      "published",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "publish",
+        "label": "发布视图",
+        "to": "published"
+      },
+      {
+        "from": "published",
+        "action": "update",
+        "label": "刷新数据",
+        "to": "published"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "task-center",
+      "client-portal",
+      "ai-products",
+      "evolution"
+    ],
+    "workflowSteps": [
+      "定义口径",
+      "连接来源",
+      "计算指标",
+      "验证归因",
+      "发布看板",
+      "触发改进"
+    ],
+    "resultMetrics": [
+      "线索转化率",
+      "人均效率",
+      "RaaS收入占比",
+      "平台ROI"
+    ],
+    "exceptionCases": [
+      "数据口径不一致",
+      "归因链断裂",
+      "指标延迟超SLA"
+    ]
+  },
+  {
+    "moduleId": "security",
+    "workbench": "governance",
+    "objectName": "auditEvent",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "资产范围",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "风险等级",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "控制策略",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "责任人",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "合规证据",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "安全与合规中心名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "review",
+      "active",
+      "closed",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "approve",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交评审",
+        "to": "review"
+      },
+      {
+        "from": "review",
+        "action": "approve",
+        "label": "批准生效",
+        "to": "active"
+      },
+      {
+        "from": "active",
+        "action": "close",
+        "label": "关闭",
+        "to": "closed"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "permissions",
+      "mkt-ethics",
+      "mkt-dr",
+      "ticket-system"
+    ],
+    "workflowSteps": [
+      "资产盘点",
+      "风险评估",
+      "配置控制",
+      "监测事件",
+      "执行整改",
+      "证据归档"
+    ],
+    "resultMetrics": [
+      "高危风险数",
+      "控制覆盖率",
+      "整改按期率"
+    ],
+    "exceptionCases": [
+      "高危漏洞暴露",
+      "跨境数据风险",
+      "证据过期"
+    ]
+  },
+  {
+    "moduleId": "knowledge",
+    "workbench": "asset",
+    "objectName": "knowledgeAsset",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "知识资产组合",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field2",
+        "label": "图谱关系",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field3",
+        "label": "权属主体",
+        "type": "text",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "field4",
+        "label": "质量等级",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field5",
+        "label": "使用价值",
+        "type": "text",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "field6",
+        "label": "知识资产平台名称",
+        "type": "select",
+        "required": false,
+        "options": [
+          "高",
+          "中",
+          "低"
+        ]
+      },
+      {
+        "key": "field7",
+        "label": "适用范围",
+        "type": "textarea",
+        "required": false,
+        "options": []
+      }
+    ],
+    "columns": [
+      "name",
+      "status",
+      "field1",
+      "field2",
+      "field3",
+      "ownerId",
+      "updatedAt"
+    ],
+    "filters": [
+      "status",
+      "ownerId"
+    ],
+    "statuses": [
+      "draft",
+      "review",
+      "active",
+      "published",
+      "offline",
+      "archived"
+    ],
+    "actions": [
+      "create",
+      "update",
+      "publish",
+      "archive",
+      "restore"
+    ],
+    "stateActions": [
+      {
+        "from": "draft",
+        "action": "submit",
+        "label": "提交审核",
+        "to": "review"
+      },
+      {
+        "from": "review",
+        "action": "publish",
+        "label": "审核并发布",
+        "to": "published"
+      },
+      {
+        "from": "published",
+        "action": "offline",
+        "label": "停用",
+        "to": "offline"
+      },
+      {
+        "from": "offline",
+        "action": "restore",
+        "label": "恢复发布",
+        "to": "published"
+      }
+    ],
+    "archiveRule": "draft_without_relations_can_delete_otherwise_archive",
+    "relationTargets": [
+      "knowledge-base",
+      "data-methodology",
+      "security",
+      "analytics"
+    ],
+    "workflowSteps": [
+      "资产盘点",
+      "关系建模",
+      "质量评估",
+      "权属确认",
+      "价值计量",
+      "资产运营"
+    ],
+    "resultMetrics": [
+      "知识复用率",
+      "图谱覆盖率",
+      "知识价值贡献"
+    ],
+    "exceptionCases": [
+      "权属争议",
+      "知识冲突",
+      "低质量资产扩散"
+    ]
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "id": "v1",
+    "label": "v1.0 · 地基期",
+    "date": "2026-09-20",
+    "goal": "建立可运行的平台最小底座",
+    "status": "implementation",
+    "entryConditions": [
+      "首条业务黄金路径、数据范围和责任角色已冻结",
+      "模型供应商和业务系统接入范围已确认"
+    ],
+    "exitConditions": [
+      "真实业务闭环可运行",
+      "权限、审计和基础运维可追溯"
+    ]
+  },
+  {
+    "id": "v2",
+    "label": "v2.0 · 核心期",
+    "date": "2026-11-20",
+    "goal": "从单点 Agent 进入可控协作",
+    "status": "implementation",
+    "entryConditions": [
+      "v1 生产底座通过 Go/No-Go",
+      "A2A 协作边界和人工审批点已确认"
+    ],
+    "exitConditions": [
+      "多 Agent 协作可控",
+      "Tool 调用和异常闭环达到目标"
+    ]
+  },
+  {
+    "id": "v3",
+    "label": "v3.0 · 扩建期",
+    "date": "2026-12-20",
+    "goal": "统一数据、知识与效果度量能力",
+    "status": "enhancement",
+    "entryConditions": [
+      "首批场景数据可稳定回流",
+      "统一标签、画像和指标口径已确认"
+    ],
+    "exitConditions": [
+      "联合版本、知识图谱和效果度量嵌入既有模块"
+    ]
+  },
+  {
+    "id": "v4",
+    "label": "v4.0 · 深化期",
+    "date": "2027-02-20",
+    "goal": "进入规模化交付和生产治理",
+    "status": "implementation",
+    "entryConditions": [
+      "RaaS 合同、交付模板和 SLA 口径已确认"
+    ],
+    "exitConditions": [
+      "客户交付、门户、测试和异常工单形成生产治理闭环"
+    ]
+  },
+  {
+    "id": "v5",
+    "label": "v5.0 · 规模期",
+    "date": "2027-04-20",
+    "goal": "建立模型工厂并复制多业务线",
+    "status": "implementation",
+    "entryConditions": [
+      "训练数据和模型生命周期责任边界已确认"
+    ],
+    "exitConditions": [
+      "数据、实验、模型、特征、监控和管道可追溯"
+    ]
+  },
+  {
+    "id": "v6",
+    "label": "v6.0 · 成熟期",
+    "date": "2027-06-20",
+    "goal": "形成数据飞轮和组织变革能力",
+    "status": "planned",
+    "entryConditions": [
+      "跨场景效果和 Badcase 数据达到可复用规模"
+    ],
+    "exitConditions": [
+      "数据方法和递归改进形成稳定闭环"
+    ]
+  },
+  {
+    "id": "v7",
+    "label": "v7.0 · 生态期",
+    "date": "2027-08-20",
+    "goal": "形成生态化、治理化 RaaS 平台",
+    "status": "planned",
+    "entryConditions": [
+      "多租户、生态伙伴、合规和灾备前置条件已满足"
+    ],
+    "exitConditions": [
+      "生态、治理、ROI 和知识资产能力形成目标蓝图"
+    ]
+  }
+]

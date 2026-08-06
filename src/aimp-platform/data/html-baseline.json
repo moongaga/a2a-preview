@@ -1,0 +1,253 @@
+{
+  "sourceFile": "统一AI管控平台原型.html",
+  "extractedAt": "2026-07-30T16:34:01.451Z",
+  "tokens": {
+    "--bg-root": "#f1f5f9",
+    "--bg-surface": "#ffffff",
+    "--bg-card": "#ffffff",
+    "--bg-hover": "#f1f5f9",
+    "--border": "#e2e8f0",
+    "--border-light": "#f1f5f9",
+    "--text-primary": "#1e293b",
+    "--text-secondary": "#475569",
+    "--text-muted": "#94a3b8",
+    "--accent": "#3b82f6",
+    "--accent-light": "#2563eb",
+    "--accent-bg": "rgba(59,130,246,0.08)",
+    "--green": "#059669",
+    "--green-bg": "rgba(5,150,105,0.08)",
+    "--amber": "#d97706",
+    "--amber-bg": "rgba(217,119,6,0.08)",
+    "--purple": "#7c3aed",
+    "--purple-bg": "rgba(124,58,237,0.08)",
+    "--red": "#dc2626",
+    "--red-bg": "rgba(220,38,38,0.08)",
+    "--cyan": "#0891b2",
+    "--radius": "10px",
+    "--radius-sm": "6px",
+    "--shadow": "0 4px 24px rgba(0,0,0,0.06)",
+    "--transition": "0.2s ease"
+  },
+  "navSections": [
+    {
+      "id": "-",
+      "title": "我的工作台",
+      "items": [
+        {
+          "id": "workspace",
+          "label": "工作空间 ●"
+        }
+      ]
+    },
+    {
+      "id": "agent-",
+      "title": "Agent 管理",
+      "items": [
+        {
+          "id": "agents",
+          "label": "Agent 注册中心 24"
+        },
+        {
+          "id": "orchestration",
+          "label": "Agent 编排引擎 NEW"
+        }
+      ]
+    },
+    {
+      "id": "-",
+      "title": "能力工厂",
+      "items": [
+        {
+          "id": "skills",
+          "label": "Skill 技能库 32"
+        },
+        {
+          "id": "tools",
+          "label": "Tools 工具集 18"
+        },
+        {
+          "id": "prompts",
+          "label": "Prompt 工程平台 186"
+        }
+      ]
+    },
+    {
+      "id": "ai-",
+      "title": "AI 产品",
+      "items": [
+        {
+          "id": "ai-products",
+          "label": "产品目录 12"
+        }
+      ]
+    },
+    {
+      "id": "ai-",
+      "title": "AI 组织",
+      "items": [
+        {
+          "id": "ai-org",
+          "label": "数字组织架构"
+        }
+      ]
+    },
+    {
+      "id": "-",
+      "title": "平台管理",
+      "items": [
+        {
+          "id": "admin",
+          "label": "基础管理"
+        }
+      ]
+    },
+    {
+      "id": "-",
+      "title": "质量保障",
+      "items": [
+        {
+          "id": "agent-testing",
+          "label": "Agent测试沙箱 NEW"
+        }
+      ]
+    },
+    {
+      "id": "-",
+      "title": "模型工厂",
+      "items": [
+        {
+          "id": "mf-data-factory",
+          "label": "训练数据工厂 NEW"
+        },
+        {
+          "id": "mf-experiment",
+          "label": "实验追踪"
+        },
+        {
+          "id": "mf-model-registry",
+          "label": "模型注册中心 24"
+        },
+        {
+          "id": "mf-feature-store",
+          "label": "特征平台"
+        },
+        {
+          "id": "mf-model-monitor",
+          "label": "模型监控"
+        }
+      ]
+    },
+    {
+      "id": "-",
+      "title": "生态与治理",
+      "items": [
+        {
+          "id": "mkt-agent-market",
+          "label": "Agent市场 NEW"
+        },
+        {
+          "id": "mkt-dr",
+          "label": "业务连续性灾备"
+        },
+        {
+          "id": "mkt-ethics",
+          "label": "Agent伦理治理"
+        }
+      ]
+    },
+    {
+      "id": "-",
+      "title": "治理与分析",
+      "items": [
+        {
+          "id": "analytics",
+          "label": "效果度量看板"
+        },
+        {
+          "id": "security",
+          "label": "安全与合规中心"
+        }
+      ]
+    }
+  ],
+  "globalRegions": [
+    {
+      "id": "sidebar",
+      "selector": ".sidebar",
+      "purpose": "全局导航和模块入口"
+    },
+    {
+      "id": "topbar",
+      "selector": ".topbar",
+      "purpose": "版本、角色、通知和全局操作"
+    },
+    {
+      "id": "dashboard",
+      "selector": "[data-tab=\"dashboard\"]",
+      "purpose": "经营驾驶舱"
+    },
+    {
+      "id": "workspace",
+      "selector": ".workspace-layout",
+      "purpose": "工作空间和上下文协作"
+    },
+    {
+      "id": "notification-center",
+      "selector": ".notification-panel",
+      "purpose": "通知、审批和异常动态"
+    }
+  ],
+  "dashboardBlocks": [
+    {
+      "id": "dashboard-1",
+      "label": "业务运营视角",
+      "sourceText": "业务运营视角"
+    },
+    {
+      "id": "dashboard-2",
+      "label": "AIMP 七版本推进路线",
+      "sourceText": "AIMP 七版本推进路线"
+    },
+    {
+      "id": "dashboard-3",
+      "label": "数字员工",
+      "sourceText": "数字员工"
+    },
+    {
+      "id": "dashboard-4",
+      "label": "人类员工",
+      "sourceText": "人类员工"
+    },
+    {
+      "id": "dashboard-5",
+      "label": "Agent 业务贡献度",
+      "sourceText": "Agent 业务贡献度"
+    },
+    {
+      "id": "dashboard-6",
+      "label": "业务动态",
+      "sourceText": "业务动态"
+    },
+    {
+      "id": "dashboard-7",
+      "label": "平台管理员",
+      "sourceText": "平台管理员"
+    },
+    {
+      "id": "dashboard-8",
+      "label": "线索转化",
+      "sourceText": "线索转化"
+    }
+  ],
+  "contentLabels": [
+    "业务运营视角",
+    "技术治理视角",
+    "AIMP 七版本推进路线",
+    "数字员工",
+    "人类员工",
+    "Agent 业务贡献度",
+    "业务动态",
+    "平台管理员",
+    "线索转化"
+  ]
+}

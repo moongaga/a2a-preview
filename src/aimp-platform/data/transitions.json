@@ -1,0 +1,49 @@
+{
+  "task": {
+    "draft": { "submit": "pending_approval", "cancel": "cancelled" },
+    "pending_approval": { "approve": "queued", "reject": "draft", "cancel": "cancelled" },
+    "queued": { "start": "running", "cancel": "cancelled" },
+    "running": { "handoff": "needs_human", "complete": "succeeded", "fail": "failed", "cancel": "cancelled" },
+    "needs_human": { "resume": "running", "complete": "succeeded", "cancel": "cancelled" },
+    "failed": { "retry": "queued", "handoff": "needs_human" }
+  },
+  "agent": {
+    "draft": { "submit": "review", "archive": "archived" },
+    "review": { "approve": "active", "reject": "draft" },
+    "active": { "degrade": "degraded", "offline": "offline", "archive": "archived" },
+    "degraded": { "recover": "active", "offline": "offline" },
+    "offline": { "recover": "active", "archive": "archived" }
+  },
+  "knowledgeAsset": {
+    "draft": { "submit": "review", "archive": "archived" },
+    "review": { "publish": "published", "reject": "draft" },
+    "published": { "expire": "expired", "archive": "archived" },
+    "expired": { "renew": "review", "archive": "archived" }
+  },
+  "workflowRun": {
+    "queued": { "start": "running", "cancel": "failed" },
+    "running": { "pause": "paused", "complete": "completed", "fail": "failed", "timeout": "timeout" },
+    "paused": { "resume": "running", "cancel": "failed" },
+    "failed": { "retry": "queued" },
+    "timeout": { "retry": "queued", "handoff": "paused" }
+  },
+  "promptVersion": {
+    "draft": { "test": "testing" },
+    "testing": { "approve": "approved", "reject": "draft" },
+    "approved": { "publish": "published" },
+    "published": { "rollback": "approved" }
+  },
+  "ticket": {
+    "open": { "triage": "assigned", "cancel": "closed" },
+    "assigned": { "start": "handling", "escalate": "escalated" },
+    "handling": { "resolve": "resolved", "escalate": "escalated" },
+    "escalated": { "start": "handling" },
+    "resolved": { "verify": "closed", "reopen": "handling" }
+  },
+  "generic": {
+    "planned": { "start": "active", "cancel": "blocked" },
+    "active": { "complete": "completed", "block": "blocked" },
+    "blocked": { "resume": "active", "cancel": "completed" },
+    "completed": { "reopen": "active" }
+  }
+}

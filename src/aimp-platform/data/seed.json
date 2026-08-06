@@ -1,0 +1,4778 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-26T03:00:00.000Z",
+  "currentUser": {
+    "id": "USER-001",
+    "name": "陈琳",
+    "role": "business"
+  },
+  "entities": [
+    {
+      "id": "WORKSPACE-001",
+      "type": "task",
+      "name": "工作空间示例 1",
+      "status": "draft",
+      "ownerId": "陈琳",
+      "moduleId": "workspace",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "工作空间我的待办的连贯演示数据",
+        "field1": "工作空间·待办来源·华南业务组",
+        "field2": "工作空间·业务场景·生产验证",
+        "field3": "工作空间·截止时间·经营协同",
+        "field4": "工作空间·协作Agent·华南业务组",
+        "field5": "工作空间·人工确认点·生产验证",
+        "field6": "高",
+        "field7": "工作空间·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "TASK_CENTER-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "businessGoal",
+          "targetId": "DYNAMIC_PLAN-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-WORKSPACE-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立工作空间示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "WORKSPACE-002",
+      "type": "task",
+      "name": "工作空间示例 2",
+      "status": "pending_approval",
+      "ownerId": "周敏",
+      "moduleId": "workspace",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "工作空间场景工作区的连贯演示数据",
+        "field1": "工作空间·待办来源·华南业务组",
+        "field2": "工作空间·业务场景·生产验证",
+        "field3": "工作空间·截止时间·经营协同",
+        "field4": "工作空间·协作Agent·华南业务组",
+        "field5": "工作空间·人工确认点·生产验证",
+        "field6": "中",
+        "field7": "工作空间·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "TASK_CENTER-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "businessGoal",
+          "targetId": "DYNAMIC_PLAN-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-WORKSPACE-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立工作空间示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "WORKSPACE-003",
+      "type": "task",
+      "name": "工作空间示例 3",
+      "status": "needs_human",
+      "ownerId": "李哲",
+      "moduleId": "workspace",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "工作空间Agent 协作会话的连贯演示数据",
+        "field1": "工作空间·待办来源·华南业务组",
+        "field2": "工作空间·业务场景·生产验证",
+        "field3": "工作空间·截止时间·经营协同",
+        "field4": "工作空间·协作Agent·华南业务组",
+        "field5": "工作空间·人工确认点·生产验证",
+        "field6": "低",
+        "field7": "工作空间·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "TASK_CENTER-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "businessGoal",
+          "targetId": "DYNAMIC_PLAN-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-WORKSPACE-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立工作空间示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "TASK_CENTER-001",
+      "type": "task",
+      "name": "华南新能源线索诊断与培育",
+      "status": "running",
+      "ownerId": "陈琳",
+      "moduleId": "task-center",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "任务中心任务池的连贯演示数据",
+        "field1": "任务中心·任务中心名称·华南业务组",
+        "field2": "任务中心·适用范围·生产验证",
+        "field3": "任务中心·责任人·经营协同",
+        "field4": "高",
+        "field5": "任务中心·业务说明·生产验证",
+        "scenario": "leads",
+        "businessGoal": "将有效线索转化率从 8.4% 提升至 11.0%",
+        "leadCount": 1286,
+        "approvalStatus": "approved"
+      },
+      "relations": [
+        {
+          "type": "uses",
+          "targetType": "agent",
+          "targetId": "AGENTS-002"
+        },
+        {
+          "type": "uses",
+          "targetType": "promptVersion",
+          "targetId": "PROMPTS-001"
+        },
+        {
+          "type": "uses",
+          "targetType": "capabilityAsset",
+          "targetId": "SKILLS-001"
+        },
+        {
+          "type": "uses",
+          "targetType": "capabilityAsset",
+          "targetId": "TOOLS-001"
+        },
+        {
+          "type": "uses",
+          "targetType": "knowledgeAsset",
+          "targetId": "KNOWLEDGE_BASE-003"
+        },
+        {
+          "type": "drives",
+          "targetType": "workflowRun",
+          "targetId": "ORCHESTRATION-002"
+        },
+        {
+          "type": "impacts",
+          "targetType": "metricSnapshot",
+          "targetId": "ANALYTICS-001"
+        },
+        {
+          "type": "produces",
+          "targetType": "ticket",
+          "targetId": "EVOLUTION-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-TASK_CENTER-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立任务中心示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "TASK_CENTER-002",
+      "type": "task",
+      "name": "华南新能源诊断策略审批",
+      "status": "pending_approval",
+      "ownerId": "周敏",
+      "moduleId": "task-center",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "任务中心创建任务的连贯演示数据",
+        "field1": "任务中心·任务中心名称·华南业务组",
+        "field2": "任务中心·适用范围·生产验证",
+        "field3": "任务中心·责任人·经营协同",
+        "field4": "中",
+        "field5": "任务中心·业务说明·生产验证",
+        "scenario": "leads",
+        "businessGoal": "以 30% 流量影子运行验证线索诊断策略，通过后进入正式队列",
+        "leadCount": 386,
+        "approvalStatus": "pending"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "WORKSPACE-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-TASK_CENTER-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立任务中心示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "TASK_CENTER-003",
+      "type": "task",
+      "name": "任务中心示例 3",
+      "status": "needs_human",
+      "ownerId": "李哲",
+      "moduleId": "task-center",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "任务中心任务中心详情的连贯演示数据",
+        "field1": "任务中心·任务中心名称·华南业务组",
+        "field2": "任务中心·适用范围·生产验证",
+        "field3": "任务中心·责任人·经营协同",
+        "field4": "低",
+        "field5": "任务中心·业务说明·生产验证"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "WORKSPACE-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-TASK_CENTER-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立任务中心示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "AGENTS-001",
+      "type": "agent",
+      "name": "Agent 注册中心示例 1",
+      "status": "draft",
+      "ownerId": "陈琳",
+      "moduleId": "agents",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "Agent 注册中心Agent 目录的连贯演示数据",
+        "field1": "Agent 注册中心·Agent 注册中心名称·华南业务组",
+        "field2": "Agent 注册中心·适用范围·生产验证",
+        "field3": "Agent 注册中心·责任人·经营协同",
+        "field4": "高",
+        "field5": "Agent 注册中心·业务说明·生产验证"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "ADMIN-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "SKILLS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-AGENTS-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立Agent 注册中心示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "AGENTS-002",
+      "type": "agent",
+      "name": "线索诊断 Agent",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "agents",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "Agent 注册中心注册向导的连贯演示数据",
+        "field1": "Agent 注册中心·Agent 注册中心名称·华南业务组",
+        "field2": "Agent 注册中心·适用范围·生产验证",
+        "field3": "Agent 注册中心·责任人·经营协同",
+        "field4": "中",
+        "field5": "Agent 注册中心·业务说明·生产验证"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "ADMIN-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "SKILLS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-AGENTS-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立Agent 注册中心示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "AGENTS-003",
+      "type": "agent",
+      "name": "Agent 注册中心示例 3",
+      "status": "degraded",
+      "ownerId": "李哲",
+      "moduleId": "agents",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "Agent 注册中心能力绑定的连贯演示数据",
+        "field1": "Agent 注册中心·Agent 注册中心名称·华南业务组",
+        "field2": "Agent 注册中心·适用范围·生产验证",
+        "field3": "Agent 注册中心·责任人·经营协同",
+        "field4": "低",
+        "field5": "Agent 注册中心·业务说明·生产验证"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "ADMIN-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "SKILLS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-AGENTS-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立Agent 注册中心示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "ORCHESTRATION-001",
+      "type": "workflowRun",
+      "name": "Agent 编排引擎示例 1",
+      "status": "queued",
+      "ownerId": "陈琳",
+      "moduleId": "orchestration",
+      "fields": {
+        "version": "v2",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "Agent 编排引擎流程目录的连贯演示数据",
+        "field1": "Agent 编排引擎·流程版本·华南业务组",
+        "field2": "Agent 编排引擎·触发方式·生产验证",
+        "field3": "Agent 编排引擎·参与Agent·经营协同",
+        "field4": "Agent 编排引擎·人工节点·华南业务组",
+        "field5": "Agent 编排引擎·超时策略·生产验证",
+        "field6": "高",
+        "field7": "Agent 编排引擎·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "businessGoal",
+          "targetId": "DYNAMIC_PLAN-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "TASK_CENTER-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-ORCHESTRATION-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立Agent 编排引擎示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "ORCHESTRATION-002",
+      "type": "workflowRun",
+      "name": "华南线索诊断工作流运行",
+      "status": "running",
+      "ownerId": "周敏",
+      "moduleId": "orchestration",
+      "fields": {
+        "version": "v2",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "Agent 编排引擎编排画布的连贯演示数据",
+        "field1": "Agent 编排引擎·流程版本·华南业务组",
+        "field2": "Agent 编排引擎·触发方式·生产验证",
+        "field3": "Agent 编排引擎·参与Agent·经营协同",
+        "field4": "Agent 编排引擎·人工节点·华南业务组",
+        "field5": "Agent 编排引擎·超时策略·生产验证",
+        "field6": "中",
+        "field7": "Agent 编排引擎·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "businessGoal",
+          "targetId": "DYNAMIC_PLAN-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "TASK_CENTER-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-ORCHESTRATION-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立Agent 编排引擎示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "ORCHESTRATION-003",
+      "type": "workflowRun",
+      "name": "Agent 编排引擎示例 3",
+      "status": "paused",
+      "ownerId": "李哲",
+      "moduleId": "orchestration",
+      "fields": {
+        "version": "v2",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "Agent 编排引擎Agent 编排引擎详情的连贯演示数据",
+        "field1": "Agent 编排引擎·流程版本·华南业务组",
+        "field2": "Agent 编排引擎·触发方式·生产验证",
+        "field3": "Agent 编排引擎·参与Agent·经营协同",
+        "field4": "Agent 编排引擎·人工节点·华南业务组",
+        "field5": "Agent 编排引擎·超时策略·生产验证",
+        "field6": "低",
+        "field7": "Agent 编排引擎·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "businessGoal",
+          "targetId": "DYNAMIC_PLAN-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "TASK_CENTER-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-ORCHESTRATION-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立Agent 编排引擎示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "DYNAMIC_PLAN-001",
+      "type": "businessGoal",
+      "name": "动态计划示例 1",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "dynamic-plan",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "动态计划计划列表的连贯演示数据",
+        "field1": "动态计划·业务目标·华南业务组",
+        "field2": "动态计划·计划周期·生产验证",
+        "field3": "动态计划·资源预算·经营协同",
+        "field4": "动态计划·负责人·华南业务组",
+        "field5": "动态计划·调整阈值·生产验证",
+        "field6": "高",
+        "field7": "动态计划·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "TASK_CENTER-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "workflowRun",
+          "targetId": "ORCHESTRATION-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-DYNAMIC_PLAN-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立动态计划示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "DYNAMIC_PLAN-002",
+      "type": "businessGoal",
+      "name": "动态计划示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "dynamic-plan",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "动态计划目标拆解的连贯演示数据",
+        "field1": "动态计划·业务目标·华南业务组",
+        "field2": "动态计划·计划周期·生产验证",
+        "field3": "动态计划·资源预算·经营协同",
+        "field4": "动态计划·负责人·华南业务组",
+        "field5": "动态计划·调整阈值·生产验证",
+        "field6": "中",
+        "field7": "动态计划·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "TASK_CENTER-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "workflowRun",
+          "targetId": "ORCHESTRATION-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-DYNAMIC_PLAN-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立动态计划示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "DYNAMIC_PLAN-003",
+      "type": "businessGoal",
+      "name": "动态计划示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "dynamic-plan",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "动态计划动态计划详情的连贯演示数据",
+        "field1": "动态计划·业务目标·华南业务组",
+        "field2": "动态计划·计划周期·生产验证",
+        "field3": "动态计划·资源预算·经营协同",
+        "field4": "动态计划·负责人·华南业务组",
+        "field5": "动态计划·调整阈值·生产验证",
+        "field6": "低",
+        "field7": "动态计划·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "TASK_CENTER-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "workflowRun",
+          "targetId": "ORCHESTRATION-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-DYNAMIC_PLAN-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立动态计划示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "SKILLS-001",
+      "type": "capabilityAsset",
+      "name": "线索画像与意向评分 Skill",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "skills",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "Skill 技能库Skill 目录的连贯演示数据",
+        "field1": "Skill 技能库·Skill名称·华南业务组",
+        "field2": "Skill 技能库·输入输出契约·生产验证",
+        "field3": "Skill 技能库·适用Agent·经营协同",
+        "field4": "Skill 技能库·版本·华南业务组",
+        "field5": "Skill 技能库·测试集·生产验证",
+        "field6": "高",
+        "field7": "Skill 技能库·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "workflowRun",
+          "targetId": "AGENT_TESTING-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-SKILLS-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立Skill 技能库示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "SKILLS-002",
+      "type": "capabilityAsset",
+      "name": "Skill 技能库示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "skills",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "Skill 技能库创建编辑的连贯演示数据",
+        "field1": "Skill 技能库·Skill名称·华南业务组",
+        "field2": "Skill 技能库·输入输出契约·生产验证",
+        "field3": "Skill 技能库·适用Agent·经营协同",
+        "field4": "Skill 技能库·版本·华南业务组",
+        "field5": "Skill 技能库·测试集·生产验证",
+        "field6": "中",
+        "field7": "Skill 技能库·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "workflowRun",
+          "targetId": "AGENT_TESTING-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-SKILLS-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立Skill 技能库示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "SKILLS-003",
+      "type": "capabilityAsset",
+      "name": "Skill 技能库示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "skills",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "Skill 技能库Skill 技能库详情的连贯演示数据",
+        "field1": "Skill 技能库·Skill名称·华南业务组",
+        "field2": "Skill 技能库·输入输出契约·生产验证",
+        "field3": "Skill 技能库·适用Agent·经营协同",
+        "field4": "Skill 技能库·版本·华南业务组",
+        "field5": "Skill 技能库·测试集·生产验证",
+        "field6": "低",
+        "field7": "Skill 技能库·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "workflowRun",
+          "targetId": "AGENT_TESTING-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-SKILLS-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立Skill 技能库示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "TOOLS-001",
+      "type": "capabilityAsset",
+      "name": "CRM 线索读写 Tool",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "tools",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "Tools 工具集Tool 目录的连贯演示数据",
+        "field1": "Tools 工具集·连接方式·华南业务组",
+        "field2": "Tools 工具集·授权范围·生产验证",
+        "field3": "Tools 工具集·凭据位置·经营协同",
+        "field4": "Tools 工具集·限流策略·华南业务组",
+        "field5": "Tools 工具集·健康状态·生产验证",
+        "field6": "高",
+        "field7": "Tools 工具集·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "ADMIN-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-TOOLS-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立Tools 工具集示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "TOOLS-002",
+      "type": "capabilityAsset",
+      "name": "Tools 工具集示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "tools",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "Tools 工具集接入配置的连贯演示数据",
+        "field1": "Tools 工具集·连接方式·华南业务组",
+        "field2": "Tools 工具集·授权范围·生产验证",
+        "field3": "Tools 工具集·凭据位置·经营协同",
+        "field4": "Tools 工具集·限流策略·华南业务组",
+        "field5": "Tools 工具集·健康状态·生产验证",
+        "field6": "中",
+        "field7": "Tools 工具集·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "ADMIN-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-TOOLS-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立Tools 工具集示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "TOOLS-003",
+      "type": "capabilityAsset",
+      "name": "Tools 工具集示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "tools",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "Tools 工具集Tools 工具集详情的连贯演示数据",
+        "field1": "Tools 工具集·连接方式·华南业务组",
+        "field2": "Tools 工具集·授权范围·生产验证",
+        "field3": "Tools 工具集·凭据位置·经营协同",
+        "field4": "Tools 工具集·限流策略·华南业务组",
+        "field5": "Tools 工具集·健康状态·生产验证",
+        "field6": "低",
+        "field7": "Tools 工具集·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "ADMIN-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-TOOLS-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立Tools 工具集示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "PROMPTS-001",
+      "type": "promptVersion",
+      "name": "线索诊断 Prompt v1.8",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "prompts",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "Prompt 工程平台Prompt 目录的连贯演示数据",
+        "field1": "Prompt 工程平台·Prompt版本·华南业务组",
+        "field2": "Prompt 工程平台·变量·生产验证",
+        "field3": "Prompt 工程平台·关联Agent·经营协同",
+        "field4": "Prompt 工程平台·评测集·华南业务组",
+        "field5": "Prompt 工程平台·发布状态·生产验证",
+        "field6": "高",
+        "field7": "Prompt 工程平台·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "TASK_CENTER-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "SKILLS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-PROMPTS-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立Prompt 工程平台示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "PROMPTS-002",
+      "type": "capabilityAsset",
+      "name": "Prompt 工程平台示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "prompts",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "Prompt 工程平台版本编辑的连贯演示数据",
+        "field1": "Prompt 工程平台·Prompt版本·华南业务组",
+        "field2": "Prompt 工程平台·变量·生产验证",
+        "field3": "Prompt 工程平台·关联Agent·经营协同",
+        "field4": "Prompt 工程平台·评测集·华南业务组",
+        "field5": "Prompt 工程平台·发布状态·生产验证",
+        "field6": "中",
+        "field7": "Prompt 工程平台·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "TASK_CENTER-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "SKILLS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-PROMPTS-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立Prompt 工程平台示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "PROMPTS-003",
+      "type": "capabilityAsset",
+      "name": "Prompt 工程平台示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "prompts",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "Prompt 工程平台Prompt 工程平台详情的连贯演示数据",
+        "field1": "Prompt 工程平台·Prompt版本·华南业务组",
+        "field2": "Prompt 工程平台·变量·生产验证",
+        "field3": "Prompt 工程平台·关联Agent·经营协同",
+        "field4": "Prompt 工程平台·评测集·华南业务组",
+        "field5": "Prompt 工程平台·发布状态·生产验证",
+        "field6": "低",
+        "field7": "Prompt 工程平台·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "TASK_CENTER-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "SKILLS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-PROMPTS-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立Prompt 工程平台示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "KNOWLEDGE_BASE-001",
+      "type": "knowledgeAsset",
+      "name": "知识库示例 1",
+      "status": "draft",
+      "ownerId": "陈琳",
+      "moduleId": "knowledge-base",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "知识库知识空间的连贯演示数据",
+        "field1": "知识库·知识库名称·华南业务组",
+        "field2": "知识库·适用范围·生产验证",
+        "field3": "知识库·责任人·经营协同",
+        "field4": "高",
+        "field5": "知识库·业务说明·生产验证"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "PROMPTS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-KNOWLEDGE_BASE-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立知识库示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "KNOWLEDGE_BASE-002",
+      "type": "knowledgeAsset",
+      "name": "知识库示例 2",
+      "status": "review",
+      "ownerId": "周敏",
+      "moduleId": "knowledge-base",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "知识库资产采集的连贯演示数据",
+        "field1": "知识库·知识库名称·华南业务组",
+        "field2": "知识库·适用范围·生产验证",
+        "field3": "知识库·责任人·经营协同",
+        "field4": "中",
+        "field5": "知识库·业务说明·生产验证"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "PROMPTS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-KNOWLEDGE_BASE-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立知识库示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "KNOWLEDGE_BASE-003",
+      "type": "knowledgeAsset",
+      "name": "新能源销售授权知识包",
+      "status": "published",
+      "ownerId": "李哲",
+      "moduleId": "knowledge-base",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "知识库知识库详情的连贯演示数据",
+        "field1": "知识库·知识库名称·华南业务组",
+        "field2": "知识库·适用范围·生产验证",
+        "field3": "知识库·责任人·经营协同",
+        "field4": "低",
+        "field5": "知识库·业务说明·生产验证"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "PROMPTS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-KNOWLEDGE_BASE-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立知识库示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "AI_PRODUCTS-001",
+      "type": "capabilityAsset",
+      "name": "AI 产品目录示例 1",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "ai-products",
+      "fields": {
+        "version": "v2",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "AI 产品目录产品组合的连贯演示数据",
+        "field1": "AI 产品目录·产品名称·华南业务组",
+        "field2": "AI 产品目录·目标场景·生产验证",
+        "field3": "AI 产品目录·能力包·经营协同",
+        "field4": "AI 产品目录·服务等级·华南业务组",
+        "field5": "AI 产品目录·定价方案·生产验证",
+        "field6": "高",
+        "field7": "AI 产品目录·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "DELIVERY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "CLIENT_PORTAL-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-AI_PRODUCTS-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立AI 产品目录示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "AI_PRODUCTS-002",
+      "type": "capabilityAsset",
+      "name": "AI 产品目录示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "ai-products",
+      "fields": {
+        "version": "v2",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "AI 产品目录能力装配的连贯演示数据",
+        "field1": "AI 产品目录·产品名称·华南业务组",
+        "field2": "AI 产品目录·目标场景·生产验证",
+        "field3": "AI 产品目录·能力包·经营协同",
+        "field4": "AI 产品目录·服务等级·华南业务组",
+        "field5": "AI 产品目录·定价方案·生产验证",
+        "field6": "中",
+        "field7": "AI 产品目录·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "DELIVERY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "CLIENT_PORTAL-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-AI_PRODUCTS-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立AI 产品目录示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "AI_PRODUCTS-003",
+      "type": "capabilityAsset",
+      "name": "AI 产品目录示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "ai-products",
+      "fields": {
+        "version": "v2",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "AI 产品目录AI 产品目录详情的连贯演示数据",
+        "field1": "AI 产品目录·产品名称·华南业务组",
+        "field2": "AI 产品目录·目标场景·生产验证",
+        "field3": "AI 产品目录·能力包·经营协同",
+        "field4": "AI 产品目录·服务等级·华南业务组",
+        "field5": "AI 产品目录·定价方案·生产验证",
+        "field6": "低",
+        "field7": "AI 产品目录·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "DELIVERY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "CLIENT_PORTAL-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-AI_PRODUCTS-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立AI 产品目录示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "DELIVERY-001",
+      "type": "customerTenant",
+      "name": "交付管理示例 1",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "delivery",
+      "fields": {
+        "version": "v4",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "交付管理交付项目的连贯演示数据",
+        "field1": "交付管理·客户租户·华南业务组",
+        "field2": "交付管理·合同范围·生产验证",
+        "field3": "交付管理·交付版本·经营协同",
+        "field4": "交付管理·里程碑·华南业务组",
+        "field5": "交付管理·验收标准·生产验证",
+        "field6": "高",
+        "field7": "交付管理·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "AI_PRODUCTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "MKT_TENANT-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "CLIENT_PORTAL-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-DELIVERY-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立交付管理示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "DELIVERY-002",
+      "type": "customerTenant",
+      "name": "交付管理示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "delivery",
+      "fields": {
+        "version": "v4",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "交付管理合同范围的连贯演示数据",
+        "field1": "交付管理·客户租户·华南业务组",
+        "field2": "交付管理·合同范围·生产验证",
+        "field3": "交付管理·交付版本·经营协同",
+        "field4": "交付管理·里程碑·华南业务组",
+        "field5": "交付管理·验收标准·生产验证",
+        "field6": "中",
+        "field7": "交付管理·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "AI_PRODUCTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "MKT_TENANT-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "CLIENT_PORTAL-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-DELIVERY-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立交付管理示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "DELIVERY-003",
+      "type": "customerTenant",
+      "name": "交付管理示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "delivery",
+      "fields": {
+        "version": "v4",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "交付管理交付管理详情的连贯演示数据",
+        "field1": "交付管理·客户租户·华南业务组",
+        "field2": "交付管理·合同范围·生产验证",
+        "field3": "交付管理·交付版本·经营协同",
+        "field4": "交付管理·里程碑·华南业务组",
+        "field5": "交付管理·验收标准·生产验证",
+        "field6": "低",
+        "field7": "交付管理·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "AI_PRODUCTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "MKT_TENANT-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "CLIENT_PORTAL-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-DELIVERY-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立交付管理示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "AI_ORG-001",
+      "type": "businessGoal",
+      "name": "数字组织架构示例 1",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "ai-org",
+      "fields": {
+        "version": "v2",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "数字组织架构人机组织图的连贯演示数据",
+        "field1": "数字组织架构·组织单元·华南业务组",
+        "field2": "数字组织架构·人类岗位·生产验证",
+        "field3": "数字组织架构·Agent岗位·经营协同",
+        "field4": "数字组织架构·职责边界·华南业务组",
+        "field5": "数字组织架构·协作关系·生产验证",
+        "field6": "高",
+        "field7": "数字组织架构·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "businessGoal",
+          "targetId": "POSITION_AI-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-AI_ORG-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立数字组织架构示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "AI_ORG-002",
+      "type": "businessGoal",
+      "name": "数字组织架构示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "ai-org",
+      "fields": {
+        "version": "v2",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "数字组织架构职责单元的连贯演示数据",
+        "field1": "数字组织架构·组织单元·华南业务组",
+        "field2": "数字组织架构·人类岗位·生产验证",
+        "field3": "数字组织架构·Agent岗位·经营协同",
+        "field4": "数字组织架构·职责边界·华南业务组",
+        "field5": "数字组织架构·协作关系·生产验证",
+        "field6": "中",
+        "field7": "数字组织架构·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "businessGoal",
+          "targetId": "POSITION_AI-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-AI_ORG-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立数字组织架构示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "AI_ORG-003",
+      "type": "businessGoal",
+      "name": "数字组织架构示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "ai-org",
+      "fields": {
+        "version": "v2",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "数字组织架构岗位详情的连贯演示数据",
+        "field1": "数字组织架构·组织单元·华南业务组",
+        "field2": "数字组织架构·人类岗位·生产验证",
+        "field3": "数字组织架构·Agent岗位·经营协同",
+        "field4": "数字组织架构·职责边界·华南业务组",
+        "field5": "数字组织架构·协作关系·生产验证",
+        "field6": "低",
+        "field7": "数字组织架构·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "businessGoal",
+          "targetId": "POSITION_AI-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-AI_ORG-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立数字组织架构示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "POSITION_AI-001",
+      "type": "businessGoal",
+      "name": "岗位 AI 化追踪示例 1",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "position-ai",
+      "fields": {
+        "version": "v2",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "岗位 AI 化追踪岗位基线的连贯演示数据",
+        "field1": "岗位 AI 化追踪·岗位名称·华南业务组",
+        "field2": "岗位 AI 化追踪·任务清单·生产验证",
+        "field3": "岗位 AI 化追踪·AI化机会·经营协同",
+        "field4": "岗位 AI 化追踪·试运行范围·华南业务组",
+        "field5": "岗位 AI 化追踪·人员影响·生产验证",
+        "field6": "高",
+        "field7": "岗位 AI 化追踪·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "businessGoal",
+          "targetId": "AI_ORG-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "WORKSPACE-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-POSITION_AI-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立岗位 AI 化追踪示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "POSITION_AI-002",
+      "type": "businessGoal",
+      "name": "岗位 AI 化追踪示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "position-ai",
+      "fields": {
+        "version": "v2",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "岗位 AI 化追踪任务拆解的连贯演示数据",
+        "field1": "岗位 AI 化追踪·岗位名称·华南业务组",
+        "field2": "岗位 AI 化追踪·任务清单·生产验证",
+        "field3": "岗位 AI 化追踪·AI化机会·经营协同",
+        "field4": "岗位 AI 化追踪·试运行范围·华南业务组",
+        "field5": "岗位 AI 化追踪·人员影响·生产验证",
+        "field6": "中",
+        "field7": "岗位 AI 化追踪·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "businessGoal",
+          "targetId": "AI_ORG-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "WORKSPACE-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-POSITION_AI-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立岗位 AI 化追踪示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "POSITION_AI-003",
+      "type": "businessGoal",
+      "name": "岗位 AI 化追踪示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "position-ai",
+      "fields": {
+        "version": "v2",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "岗位 AI 化追踪岗位 AI 化追踪详情的连贯演示数据",
+        "field1": "岗位 AI 化追踪·岗位名称·华南业务组",
+        "field2": "岗位 AI 化追踪·任务清单·生产验证",
+        "field3": "岗位 AI 化追踪·AI化机会·经营协同",
+        "field4": "岗位 AI 化追踪·试运行范围·华南业务组",
+        "field5": "岗位 AI 化追踪·人员影响·生产验证",
+        "field6": "低",
+        "field7": "岗位 AI 化追踪·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "businessGoal",
+          "targetId": "AI_ORG-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "WORKSPACE-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-POSITION_AI-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立岗位 AI 化追踪示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "ADMIN-001",
+      "type": "auditEvent",
+      "name": "基础管理示例 1",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "admin",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "基础管理模型网关的连贯演示数据",
+        "field1": "基础管理·模型供应商·华南业务组",
+        "field2": "基础管理·路由策略·生产验证",
+        "field3": "基础管理·系统参数·经营协同",
+        "field4": "基础管理·计费策略·华南业务组",
+        "field5": "基础管理·限流规则·生产验证",
+        "field6": "高",
+        "field7": "基础管理·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "TOOLS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_REGISTRY-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-ADMIN-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立基础管理示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "ADMIN-002",
+      "type": "auditEvent",
+      "name": "基础管理示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "admin",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "基础管理供应商路由的连贯演示数据",
+        "field1": "基础管理·模型供应商·华南业务组",
+        "field2": "基础管理·路由策略·生产验证",
+        "field3": "基础管理·系统参数·经营协同",
+        "field4": "基础管理·计费策略·华南业务组",
+        "field5": "基础管理·限流规则·生产验证",
+        "field6": "中",
+        "field7": "基础管理·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "TOOLS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_REGISTRY-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-ADMIN-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立基础管理示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "ADMIN-003",
+      "type": "auditEvent",
+      "name": "基础管理示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "admin",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "基础管理基础管理详情的连贯演示数据",
+        "field1": "基础管理·模型供应商·华南业务组",
+        "field2": "基础管理·路由策略·生产验证",
+        "field3": "基础管理·系统参数·经营协同",
+        "field4": "基础管理·计费策略·华南业务组",
+        "field5": "基础管理·限流规则·生产验证",
+        "field6": "低",
+        "field7": "基础管理·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "TOOLS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_REGISTRY-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-ADMIN-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立基础管理示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "PERMISSIONS-001",
+      "type": "auditEvent",
+      "name": "权限管理示例 1",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "permissions",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "权限管理用户角色的连贯演示数据",
+        "field1": "权限管理·主体角色·华南业务组",
+        "field2": "权限管理·资源范围·生产验证",
+        "field3": "权限管理·动作权限·经营协同",
+        "field4": "权限管理·生效时间·华南业务组",
+        "field5": "权限管理·复核周期·生产验证",
+        "field6": "高",
+        "field7": "权限管理·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "ADMIN-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "SECURITY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "MKT_TENANT-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-PERMISSIONS-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立权限管理示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "PERMISSIONS-002",
+      "type": "auditEvent",
+      "name": "权限管理示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "permissions",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "权限管理资源策略的连贯演示数据",
+        "field1": "权限管理·主体角色·华南业务组",
+        "field2": "权限管理·资源范围·生产验证",
+        "field3": "权限管理·动作权限·经营协同",
+        "field4": "权限管理·生效时间·华南业务组",
+        "field5": "权限管理·复核周期·生产验证",
+        "field6": "中",
+        "field7": "权限管理·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "ADMIN-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "SECURITY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "MKT_TENANT-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-PERMISSIONS-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立权限管理示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "PERMISSIONS-003",
+      "type": "auditEvent",
+      "name": "权限管理示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "permissions",
+      "fields": {
+        "version": "v1",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "权限管理权限管理详情的连贯演示数据",
+        "field1": "权限管理·主体角色·华南业务组",
+        "field2": "权限管理·资源范围·生产验证",
+        "field3": "权限管理·动作权限·经营协同",
+        "field4": "权限管理·生效时间·华南业务组",
+        "field5": "权限管理·复核周期·生产验证",
+        "field6": "低",
+        "field7": "权限管理·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "ADMIN-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "SECURITY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "MKT_TENANT-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-PERMISSIONS-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立权限管理示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "CLIENT_PORTAL-001",
+      "type": "customerTenant",
+      "name": "客户门户示例 1",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "client-portal",
+      "fields": {
+        "version": "v4",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "客户门户客户首页的连贯演示数据",
+        "field1": "客户门户·客户租户·华南业务组",
+        "field2": "客户门户·已购产品·生产验证",
+        "field3": "客户门户·交付状态·经营协同",
+        "field4": "客户门户·业务KPI·华南业务组",
+        "field5": "客户门户·SLA状态·生产验证",
+        "field6": "高",
+        "field7": "客户门户·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "DELIVERY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "metricSnapshot",
+          "targetId": "ANALYTICS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "AI_PRODUCTS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-CLIENT_PORTAL-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立客户门户示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "CLIENT_PORTAL-002",
+      "type": "customerTenant",
+      "name": "客户门户示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "client-portal",
+      "fields": {
+        "version": "v4",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "客户门户已购产品的连贯演示数据",
+        "field1": "客户门户·客户租户·华南业务组",
+        "field2": "客户门户·已购产品·生产验证",
+        "field3": "客户门户·交付状态·经营协同",
+        "field4": "客户门户·业务KPI·华南业务组",
+        "field5": "客户门户·SLA状态·生产验证",
+        "field6": "中",
+        "field7": "客户门户·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "DELIVERY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "metricSnapshot",
+          "targetId": "ANALYTICS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "AI_PRODUCTS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-CLIENT_PORTAL-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立客户门户示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "CLIENT_PORTAL-003",
+      "type": "customerTenant",
+      "name": "客户门户示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "client-portal",
+      "fields": {
+        "version": "v4",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "客户门户客户门户详情的连贯演示数据",
+        "field1": "客户门户·客户租户·华南业务组",
+        "field2": "客户门户·已购产品·生产验证",
+        "field3": "客户门户·交付状态·经营协同",
+        "field4": "客户门户·业务KPI·华南业务组",
+        "field5": "客户门户·SLA状态·生产验证",
+        "field6": "低",
+        "field7": "客户门户·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "DELIVERY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "metricSnapshot",
+          "targetId": "ANALYTICS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "AI_PRODUCTS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-CLIENT_PORTAL-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立客户门户示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "AGENT_TESTING-001",
+      "type": "workflowRun",
+      "name": "Agent 测试沙箱示例 1",
+      "status": "queued",
+      "ownerId": "陈琳",
+      "moduleId": "agent-testing",
+      "fields": {
+        "version": "v4",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "Agent 测试沙箱测试计划的连贯演示数据",
+        "field1": "Agent 测试沙箱·测试计划·华南业务组",
+        "field2": "Agent 测试沙箱·目标版本·生产验证",
+        "field3": "Agent 测试沙箱·测试集·经营协同",
+        "field4": "Agent 测试沙箱·风险等级·华南业务组",
+        "field5": "Agent 测试沙箱·门禁结论·生产验证",
+        "field6": "高",
+        "field7": "Agent 测试沙箱·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "PROMPTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "SKILLS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-AGENT_TESTING-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立Agent 测试沙箱示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "AGENT_TESTING-002",
+      "type": "workflowRun",
+      "name": "Agent 测试沙箱示例 2",
+      "status": "running",
+      "ownerId": "周敏",
+      "moduleId": "agent-testing",
+      "fields": {
+        "version": "v4",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "Agent 测试沙箱测试集的连贯演示数据",
+        "field1": "Agent 测试沙箱·测试计划·华南业务组",
+        "field2": "Agent 测试沙箱·目标版本·生产验证",
+        "field3": "Agent 测试沙箱·测试集·经营协同",
+        "field4": "Agent 测试沙箱·风险等级·华南业务组",
+        "field5": "Agent 测试沙箱·门禁结论·生产验证",
+        "field6": "中",
+        "field7": "Agent 测试沙箱·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "PROMPTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "SKILLS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-AGENT_TESTING-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立Agent 测试沙箱示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "AGENT_TESTING-003",
+      "type": "workflowRun",
+      "name": "Agent 测试沙箱示例 3",
+      "status": "paused",
+      "ownerId": "李哲",
+      "moduleId": "agent-testing",
+      "fields": {
+        "version": "v4",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "Agent 测试沙箱Agent 测试沙箱详情的连贯演示数据",
+        "field1": "Agent 测试沙箱·测试计划·华南业务组",
+        "field2": "Agent 测试沙箱·目标版本·生产验证",
+        "field3": "Agent 测试沙箱·测试集·经营协同",
+        "field4": "Agent 测试沙箱·风险等级·华南业务组",
+        "field5": "Agent 测试沙箱·门禁结论·生产验证",
+        "field6": "低",
+        "field7": "Agent 测试沙箱·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "PROMPTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "SKILLS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-AGENT_TESTING-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立Agent 测试沙箱示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "TICKET_SYSTEM-001",
+      "type": "ticket",
+      "name": "异常工单中心示例 1",
+      "status": "open",
+      "ownerId": "陈琳",
+      "moduleId": "ticket-system",
+      "fields": {
+        "version": "v4",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "异常工单中心异常看板的连贯演示数据",
+        "field1": "异常工单中心·异常等级·华南业务组",
+        "field2": "异常工单中心·影响对象·生产验证",
+        "field3": "异常工单中心·责任团队·经营协同",
+        "field4": "异常工单中心·SLA·华南业务组",
+        "field5": "异常工单中心·根因分类·生产验证",
+        "field6": "高",
+        "field7": "异常工单中心·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "TASK_CENTER-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "TOOLS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_MONITOR-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-TICKET_SYSTEM-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立异常工单中心示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "TICKET_SYSTEM-002",
+      "type": "ticket",
+      "name": "异常工单中心示例 2",
+      "status": "handling",
+      "ownerId": "周敏",
+      "moduleId": "ticket-system",
+      "fields": {
+        "version": "v4",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "异常工单中心工单队列的连贯演示数据",
+        "field1": "异常工单中心·异常等级·华南业务组",
+        "field2": "异常工单中心·影响对象·生产验证",
+        "field3": "异常工单中心·责任团队·经营协同",
+        "field4": "异常工单中心·SLA·华南业务组",
+        "field5": "异常工单中心·根因分类·生产验证",
+        "field6": "中",
+        "field7": "异常工单中心·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "TASK_CENTER-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "TOOLS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_MONITOR-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-TICKET_SYSTEM-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立异常工单中心示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "TICKET_SYSTEM-003",
+      "type": "ticket",
+      "name": "异常工单中心示例 3",
+      "status": "resolved",
+      "ownerId": "李哲",
+      "moduleId": "ticket-system",
+      "fields": {
+        "version": "v4",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "异常工单中心异常工单中心详情的连贯演示数据",
+        "field1": "异常工单中心·异常等级·华南业务组",
+        "field2": "异常工单中心·影响对象·生产验证",
+        "field3": "异常工单中心·责任团队·经营协同",
+        "field4": "异常工单中心·SLA·华南业务组",
+        "field5": "异常工单中心·根因分类·生产验证",
+        "field6": "低",
+        "field7": "异常工单中心·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "TASK_CENTER-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "TOOLS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_MONITOR-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-TICKET_SYSTEM-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立异常工单中心示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MF_DATA_FACTORY-001",
+      "type": "modelAsset",
+      "name": "训练数据工厂示例 1",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "mf-data-factory",
+      "fields": {
+        "version": "v5",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "训练数据工厂数据集目录的连贯演示数据",
+        "field1": "训练数据工厂·数据集·华南业务组",
+        "field2": "训练数据工厂·样本来源·生产验证",
+        "field3": "训练数据工厂·标注规范·经营协同",
+        "field4": "训练数据工厂·质量阈值·华南业务组",
+        "field5": "训练数据工厂·版本·生产验证",
+        "field6": "高",
+        "field7": "训练数据工厂·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_EXPERIMENT-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "ticket",
+          "targetId": "EVOLUTION-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "knowledgeAsset",
+          "targetId": "KNOWLEDGE-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MF_DATA_FACTORY-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立训练数据工厂示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MF_DATA_FACTORY-002",
+      "type": "modelAsset",
+      "name": "训练数据工厂示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "mf-data-factory",
+      "fields": {
+        "version": "v5",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "训练数据工厂样本采集的连贯演示数据",
+        "field1": "训练数据工厂·数据集·华南业务组",
+        "field2": "训练数据工厂·样本来源·生产验证",
+        "field3": "训练数据工厂·标注规范·经营协同",
+        "field4": "训练数据工厂·质量阈值·华南业务组",
+        "field5": "训练数据工厂·版本·生产验证",
+        "field6": "中",
+        "field7": "训练数据工厂·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_EXPERIMENT-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "ticket",
+          "targetId": "EVOLUTION-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "knowledgeAsset",
+          "targetId": "KNOWLEDGE-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MF_DATA_FACTORY-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立训练数据工厂示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MF_DATA_FACTORY-003",
+      "type": "modelAsset",
+      "name": "训练数据工厂示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "mf-data-factory",
+      "fields": {
+        "version": "v5",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "训练数据工厂标注任务的连贯演示数据",
+        "field1": "训练数据工厂·数据集·华南业务组",
+        "field2": "训练数据工厂·样本来源·生产验证",
+        "field3": "训练数据工厂·标注规范·经营协同",
+        "field4": "训练数据工厂·质量阈值·华南业务组",
+        "field5": "训练数据工厂·版本·生产验证",
+        "field6": "低",
+        "field7": "训练数据工厂·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_EXPERIMENT-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "ticket",
+          "targetId": "EVOLUTION-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "knowledgeAsset",
+          "targetId": "KNOWLEDGE-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MF_DATA_FACTORY-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立训练数据工厂示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MF_EXPERIMENT-001",
+      "type": "modelAsset",
+      "name": "实验追踪示例 1",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "mf-experiment",
+      "fields": {
+        "version": "v5",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "实验追踪实验列表的连贯演示数据",
+        "field1": "实验追踪·实验目标·华南业务组",
+        "field2": "实验追踪·基线模型·生产验证",
+        "field3": "实验追踪·数据版本·经营协同",
+        "field4": "实验追踪·参数组合·华南业务组",
+        "field5": "实验追踪·主指标·生产验证",
+        "field6": "高",
+        "field7": "实验追踪·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_DATA_FACTORY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_REGISTRY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_MONITOR-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MF_EXPERIMENT-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立实验追踪示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MF_EXPERIMENT-002",
+      "type": "modelAsset",
+      "name": "实验追踪示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "mf-experiment",
+      "fields": {
+        "version": "v5",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "实验追踪参数配置的连贯演示数据",
+        "field1": "实验追踪·实验目标·华南业务组",
+        "field2": "实验追踪·基线模型·生产验证",
+        "field3": "实验追踪·数据版本·经营协同",
+        "field4": "实验追踪·参数组合·华南业务组",
+        "field5": "实验追踪·主指标·生产验证",
+        "field6": "中",
+        "field7": "实验追踪·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_DATA_FACTORY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_REGISTRY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_MONITOR-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MF_EXPERIMENT-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立实验追踪示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MF_EXPERIMENT-003",
+      "type": "modelAsset",
+      "name": "实验追踪示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "mf-experiment",
+      "fields": {
+        "version": "v5",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "实验追踪运行详情的连贯演示数据",
+        "field1": "实验追踪·实验目标·华南业务组",
+        "field2": "实验追踪·基线模型·生产验证",
+        "field3": "实验追踪·数据版本·经营协同",
+        "field4": "实验追踪·参数组合·华南业务组",
+        "field5": "实验追踪·主指标·生产验证",
+        "field6": "低",
+        "field7": "实验追踪·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_DATA_FACTORY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_REGISTRY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_MONITOR-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MF_EXPERIMENT-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立实验追踪示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MF_MODEL_REGISTRY-001",
+      "type": "modelAsset",
+      "name": "模型注册中心示例 1",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "mf-model-registry",
+      "fields": {
+        "version": "v5",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "模型注册中心模型目录的连贯演示数据",
+        "field1": "模型注册中心·模型名称·华南业务组",
+        "field2": "模型注册中心·版本血缘·生产验证",
+        "field3": "模型注册中心·安全等级·经营协同",
+        "field4": "模型注册中心·部署环境·华南业务组",
+        "field5": "模型注册中心·回滚版本·生产验证",
+        "field6": "高",
+        "field7": "模型注册中心·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_EXPERIMENT-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "workflowRun",
+          "targetId": "MF_PIPELINE-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_MONITOR-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MF_MODEL_REGISTRY-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立模型注册中心示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MF_MODEL_REGISTRY-002",
+      "type": "modelAsset",
+      "name": "模型注册中心示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "mf-model-registry",
+      "fields": {
+        "version": "v5",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "模型注册中心版本血缘的连贯演示数据",
+        "field1": "模型注册中心·模型名称·华南业务组",
+        "field2": "模型注册中心·版本血缘·生产验证",
+        "field3": "模型注册中心·安全等级·经营协同",
+        "field4": "模型注册中心·部署环境·华南业务组",
+        "field5": "模型注册中心·回滚版本·生产验证",
+        "field6": "中",
+        "field7": "模型注册中心·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_EXPERIMENT-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "workflowRun",
+          "targetId": "MF_PIPELINE-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_MONITOR-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MF_MODEL_REGISTRY-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立模型注册中心示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MF_MODEL_REGISTRY-003",
+      "type": "modelAsset",
+      "name": "模型注册中心示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "mf-model-registry",
+      "fields": {
+        "version": "v5",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "模型注册中心安全评审的连贯演示数据",
+        "field1": "模型注册中心·模型名称·华南业务组",
+        "field2": "模型注册中心·版本血缘·生产验证",
+        "field3": "模型注册中心·安全等级·经营协同",
+        "field4": "模型注册中心·部署环境·华南业务组",
+        "field5": "模型注册中心·回滚版本·生产验证",
+        "field6": "低",
+        "field7": "模型注册中心·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_EXPERIMENT-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "workflowRun",
+          "targetId": "MF_PIPELINE-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_MONITOR-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MF_MODEL_REGISTRY-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立模型注册中心示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MF_FEATURE_STORE-001",
+      "type": "modelAsset",
+      "name": "特征平台示例 1",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "mf-feature-store",
+      "fields": {
+        "version": "v5",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "特征平台特征目录的连贯演示数据",
+        "field1": "特征平台·特征名称·华南业务组",
+        "field2": "特征平台·业务实体·生产验证",
+        "field3": "特征平台·计算逻辑·经营协同",
+        "field4": "特征平台·更新频率·华南业务组",
+        "field5": "特征平台·使用方·生产验证",
+        "field6": "高",
+        "field7": "特征平台·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_DATA_FACTORY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "workflowRun",
+          "targetId": "MF_PIPELINE-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_MONITOR-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MF_FEATURE_STORE-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立特征平台示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MF_FEATURE_STORE-002",
+      "type": "modelAsset",
+      "name": "特征平台示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "mf-feature-store",
+      "fields": {
+        "version": "v5",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "特征平台实体定义的连贯演示数据",
+        "field1": "特征平台·特征名称·华南业务组",
+        "field2": "特征平台·业务实体·生产验证",
+        "field3": "特征平台·计算逻辑·经营协同",
+        "field4": "特征平台·更新频率·华南业务组",
+        "field5": "特征平台·使用方·生产验证",
+        "field6": "中",
+        "field7": "特征平台·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_DATA_FACTORY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "workflowRun",
+          "targetId": "MF_PIPELINE-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_MONITOR-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MF_FEATURE_STORE-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立特征平台示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MF_FEATURE_STORE-003",
+      "type": "modelAsset",
+      "name": "特征平台示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "mf-feature-store",
+      "fields": {
+        "version": "v5",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "特征平台特征平台详情的连贯演示数据",
+        "field1": "特征平台·特征名称·华南业务组",
+        "field2": "特征平台·业务实体·生产验证",
+        "field3": "特征平台·计算逻辑·经营协同",
+        "field4": "特征平台·更新频率·华南业务组",
+        "field5": "特征平台·使用方·生产验证",
+        "field6": "低",
+        "field7": "特征平台·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_DATA_FACTORY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "workflowRun",
+          "targetId": "MF_PIPELINE-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_MONITOR-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MF_FEATURE_STORE-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立特征平台示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MF_MODEL_MONITOR-001",
+      "type": "modelAsset",
+      "name": "模型监控示例 1",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "mf-model-monitor",
+      "fields": {
+        "version": "v5",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "模型监控模型看板的连贯演示数据",
+        "field1": "模型监控·监控模型·华南业务组",
+        "field2": "模型监控·指标基线·生产验证",
+        "field3": "模型监控·漂移阈值·经营协同",
+        "field4": "模型监控·影响场景·华南业务组",
+        "field5": "模型监控·处置策略·生产验证",
+        "field6": "高",
+        "field7": "模型监控·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_REGISTRY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_EXPERIMENT-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "ticket",
+          "targetId": "TICKET_SYSTEM-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MF_MODEL_MONITOR-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立模型监控示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MF_MODEL_MONITOR-002",
+      "type": "modelAsset",
+      "name": "模型监控示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "mf-model-monitor",
+      "fields": {
+        "version": "v5",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "模型监控指标基线的连贯演示数据",
+        "field1": "模型监控·监控模型·华南业务组",
+        "field2": "模型监控·指标基线·生产验证",
+        "field3": "模型监控·漂移阈值·经营协同",
+        "field4": "模型监控·影响场景·华南业务组",
+        "field5": "模型监控·处置策略·生产验证",
+        "field6": "中",
+        "field7": "模型监控·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_REGISTRY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_EXPERIMENT-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "ticket",
+          "targetId": "TICKET_SYSTEM-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MF_MODEL_MONITOR-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立模型监控示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MF_MODEL_MONITOR-003",
+      "type": "modelAsset",
+      "name": "模型监控示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "mf-model-monitor",
+      "fields": {
+        "version": "v5",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "模型监控模型监控详情的连贯演示数据",
+        "field1": "模型监控·监控模型·华南业务组",
+        "field2": "模型监控·指标基线·生产验证",
+        "field3": "模型监控·漂移阈值·经营协同",
+        "field4": "模型监控·影响场景·华南业务组",
+        "field5": "模型监控·处置策略·生产验证",
+        "field6": "低",
+        "field7": "模型监控·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_REGISTRY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_EXPERIMENT-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "ticket",
+          "targetId": "TICKET_SYSTEM-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MF_MODEL_MONITOR-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立模型监控示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MF_PIPELINE-001",
+      "type": "workflowRun",
+      "name": "数据管道调度示例 1",
+      "status": "queued",
+      "ownerId": "陈琳",
+      "moduleId": "mf-pipeline",
+      "fields": {
+        "version": "v5",
+        "maturity": "implementation",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "数据管道调度管道目录的连贯演示数据",
+        "field1": "数据管道调度·管道名称·华南业务组",
+        "field2": "数据管道调度·节点依赖·生产验证",
+        "field3": "数据管道调度·调度周期·经营协同",
+        "field4": "数据管道调度·数据SLA·华南业务组",
+        "field5": "数据管道调度·重试策略·生产验证",
+        "field6": "高",
+        "field7": "数据管道调度·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_DATA_FACTORY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_FEATURE_STORE-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_REGISTRY-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MF_PIPELINE-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立数据管道调度示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MF_PIPELINE-002",
+      "type": "workflowRun",
+      "name": "数据管道调度示例 2",
+      "status": "running",
+      "ownerId": "周敏",
+      "moduleId": "mf-pipeline",
+      "fields": {
+        "version": "v5",
+        "maturity": "implementation",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "数据管道调度节点画布的连贯演示数据",
+        "field1": "数据管道调度·管道名称·华南业务组",
+        "field2": "数据管道调度·节点依赖·生产验证",
+        "field3": "数据管道调度·调度周期·经营协同",
+        "field4": "数据管道调度·数据SLA·华南业务组",
+        "field5": "数据管道调度·重试策略·生产验证",
+        "field6": "中",
+        "field7": "数据管道调度·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_DATA_FACTORY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_FEATURE_STORE-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_REGISTRY-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MF_PIPELINE-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立数据管道调度示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MF_PIPELINE-003",
+      "type": "workflowRun",
+      "name": "数据管道调度示例 3",
+      "status": "paused",
+      "ownerId": "李哲",
+      "moduleId": "mf-pipeline",
+      "fields": {
+        "version": "v5",
+        "maturity": "implementation",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "数据管道调度数据管道调度详情的连贯演示数据",
+        "field1": "数据管道调度·管道名称·华南业务组",
+        "field2": "数据管道调度·节点依赖·生产验证",
+        "field3": "数据管道调度·调度周期·经营协同",
+        "field4": "数据管道调度·数据SLA·华南业务组",
+        "field5": "数据管道调度·重试策略·生产验证",
+        "field6": "低",
+        "field7": "数据管道调度·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_DATA_FACTORY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_FEATURE_STORE-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_MODEL_REGISTRY-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MF_PIPELINE-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立数据管道调度示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "DATA_METHODOLOGY-001",
+      "type": "knowledgeAsset",
+      "name": "数据方法论示例 1",
+      "status": "draft",
+      "ownerId": "陈琳",
+      "moduleId": "data-methodology",
+      "fields": {
+        "version": "v6",
+        "maturity": "planned",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "数据方法论业务问题库的连贯演示数据",
+        "field1": "数据方法论·业务问题·华南业务组",
+        "field2": "数据方法论·指标口径·生产验证",
+        "field3": "数据方法论·分析方法·经营协同",
+        "field4": "数据方法论·验证证据·华南业务组",
+        "field5": "数据方法论·适用范围·生产验证",
+        "field6": "高",
+        "field7": "数据方法论·责任人·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "metricSnapshot",
+          "targetId": "ANALYTICS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "knowledgeAsset",
+          "targetId": "KNOWLEDGE-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_FEATURE_STORE-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-DATA_METHODOLOGY-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立数据方法论示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "DATA_METHODOLOGY-002",
+      "type": "knowledgeAsset",
+      "name": "数据方法论示例 2",
+      "status": "review",
+      "ownerId": "周敏",
+      "moduleId": "data-methodology",
+      "fields": {
+        "version": "v6",
+        "maturity": "planned",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "数据方法论指标口径的连贯演示数据",
+        "field1": "数据方法论·业务问题·华南业务组",
+        "field2": "数据方法论·指标口径·生产验证",
+        "field3": "数据方法论·分析方法·经营协同",
+        "field4": "数据方法论·验证证据·华南业务组",
+        "field5": "数据方法论·适用范围·生产验证",
+        "field6": "中",
+        "field7": "数据方法论·责任人·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "metricSnapshot",
+          "targetId": "ANALYTICS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "knowledgeAsset",
+          "targetId": "KNOWLEDGE-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_FEATURE_STORE-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-DATA_METHODOLOGY-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立数据方法论示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "DATA_METHODOLOGY-003",
+      "type": "knowledgeAsset",
+      "name": "数据方法论示例 3",
+      "status": "published",
+      "ownerId": "李哲",
+      "moduleId": "data-methodology",
+      "fields": {
+        "version": "v6",
+        "maturity": "planned",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "数据方法论数据方法论详情的连贯演示数据",
+        "field1": "数据方法论·业务问题·华南业务组",
+        "field2": "数据方法论·指标口径·生产验证",
+        "field3": "数据方法论·分析方法·经营协同",
+        "field4": "数据方法论·验证证据·华南业务组",
+        "field5": "数据方法论·适用范围·生产验证",
+        "field6": "低",
+        "field7": "数据方法论·责任人·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "metricSnapshot",
+          "targetId": "ANALYTICS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "knowledgeAsset",
+          "targetId": "KNOWLEDGE-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_FEATURE_STORE-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-DATA_METHODOLOGY-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立数据方法论示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "EVOLUTION-001",
+      "type": "ticket",
+      "name": "高意向线索误判 Badcase",
+      "status": "open",
+      "ownerId": "陈琳",
+      "moduleId": "evolution",
+      "fields": {
+        "version": "v6",
+        "maturity": "planned",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "递归成长Badcase 池的连贯演示数据",
+        "field1": "递归成长·Badcase·华南业务组",
+        "field2": "递归成长·能力缺口·生产验证",
+        "field3": "递归成长·改进提案·经营协同",
+        "field4": "递归成长·实验计划·华南业务组",
+        "field5": "递归成长·预期收益·生产验证",
+        "field6": "高",
+        "field7": "递归成长·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "workflowRun",
+          "targetId": "AGENT_TESTING-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_DATA_FACTORY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_EXPERIMENT-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-EVOLUTION-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立递归成长示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "EVOLUTION-002",
+      "type": "ticket",
+      "name": "递归成长示例 2",
+      "status": "handling",
+      "ownerId": "周敏",
+      "moduleId": "evolution",
+      "fields": {
+        "version": "v6",
+        "maturity": "planned",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "递归成长能力缺口的连贯演示数据",
+        "field1": "递归成长·Badcase·华南业务组",
+        "field2": "递归成长·能力缺口·生产验证",
+        "field3": "递归成长·改进提案·经营协同",
+        "field4": "递归成长·实验计划·华南业务组",
+        "field5": "递归成长·预期收益·生产验证",
+        "field6": "中",
+        "field7": "递归成长·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "workflowRun",
+          "targetId": "AGENT_TESTING-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_DATA_FACTORY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_EXPERIMENT-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-EVOLUTION-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立递归成长示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "EVOLUTION-003",
+      "type": "ticket",
+      "name": "递归成长示例 3",
+      "status": "resolved",
+      "ownerId": "李哲",
+      "moduleId": "evolution",
+      "fields": {
+        "version": "v6",
+        "maturity": "planned",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "递归成长递归成长详情的连贯演示数据",
+        "field1": "递归成长·Badcase·华南业务组",
+        "field2": "递归成长·能力缺口·生产验证",
+        "field3": "递归成长·改进提案·经营协同",
+        "field4": "递归成长·实验计划·华南业务组",
+        "field5": "递归成长·预期收益·生产验证",
+        "field6": "低",
+        "field7": "递归成长·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "workflowRun",
+          "targetId": "AGENT_TESTING-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_DATA_FACTORY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "modelAsset",
+          "targetId": "MF_EXPERIMENT-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-EVOLUTION-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立递归成长示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MKT_AGENT_MARKET-001",
+      "type": "agent",
+      "name": "Agent 市场示例 1",
+      "status": "draft",
+      "ownerId": "陈琳",
+      "moduleId": "mkt-agent-market",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "Agent 市场Agent 发现的连贯演示数据",
+        "field1": "Agent 市场·Agent商品·华南业务组",
+        "field2": "Agent 市场·提供方·生产验证",
+        "field3": "Agent 市场·能力声明·经营协同",
+        "field4": "Agent 市场·测试结论·华南业务组",
+        "field5": "Agent 市场·安装权限·生产验证",
+        "field6": "高",
+        "field7": "Agent 市场·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "workflowRun",
+          "targetId": "AGENT_TESTING-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MKT_AGENT_MARKET-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立Agent 市场示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MKT_AGENT_MARKET-002",
+      "type": "agent",
+      "name": "Agent 市场示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "mkt-agent-market",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "Agent 市场伙伴空间的连贯演示数据",
+        "field1": "Agent 市场·Agent商品·华南业务组",
+        "field2": "Agent 市场·提供方·生产验证",
+        "field3": "Agent 市场·能力声明·经营协同",
+        "field4": "Agent 市场·测试结论·华南业务组",
+        "field5": "Agent 市场·安装权限·生产验证",
+        "field6": "中",
+        "field7": "Agent 市场·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "workflowRun",
+          "targetId": "AGENT_TESTING-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MKT_AGENT_MARKET-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立Agent 市场示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MKT_AGENT_MARKET-003",
+      "type": "agent",
+      "name": "Agent 市场示例 3",
+      "status": "degraded",
+      "ownerId": "李哲",
+      "moduleId": "mkt-agent-market",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "Agent 市场Agent 市场详情的连贯演示数据",
+        "field1": "Agent 市场·Agent商品·华南业务组",
+        "field2": "Agent 市场·提供方·生产验证",
+        "field3": "Agent 市场·能力声明·经营协同",
+        "field4": "Agent 市场·测试结论·华南业务组",
+        "field5": "Agent 市场·安装权限·生产验证",
+        "field6": "低",
+        "field7": "Agent 市场·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "workflowRun",
+          "targetId": "AGENT_TESTING-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MKT_AGENT_MARKET-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立Agent 市场示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MKT_DR-001",
+      "type": "ticket",
+      "name": "业务连续性灾备示例 1",
+      "status": "open",
+      "ownerId": "陈琳",
+      "moduleId": "mkt-dr",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "业务连续性灾备关键链路的连贯演示数据",
+        "field1": "业务连续性灾备·关键链路·华南业务组",
+        "field2": "业务连续性灾备·RPO·生产验证",
+        "field3": "业务连续性灾备·RTO·经营协同",
+        "field4": "业务连续性灾备·备用资源·华南业务组",
+        "field5": "业务连续性灾备·演练计划·生产验证",
+        "field6": "高",
+        "field7": "业务连续性灾备·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "ADMIN-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "SECURITY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "ticket",
+          "targetId": "TICKET_SYSTEM-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MKT_DR-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立业务连续性灾备示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MKT_DR-002",
+      "type": "ticket",
+      "name": "业务连续性灾备示例 2",
+      "status": "handling",
+      "ownerId": "周敏",
+      "moduleId": "mkt-dr",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "业务连续性灾备RPO/RTO 策略的连贯演示数据",
+        "field1": "业务连续性灾备·关键链路·华南业务组",
+        "field2": "业务连续性灾备·RPO·生产验证",
+        "field3": "业务连续性灾备·RTO·经营协同",
+        "field4": "业务连续性灾备·备用资源·华南业务组",
+        "field5": "业务连续性灾备·演练计划·生产验证",
+        "field6": "中",
+        "field7": "业务连续性灾备·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "ADMIN-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "SECURITY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "ticket",
+          "targetId": "TICKET_SYSTEM-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MKT_DR-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立业务连续性灾备示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MKT_DR-003",
+      "type": "ticket",
+      "name": "业务连续性灾备示例 3",
+      "status": "resolved",
+      "ownerId": "李哲",
+      "moduleId": "mkt-dr",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "业务连续性灾备业务连续性灾备详情的连贯演示数据",
+        "field1": "业务连续性灾备·关键链路·华南业务组",
+        "field2": "业务连续性灾备·RPO·生产验证",
+        "field3": "业务连续性灾备·RTO·经营协同",
+        "field4": "业务连续性灾备·备用资源·华南业务组",
+        "field5": "业务连续性灾备·演练计划·生产验证",
+        "field6": "低",
+        "field7": "业务连续性灾备·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "ADMIN-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "SECURITY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "ticket",
+          "targetId": "TICKET_SYSTEM-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MKT_DR-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立业务连续性灾备示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MKT_ETHICS-001",
+      "type": "auditEvent",
+      "name": "Agent 伦理治理示例 1",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "mkt-ethics",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "Agent 伦理治理风险登记的连贯演示数据",
+        "field1": "Agent 伦理治理·风险主题·华南业务组",
+        "field2": "Agent 伦理治理·影响人群·生产验证",
+        "field3": "Agent 伦理治理·解释证据·经营协同",
+        "field4": "Agent 伦理治理·专家结论·华南业务组",
+        "field5": "Agent 伦理治理·整改措施·生产验证",
+        "field6": "高",
+        "field7": "Agent 伦理治理·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "SECURITY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MKT_ETHICS-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立Agent 伦理治理示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MKT_ETHICS-002",
+      "type": "auditEvent",
+      "name": "Agent 伦理治理示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "mkt-ethics",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "Agent 伦理治理解释证据的连贯演示数据",
+        "field1": "Agent 伦理治理·风险主题·华南业务组",
+        "field2": "Agent 伦理治理·影响人群·生产验证",
+        "field3": "Agent 伦理治理·解释证据·经营协同",
+        "field4": "Agent 伦理治理·专家结论·华南业务组",
+        "field5": "Agent 伦理治理·整改措施·生产验证",
+        "field6": "中",
+        "field7": "Agent 伦理治理·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "SECURITY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MKT_ETHICS-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立Agent 伦理治理示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MKT_ETHICS-003",
+      "type": "auditEvent",
+      "name": "Agent 伦理治理示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "mkt-ethics",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "Agent 伦理治理Agent 伦理治理详情的连贯演示数据",
+        "field1": "Agent 伦理治理·风险主题·华南业务组",
+        "field2": "Agent 伦理治理·影响人群·生产验证",
+        "field3": "Agent 伦理治理·解释证据·经营协同",
+        "field4": "Agent 伦理治理·专家结论·华南业务组",
+        "field5": "Agent 伦理治理·整改措施·生产验证",
+        "field6": "低",
+        "field7": "Agent 伦理治理·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "agent",
+          "targetId": "AGENTS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "SECURITY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MKT_ETHICS-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立Agent 伦理治理示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MKT_TENANT-001",
+      "type": "customerTenant",
+      "name": "多租户管理示例 1",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "mkt-tenant",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "多租户管理租户目录的连贯演示数据",
+        "field1": "多租户管理·租户名称·华南业务组",
+        "field2": "多租户管理·隔离级别·生产验证",
+        "field3": "多租户管理·资源配额·经营协同",
+        "field4": "多租户管理·已购产品·华南业务组",
+        "field5": "多租户管理·续约日期·生产验证",
+        "field6": "高",
+        "field7": "多租户管理·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "DELIVERY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "CLIENT_PORTAL-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MKT_TENANT-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立多租户管理示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MKT_TENANT-002",
+      "type": "customerTenant",
+      "name": "多租户管理示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "mkt-tenant",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "多租户管理资源配额的连贯演示数据",
+        "field1": "多租户管理·租户名称·华南业务组",
+        "field2": "多租户管理·隔离级别·生产验证",
+        "field3": "多租户管理·资源配额·经营协同",
+        "field4": "多租户管理·已购产品·华南业务组",
+        "field5": "多租户管理·续约日期·生产验证",
+        "field6": "中",
+        "field7": "多租户管理·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "DELIVERY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "CLIENT_PORTAL-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MKT_TENANT-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立多租户管理示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "MKT_TENANT-003",
+      "type": "customerTenant",
+      "name": "多租户管理示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "mkt-tenant",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "多租户管理多租户管理详情的连贯演示数据",
+        "field1": "多租户管理·租户名称·华南业务组",
+        "field2": "多租户管理·隔离级别·生产验证",
+        "field3": "多租户管理·资源配额·经营协同",
+        "field4": "多租户管理·已购产品·华南业务组",
+        "field5": "多租户管理·续约日期·生产验证",
+        "field6": "低",
+        "field7": "多租户管理·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "DELIVERY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "CLIENT_PORTAL-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-MKT_TENANT-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立多租户管理示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "ANALYTICS-001",
+      "type": "metricSnapshot",
+      "name": "华南新能源线索转化率",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "analytics",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "效果度量看板业务价值的连贯演示数据",
+        "field1": "效果度量看板·指标名称·华南业务组",
+        "field2": "效果度量看板·业务口径·生产验证",
+        "field3": "效果度量看板·数据来源·经营协同",
+        "field4": "效果度量看板·目标值·华南业务组",
+        "field5": "效果度量看板·归因模型·生产验证",
+        "field6": "高",
+        "field7": "效果度量看板·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "TASK_CENTER-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "CLIENT_PORTAL-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "AI_PRODUCTS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-ANALYTICS-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立效果度量看板示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "ANALYTICS-002",
+      "type": "metricSnapshot",
+      "name": "效果度量看板示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "analytics",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "效果度量看板Agent 效果的连贯演示数据",
+        "field1": "效果度量看板·指标名称·华南业务组",
+        "field2": "效果度量看板·业务口径·生产验证",
+        "field3": "效果度量看板·数据来源·经营协同",
+        "field4": "效果度量看板·目标值·华南业务组",
+        "field5": "效果度量看板·归因模型·生产验证",
+        "field6": "中",
+        "field7": "效果度量看板·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "TASK_CENTER-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "CLIENT_PORTAL-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "AI_PRODUCTS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-ANALYTICS-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立效果度量看板示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "ANALYTICS-003",
+      "type": "metricSnapshot",
+      "name": "效果度量看板示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "analytics",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "效果度量看板效果度量看板详情的连贯演示数据",
+        "field1": "效果度量看板·指标名称·华南业务组",
+        "field2": "效果度量看板·业务口径·生产验证",
+        "field3": "效果度量看板·数据来源·经营协同",
+        "field4": "效果度量看板·目标值·华南业务组",
+        "field5": "效果度量看板·归因模型·生产验证",
+        "field6": "低",
+        "field7": "效果度量看板·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "task",
+          "targetId": "TASK_CENTER-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "customerTenant",
+          "targetId": "CLIENT_PORTAL-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "capabilityAsset",
+          "targetId": "AI_PRODUCTS-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-ANALYTICS-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立效果度量看板示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "SECURITY-001",
+      "type": "auditEvent",
+      "name": "安全与合规中心示例 1",
+      "status": "planned",
+      "ownerId": "陈琳",
+      "moduleId": "security",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "安全与合规中心资产台账的连贯演示数据",
+        "field1": "安全与合规中心·资产范围·华南业务组",
+        "field2": "安全与合规中心·风险等级·生产验证",
+        "field3": "安全与合规中心·控制策略·经营协同",
+        "field4": "安全与合规中心·责任人·华南业务组",
+        "field5": "安全与合规中心·合规证据·生产验证",
+        "field6": "高",
+        "field7": "安全与合规中心·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "MKT_ETHICS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "ticket",
+          "targetId": "MKT_DR-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-SECURITY-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立安全与合规中心示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "SECURITY-002",
+      "type": "auditEvent",
+      "name": "安全与合规中心示例 2",
+      "status": "active",
+      "ownerId": "周敏",
+      "moduleId": "security",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "安全与合规中心风险评估的连贯演示数据",
+        "field1": "安全与合规中心·资产范围·华南业务组",
+        "field2": "安全与合规中心·风险等级·生产验证",
+        "field3": "安全与合规中心·控制策略·经营协同",
+        "field4": "安全与合规中心·责任人·华南业务组",
+        "field5": "安全与合规中心·合规证据·生产验证",
+        "field6": "中",
+        "field7": "安全与合规中心·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "MKT_ETHICS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "ticket",
+          "targetId": "MKT_DR-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-SECURITY-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立安全与合规中心示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "SECURITY-003",
+      "type": "auditEvent",
+      "name": "安全与合规中心示例 3",
+      "status": "completed",
+      "ownerId": "李哲",
+      "moduleId": "security",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "安全与合规中心安全与合规中心详情的连贯演示数据",
+        "field1": "安全与合规中心·资产范围·华南业务组",
+        "field2": "安全与合规中心·风险等级·生产验证",
+        "field3": "安全与合规中心·控制策略·经营协同",
+        "field4": "安全与合规中心·责任人·华南业务组",
+        "field5": "安全与合规中心·合规证据·生产验证",
+        "field6": "低",
+        "field7": "安全与合规中心·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "PERMISSIONS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "MKT_ETHICS-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "ticket",
+          "targetId": "MKT_DR-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-SECURITY-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立安全与合规中心示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "KNOWLEDGE-001",
+      "type": "knowledgeAsset",
+      "name": "知识资产平台示例 1",
+      "status": "draft",
+      "ownerId": "陈琳",
+      "moduleId": "knowledge",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "高",
+        "updatedAt": "2026-07-26 10:30",
+        "summary": "知识资产平台资产组合的连贯演示数据",
+        "field1": "知识资产平台·知识资产组合·华南业务组",
+        "field2": "知识资产平台·图谱关系·生产验证",
+        "field3": "知识资产平台·权属主体·经营协同",
+        "field4": "知识资产平台·质量等级·华南业务组",
+        "field5": "知识资产平台·使用价值·生产验证",
+        "field6": "高",
+        "field7": "知识资产平台·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "knowledgeAsset",
+          "targetId": "KNOWLEDGE_BASE-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "knowledgeAsset",
+          "targetId": "DATA_METHODOLOGY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "SECURITY-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-KNOWLEDGE-001",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-26T02:30:00.000Z",
+          "detail": "建立知识资产平台示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "KNOWLEDGE-002",
+      "type": "knowledgeAsset",
+      "name": "知识资产平台示例 2",
+      "status": "review",
+      "ownerId": "周敏",
+      "moduleId": "knowledge",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "中",
+        "updatedAt": "2026-07-25 10:30",
+        "summary": "知识资产平台知识图谱的连贯演示数据",
+        "field1": "知识资产平台·知识资产组合·华南业务组",
+        "field2": "知识资产平台·图谱关系·生产验证",
+        "field3": "知识资产平台·权属主体·经营协同",
+        "field4": "知识资产平台·质量等级·华南业务组",
+        "field5": "知识资产平台·使用价值·生产验证",
+        "field6": "中",
+        "field7": "知识资产平台·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "knowledgeAsset",
+          "targetId": "KNOWLEDGE_BASE-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "knowledgeAsset",
+          "targetId": "DATA_METHODOLOGY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "SECURITY-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-KNOWLEDGE-002",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-25T02:30:00.000Z",
+          "detail": "建立知识资产平台示例对象和上下游关系"
+        }
+      ]
+    },
+    {
+      "id": "KNOWLEDGE-003",
+      "type": "knowledgeAsset",
+      "name": "知识资产平台示例 3",
+      "status": "published",
+      "ownerId": "李哲",
+      "moduleId": "knowledge",
+      "fields": {
+        "version": "v7",
+        "maturity": "planned",
+        "priority": "低",
+        "updatedAt": "2026-07-24 10:30",
+        "summary": "知识资产平台知识资产平台详情的连贯演示数据",
+        "field1": "知识资产平台·知识资产组合·华南业务组",
+        "field2": "知识资产平台·图谱关系·生产验证",
+        "field3": "知识资产平台·权属主体·经营协同",
+        "field4": "知识资产平台·质量等级·华南业务组",
+        "field5": "知识资产平台·使用价值·生产验证",
+        "field6": "低",
+        "field7": "知识资产平台·适用范围·华南业务组"
+      },
+      "relations": [
+        {
+          "type": "depends_on",
+          "targetType": "knowledgeAsset",
+          "targetId": "KNOWLEDGE_BASE-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "knowledgeAsset",
+          "targetId": "DATA_METHODOLOGY-001"
+        },
+        {
+          "type": "depends_on",
+          "targetType": "auditEvent",
+          "targetId": "SECURITY-001"
+        }
+      ],
+      "events": [
+        {
+          "id": "EVT-KNOWLEDGE-003",
+          "action": "seeded",
+          "actor": "原型初始化",
+          "at": "2026-07-24T02:30:00.000Z",
+          "detail": "建立知识资产平台示例对象和上下游关系"
+        }
+      ]
+    }
+  ]
+}

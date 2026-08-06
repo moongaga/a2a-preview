@@ -1,0 +1,147 @@
+:root {
+  --aimp-module-header-height: 72px;
+  --aimp-page-padding: 24px;
+  --aimp-page-padding-compact: 16px;
+  --aimp-page-padding-mobile: 12px;
+  --aimp-title-size: 18px;
+  --aimp-body-size: 14px;
+  --aimp-meta-size: 12px;
+  --aimp-border: #dbe3ee;
+  --aimp-muted: #66758d;
+  --aimp-surface: #ffffff;
+  --aimp-page-bg: #f3f6fa;
+  --aimp-card-radius: 10px;
+  --aimp-dialog-radius: 14px;
+  --aimp-tab-height: 64px;
+  --aimp-toolbar-min-height: 58px;
+  --aimp-table-head-height: 42px;
+  --aimp-table-row-min-height: 60px;
+}
+
+.aimp-module-header {
+  min-width: 0;
+  min-height: var(--aimp-module-header-height);
+  padding: 0 var(--aimp-page-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--aimp-surface);
+  border-bottom: 1px solid var(--aimp-border);
+}
+
+.aimp-module-header__copy {
+  min-width: 0;
+  display: grid;
+  align-content: center;
+  gap: 3px;
+}
+
+.aimp-module-header h1 {
+  margin: 0;
+  color: #172033;
+  font-size: var(--aimp-title-size);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.aimp-module-header p {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: var(--aimp-muted);
+  font-size: var(--aimp-meta-size);
+  font-weight: 400;
+  line-height: 1.45;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aimp-module-header__actions {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Module actions keep their business semantics while sharing one title shell. */
+.m04-surface .aimp-module-header button,
+.m05 .aimp-module-header button,
+.m06 .aimp-module-header button,
+.m07 .aimp-module-header button,
+.m12 .aimp-module-header button {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.m04-surface .aimp-module-header button {
+  padding: 6px 9px;
+  border: 1px solid #d8dee7;
+  border-radius: 7px;
+  background: #fff;
+  color: #344054;
+}
+
+.m04-surface .aimp-module-header em {
+  min-width: 19px;
+  padding: 1px 5px;
+  border-radius: 10px;
+  background: #e9eef7;
+  color: #344054;
+  font-size: 12px;
+  font-style: normal;
+  text-align: center;
+}
+
+.m05 .aimp-module-header select {
+  width: 116px;
+  flex: none;
+}
+
+.m06 .aimp-module-header button {
+  padding: 7px 9px;
+  border: 1px solid #d8dee7;
+  border-radius: 7px;
+  background: #fff;
+  color: #2458a8;
+}
+
+.m07 .aimp-module-header .m07-back {
+  margin: 0;
+  padding: 7px;
+}
+
+.m07-object-head {
+  min-height: 54px;
+  margin: -16px -20px 16px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #dce3ed;
+  background: #fff;
+}
+
+.m07-object-head h1 {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.m07-object-head p {
+  margin: 3px 0 0;
+  color: #5d6b80;
+  font-size: 12px;
+}
+
+@media (max-width: 1180px) {
+  .aimp-module-header { padding-inline: var(--aimp-page-padding-compact); }
+}
+
+@media (max-width: 760px) {
+  .aimp-module-header { padding-inline: var(--aimp-page-padding-mobile); }
+  .aimp-module-header__actions { gap: 6px; }
+  .m07-object-head { margin: -14px -14px 14px; padding-inline: 14px; }
+}

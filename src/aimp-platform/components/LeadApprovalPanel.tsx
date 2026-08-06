@@ -1,0 +1,2 @@
+import React from 'react';
+export function LeadApprovalPanel({ onAction }: { onAction: (action: string) => void }) { return <section className="lead-panel"><span className="eyebrow">人工接管与审批</span><h3>高风险动作确认</h3><p>审批前可修改话术；低置信度结果可直接转人工。</p><div><button type="button" onClick={() => onAction('approve')}>批准</button><button type="button" onClick={() => onAction('reject')}>驳回</button><button type="button" onClick={() => onAction('takeover')}>转人工</button></div></section>; }

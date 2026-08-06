@@ -1,0 +1,19 @@
+{
+  "workspaces": [
+    { "id": "pool", "title": "线索池", "purpose": "发现和筛选高意向线索" },
+    { "id": "detail", "title": "线索详情", "purpose": "查看画像、行为和历史触达" },
+    { "id": "strategy", "title": "策略工作台", "purpose": "生成分层和下一步跟进建议" },
+    { "id": "followup", "title": "跟进任务中心", "purpose": "执行和跟踪跟进任务" },
+    { "id": "handoff", "title": "人工接管与审批", "purpose": "处理高风险和低置信度结果" },
+    { "id": "result", "title": "转化结果与指标回流", "purpose": "记录结果并反哺 Agent" }
+  ],
+  "leads": [
+    { "id": "LEAD-001", "name": "杭州星河汽车", "score": 92, "status": "new", "owner": "陈琳" },
+    { "id": "LEAD-002", "name": "深圳智造工厂", "score": 78, "status": "scored", "owner": "王峰" },
+    { "id": "LEAD-003", "name": "上海远景零售", "score": 61, "status": "pending_followup", "owner": "李宁" }
+  ],
+  "permissions": {
+    "business": { "actions": ["view", "create", "edit", "archive", "approve", "execute"] },
+    "employee": { "actions": ["view"] }
+  }
+}

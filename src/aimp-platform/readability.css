@@ -1,0 +1,6 @@
+/* User-facing readability floor; review chrome remains compact. */
+.module-layout.is-use,.operations-dashboard,.identity-page,.role-workspace-grid,.role-hero-strip{font-size:15px}
+.module-layout.is-use p,.module-layout.is-use input,.module-layout.is-use select,.module-layout.is-use textarea,.module-layout.is-use button,.operations-dashboard button,.operations-dashboard select,.identity-page button{font-size:15px}
+.module-layout.is-use small,.module-layout.is-use .eyebrow,.module-layout.is-use .status-pill,.module-layout.is-use .result-count,.operations-dashboard small,.identity-page small{font-size:13px}
+.contract-workspace .experience-header>div:first-child>span,.contract-workspace .experience-metrics span,.contract-workspace .experience-metrics small,.contract-workspace .binding-list small,.contract-workspace .binding-list em,.contract-workspace .experience-relations small{font-size:13px}
+.module-layout.is-use .page-header h1{font-size:30px}.contract-workspace .experience-header h2{font-size:19px}

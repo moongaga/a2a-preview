@@ -1,0 +1,2 @@
+import React from 'react';
+export function LeadResultPanel({ onAction }: { onAction: (action: string) => void }) { return <section className="lead-panel"><span className="eyebrow">结果回流</span><h3>确认线索结果</h3><p>结果将回写线索状态、跟进任务和 Agent 评估。</p><div><button type="button" onClick={() => onAction('convert')}>已转化</button><button type="button" onClick={() => onAction('nurture')}>继续培育</button><button type="button" onClick={() => onAction('lose')}>已失联</button></div></section>; }

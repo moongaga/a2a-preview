@@ -1,0 +1,49 @@
+{
+  "defaultRole": "business",
+  "defaultVersion": "v7",
+  "roles": {
+    "admin": {
+      "modules": ["*"],
+      "actions": ["*"],
+      "dataScope": "all"
+    },
+    "superadmin": {
+      "modules": [
+        "*"
+      ],
+      "actions": [
+        "*"
+      ],
+      "dataScope": "all"
+    },
+    "client": {
+      "modules": [
+        "client-portal"
+      ],
+      "actions": [
+        "read",
+        "create",
+        "feedback",
+        "confirm",
+        "download",
+        "create_request"
+      ],
+      "dataScope": "tenant"
+    },
+    "business": {
+      "modules": ["workspace", "task-center", "dynamic-plan", "orchestration", "ai-products", "delivery", "client-portal", "ai-org", "position-ai", "ticket-system", "analytics", "knowledge-base"],
+      "actions": ["read", "create", "update", "archive", "restore", "approve", "handoff", "complete", "close"],
+      "dataScope": "business"
+    },
+    "trainer": {
+      "modules": ["workspace", "task-center", "agents", "orchestration", "skills", "tools", "prompts", "knowledge-base", "agent-testing", "ticket-system", "mf-data-factory", "mf-experiment", "mf-model-registry", "mf-feature-store", "mf-model-monitor", "mf-pipeline", "data-methodology", "evolution", "analytics"],
+      "actions": ["read", "create", "update", "archive", "restore", "test", "publish", "degrade", "offline", "recover", "retry"],
+      "dataScope": "trainer"
+    },
+    "employee": {
+      "modules": ["workspace", "task-center", "ai-products", "knowledge-base"],
+      "actions": ["read", "create", "update_own", "handoff", "feedback", "start", "complete"],
+      "dataScope": "self"
+    }
+  }
+}

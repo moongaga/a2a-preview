@@ -1,0 +1,90 @@
+[
+  {
+    "id": "leads", "kind": "business", "name": "线索转化", "primaryMetric": "线索转化率", "actors": ["business","trainer","employee"],
+    "stages": [
+      {"name":"创建诊断任务","moduleId":"task-center","pageId":"create","objectType":"task","objectId":"TASK_CENTER-001","entryCondition":"业务目标和线索范围已确认","actions":["创建任务"],"exitCondition":"任务进入审批","exceptionPath":"数据范围未授权"},
+      {"name":"装配诊断能力","moduleId":"agents","pageId":"capabilities","objectType":"agent","objectId":"AGENTS-002","entryCondition":"任务场景和目标已定义","actions":["绑定Prompt、Skill、Tool和知识"],"exitCondition":"依赖校验通过","exceptionPath":"能力版本不兼容"},
+      {"name":"检索授权知识","moduleId":"knowledge-base","pageId":"retrieval","objectType":"knowledgeAsset","objectId":"KNOWLEDGE_BASE-003","entryCondition":"知识包已授权","actions":["运行检索验证"],"exitCondition":"证据覆盖达标","exceptionPath":"知识过期或无权限"},
+      {"name":"策略审批","moduleId":"task-center","pageId":"approvals","objectType":"approval","objectId":"TASK_CENTER-001","entryCondition":"诊断结果和风险证据已生成","actions":["通过","驳回","要求补充"],"exitCondition":"审批通过","exceptionPath":"退回任务配置"},
+      {"name":"培育与人工接管","moduleId":"task-center","pageId":"handoffs","objectType":"task","objectId":"TASK_CENTER-001","entryCondition":"培育流程运行中","actions":["接管","恢复"],"exitCondition":"高风险线索已处理","exceptionPath":"SLA即将超时"},
+      {"name":"结果回流","moduleId":"task-center","pageId":"acceptance","objectType":"metricSnapshot","objectId":"ANALYTICS-001","entryCondition":"诊断和培育已结束","actions":["确认结果","回流指标"],"exitCondition":"指标和Badcase已更新","exceptionPath":"指标回流失败"}
+    ]
+  },
+  {
+    "id": "content", "kind": "business", "name": "内容生产", "primaryMetric": "有效内容贡献率", "actors": ["business","trainer","employee"],
+    "stages": [
+      {"name":"创建内容任务","moduleId":"task-center","pageId":"create","objectType":"task","objectId":"TASK_CENTER-002","entryCondition":"战役目标已确认","actions":["创建任务"],"exitCondition":"Brief完成","exceptionPath":"目标受众缺失"},
+      {"name":"Prompt与变量","moduleId":"prompts","pageId":"editor","objectType":"promptVersion","objectId":"PROMPTS-001","entryCondition":"Brief已完成","actions":["编辑版本"],"exitCondition":"评测通过","exceptionPath":"变量缺失"},
+      {"name":"内容生成","moduleId":"agents","pageId":"instances","objectType":"agent","objectId":"AGENTS-001","entryCondition":"能力装配完成","actions":["运行生成"],"exitCondition":"候选内容产生","exceptionPath":"生成失败"},
+      {"name":"品牌与合规审核","moduleId":"security","pageId":"controls","objectType":"auditEvent","objectId":"SECURITY-001","entryCondition":"候选内容已提交","actions":["审核","整改"],"exitCondition":"审核通过","exceptionPath":"高风险表述"},
+      {"name":"知识资产沉淀","moduleId":"knowledge","pageId":"operations","objectType":"knowledgeAsset","objectId":"KNOWLEDGE-001","entryCondition":"内容已发布","actions":["登记资产"],"exitCondition":"权属和标签完整","exceptionPath":"权属争议"},
+      {"name":"效果复盘","moduleId":"analytics","pageId":"business-value","objectType":"metricSnapshot","objectId":"ANALYTICS-001","entryCondition":"渠道数据已回流","actions":["确认指标"],"exitCondition":"改进项已生成","exceptionPath":"渠道数据延迟"}
+    ]
+  },
+  {
+    "id": "commerce", "kind": "business", "name": "商城运营", "primaryMetric": "活动成交额", "actors": ["business","trainer","employee"],
+    "stages": [
+      {"name":"商品诊断","moduleId":"dynamic-plan","pageId":"decomposition","objectType":"businessGoal","objectId":"DYNAMIC_PLAN-001","entryCondition":"经营目标已下达","actions":["拆解目标"],"exitCondition":"机会清单完成","exceptionPath":"数据不完整"},
+      {"name":"活动规划","moduleId":"dynamic-plan","pageId":"resources","objectType":"businessGoal","objectId":"DYNAMIC_PLAN-001","entryCondition":"机会清单完成","actions":["分配资源"],"exitCondition":"计划可执行","exceptionPath":"资源冲突"},
+      {"name":"权益与Tool审批","moduleId":"tools","pageId":"authorization","objectType":"capabilityAsset","objectId":"TOOLS-001","entryCondition":"活动规则已确认","actions":["授权"],"exitCondition":"接口权限生效","exceptionPath":"高风险写权限"},
+      {"name":"上架执行","moduleId":"mf-pipeline","pageId":"runs","objectType":"workflowRun","objectId":"MF_PIPELINE-001","entryCondition":"权益审批通过","actions":["运行管道"],"exitCondition":"商品和活动上架","exceptionPath":"节点失败"},
+      {"name":"订单异常处理","moduleId":"ticket-system","pageId":"handling","objectType":"ticket","objectId":"TICKET_SYSTEM-001","entryCondition":"监测到经营异常","actions":["处理","恢复"],"exitCondition":"异常关闭","exceptionPath":"影响扩大"},
+      {"name":"经营复盘","moduleId":"analytics","pageId":"roi","objectType":"metricSnapshot","objectId":"ANALYTICS-001","entryCondition":"活动结束","actions":["计算ROI"],"exitCondition":"改进计划发布","exceptionPath":"归因链断裂"}
+    ]
+  },
+  {
+    "id": "koc", "kind": "business", "name": "KOC 运营", "primaryMetric": "KOC ROI", "actors": ["business","trainer","employee"],
+    "stages": [
+      {"name":"招募与岗位关系","moduleId":"ai-org","pageId":"collaboration","objectType":"businessGoal","objectId":"AI_ORG-001","entryCondition":"活动目标已确认","actions":["配置协作关系"],"exitCondition":"招募角色完整","exceptionPath":"职责冲突"},
+      {"name":"准入与授权","moduleId":"permissions","pageId":"requests","objectType":"auditEvent","objectId":"PERMISSIONS-001","entryCondition":"候选KOC已登记","actions":["提交准入"],"exitCondition":"权限审批通过","exceptionPath":"身份或协议缺失"},
+      {"name":"标签分层","moduleId":"agents","pageId":"instances","objectType":"agent","objectId":"AGENTS-001","entryCondition":"准入通过","actions":["运行画像"],"exitCondition":"标签完整","exceptionPath":"标签置信度不足"},
+      {"name":"活动匹配","moduleId":"task-center","pageId":"runs","objectType":"task","objectId":"TASK_CENTER-003","entryCondition":"标签分层完成","actions":["运行匹配"],"exitCondition":"任务已分配","exceptionPath":"预算或档期冲突"},
+      {"name":"履约异常","moduleId":"ticket-system","pageId":"triage","objectType":"ticket","objectId":"TICKET_SYSTEM-002","entryCondition":"发现交付偏差","actions":["分级派单"],"exitCondition":"履约恢复","exceptionPath":"内容审核不通过"},
+      {"name":"结算复盘","moduleId":"analytics","pageId":"roi","objectType":"metricSnapshot","objectId":"ANALYTICS-001","entryCondition":"履约验收完成","actions":["计算ROI"],"exitCondition":"结算和改进完成","exceptionPath":"归因证据不足"}
+    ]
+  },
+  {
+    "id": "raas", "kind": "platform", "name": "RaaS 客户交付", "primaryMetric": "客户价值达成率", "actors": ["admin","business"],
+    "stages": [
+      {"name":"AI产品定义","moduleId":"ai-products","pageId":"assembly","objectType":"capabilityAsset","objectId":"AI_PRODUCTS-001","entryCondition":"客户问题已确认","actions":["装配能力"],"exitCondition":"产品包冻结","exceptionPath":"能力依赖未发布"},
+      {"name":"合同范围","moduleId":"delivery","pageId":"contract-scope","objectType":"customerTenant","objectId":"DELIVERY-001","entryCondition":"产品和报价已确认","actions":["确认范围"],"exitCondition":"交付边界冻结","exceptionPath":"范围变更"},
+      {"name":"租户开通","moduleId":"mkt-tenant","pageId":"isolation","objectType":"customerTenant","objectId":"MKT_TENANT-001","entryCondition":"合同生效","actions":["配置隔离"],"exitCondition":"租户可用","exceptionPath":"隔离冲突"},
+      {"name":"交付实施","moduleId":"delivery","pageId":"milestones","objectType":"customerTenant","objectId":"DELIVERY-001","entryCondition":"租户开通","actions":["推进里程碑"],"exitCondition":"试运行完成","exceptionPath":"数据迁移失败"},
+      {"name":"客户验收","moduleId":"client-portal","pageId":"outcomes","objectType":"customerTenant","objectId":"CLIENT_PORTAL-001","entryCondition":"试运行达标","actions":["确认结果"],"exitCondition":"验收通过","exceptionPath":"结果不达标"},
+      {"name":"SLA与续约","moduleId":"analytics","pageId":"raas-revenue","objectType":"metricSnapshot","objectId":"ANALYTICS-001","entryCondition":"进入正式运营","actions":["跟踪价值"],"exitCondition":"续约决策完成","exceptionPath":"SLA违约"}
+    ]
+  },
+  {
+    "id": "agent-lifecycle", "kind": "platform", "name": "Agent 全生命周期", "primaryMetric": "Agent 业务成功率", "actors": ["admin","trainer"],
+    "stages": [
+      {"name":"需求","moduleId":"task-center","pageId":"create","objectType":"task","objectId":"TASK_CENTER-001","entryCondition":"业务问题已定义","actions":["提交需求"],"exitCondition":"Agent职责冻结","exceptionPath":"价值目标不清"},
+      {"name":"注册与装配","moduleId":"agents","pageId":"register","objectType":"agent","objectId":"AGENTS-001","entryCondition":"职责冻结","actions":["注册Agent"],"exitCondition":"依赖完整","exceptionPath":"能力冲突"},
+      {"name":"输入输出契约","moduleId":"agents","pageId":"contracts","objectType":"agent","objectId":"AGENTS-001","entryCondition":"能力已绑定","actions":["定义契约"],"exitCondition":"兼容检查通过","exceptionPath":"契约不兼容"},
+      {"name":"测试门禁","moduleId":"agent-testing","pageId":"release-gate","objectType":"workflowRun","objectId":"AGENT_TESTING-001","entryCondition":"候选版本已提交","actions":["运行门禁"],"exitCondition":"门禁通过","exceptionPath":"高危风险"},
+      {"name":"发布","moduleId":"agents","pageId":"release","objectType":"agent","objectId":"AGENTS-002","entryCondition":"审批和回滚方案完整","actions":["灰度发布"],"exitCondition":"生产版本可用","exceptionPath":"灰度指标下降"},
+      {"name":"监控与进化","moduleId":"evolution","pageId":"benefits","objectType":"ticket","objectId":"EVOLUTION-001","entryCondition":"运行数据已积累","actions":["确认改进收益"],"exitCondition":"下一版本提案生成","exceptionPath":"效果回退"}
+    ]
+  },
+  {
+    "id": "model-evolution", "kind": "platform", "name": "数据与模型进化", "primaryMetric": "模型主指标提升", "actors": ["admin","trainer"],
+    "stages": [
+      {"name":"Badcase","moduleId":"evolution","pageId":"badcases","objectType":"ticket","objectId":"EVOLUTION-001","entryCondition":"业务失败样本已回流","actions":["归因缺口"],"exitCondition":"样本可复现","exceptionPath":"证据不足"},
+      {"name":"训练数据","moduleId":"mf-data-factory","pageId":"freeze","objectType":"modelAsset","objectId":"MF_DATA_FACTORY-001","entryCondition":"标注和质检完成","actions":["冻结版本"],"exitCondition":"数据版本发布","exceptionPath":"质量不达标"},
+      {"name":"实验","moduleId":"mf-experiment","pageId":"comparison","objectType":"modelAsset","objectId":"MF_EXPERIMENT-001","entryCondition":"数据版本可用","actions":["比较指标"],"exitCondition":"候选模型产生","exceptionPath":"指标不可比"},
+      {"name":"模型注册","moduleId":"mf-model-registry","pageId":"security-review","objectType":"modelAsset","objectId":"MF_MODEL_REGISTRY-001","entryCondition":"候选模型提交","actions":["安全评审"],"exitCondition":"版本可部署","exceptionPath":"血缘缺失"},
+      {"name":"部署","moduleId":"mf-pipeline","pageId":"runs","objectType":"workflowRun","objectId":"MF_PIPELINE-001","entryCondition":"部署审批通过","actions":["灰度部署"],"exitCondition":"新模型接流量","exceptionPath":"管道失败"},
+      {"name":"监控","moduleId":"mf-model-monitor","pageId":"drift","objectType":"modelAsset","objectId":"MF_MODEL_MONITOR-001","entryCondition":"生产指标可采集","actions":["监测漂移"],"exitCondition":"稳定窗口通过","exceptionPath":"漂移超阈值"}
+    ]
+  },
+  {
+    "id": "governance", "kind": "platform", "name": "平台治理", "primaryMetric": "高风险问题关闭率", "actors": ["admin","business"],
+    "stages": [
+      {"name":"权限","moduleId":"permissions","pageId":"conflicts","objectType":"auditEvent","objectId":"PERMISSIONS-001","entryCondition":"主体和资源已登记","actions":["检测冲突"],"exitCondition":"权限策略合法","exceptionPath":"职责分离冲突"},
+      {"name":"安全","moduleId":"security","pageId":"risk-assessment","objectType":"auditEvent","objectId":"SECURITY-001","entryCondition":"资产范围已确认","actions":["风险评估"],"exitCondition":"控制措施确定","exceptionPath":"高危漏洞"},
+      {"name":"伦理","moduleId":"mkt-ethics","pageId":"expert-review","objectType":"auditEvent","objectId":"MKT_ETHICS-001","entryCondition":"影响证据完整","actions":["专家审查"],"exitCondition":"伦理结论形成","exceptionPath":"歧视风险"},
+      {"name":"审计","moduleId":"admin","pageId":"changes","objectType":"auditEvent","objectId":"ADMIN-001","entryCondition":"治理动作已发生","actions":["核对证据"],"exitCondition":"事件可追溯","exceptionPath":"证据缺失"},
+      {"name":"灾备","moduleId":"mkt-dr","pageId":"drills","objectType":"ticket","objectId":"MKT_DR-001","entryCondition":"关键链路已识别","actions":["执行演练"],"exitCondition":"RPO/RTO达成","exceptionPath":"切换失败"},
+      {"name":"整改","moduleId":"ticket-system","pageId":"recovery","objectType":"ticket","objectId":"TICKET_SYSTEM-001","entryCondition":"治理问题已派单","actions":["恢复验证"],"exitCondition":"问题关闭","exceptionPath":"整改后复发"}
+    ]
+  }
+]

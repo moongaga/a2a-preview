@@ -1,0 +1,5 @@
+import React, { useMemo, useState } from 'react';
+import { Search } from 'lucide-react';
+import type { ModuleDefinition } from '../types';
+import type { RouteState } from '../model/router';
+export function GlobalSearch({ modules, onNavigate }: { modules: ModuleDefinition[]; onNavigate: (route: Partial<RouteState>, replace?: boolean) => void }) { const [query, setQuery] = useState(''); const results = useMemo(() => query.trim() ? modules.filter((module) => module.name.includes(query) || module.id.includes(query)).slice(0, 5) : [], [modules, query]); return <div className="global-search"><Search size={15} /><input aria-label="全局搜索" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索模块、Agent、任务" />{results.length > 0 && <div className="search-results">{results.map((module) => <button type="button" key={module.id} onClick={() => { onNavigate({ page: 'module', module: module.id, view: module.pages[0].id }, true); setQuery(''); }}>{module.name}<small>{module.domainId}</small></button>)}</div>}</div>; }
