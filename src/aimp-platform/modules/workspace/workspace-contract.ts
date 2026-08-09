@@ -1,4 +1,5 @@
 import type { RoleId } from '../../types';
+import type { ProjectRecord } from '../delivery-management/delivery-types';
 
 export type WorkspaceBindingKind = 'knowledge' | 'data' | 'content';
 export type WorkspaceNavigateAction =
@@ -199,18 +200,23 @@ export const workspaceRoleProfiles: Record<RoleId, WorkspaceRoleProfile> = {
     },
 };
 
-export const workspaceProjects: WorkspaceProject[] = [
-    {
-        id: 'PJ-LEAD-Q3-02', name: '华东Q3线索AI优化', goal: '提升线索AI评分稳定性、可解释性和异常恢复效率',
-        owner: '李沐 · 线索中心经理', period: '2026-07-01 ～ 2026-09-30', stage: '质量优化与灰度验证', status: '进行中',
-        progress: 62, milestoneSummary: '1/4', taskCount: 5, agentCount: 3, memberCount: 5, deliveryId: 'DNDC-RAAS-01',
-    },
-    {
-        id: 'PJ-LEAD-OPS-01', name: '线索Agent生产运行保障', goal: '保障线索Agent生产稳定性、SLA与跨租户安全',
-        owner: '赵岑 · 平台运行管理员', period: '2026-08-01 ～ 2026-12-31', stage: '生产保护与发布治理', status: '运行中',
-        progress: 74, milestoneSummary: '3/5', taskCount: 8, agentCount: 4, memberCount: 7, deliveryId: 'AIMP-OPS-2026',
-    },
-];
+export function toWorkspaceProject(project: ProjectRecord): WorkspaceProject {
+    return {
+        id: project.id,
+        name: project.name,
+        goal: project.goal,
+        owner: project.owner,
+        period: project.period,
+        stage: project.stage,
+        status: project.status,
+        progress: project.progress,
+        milestoneSummary: `${project.milestones.filter((item) => item.status === '已完成').length}/${project.milestones.length}`,
+        taskCount: project.taskCount,
+        agentCount: project.bindings.filter((item) => item.kind === 'Agent').length,
+        memberCount: project.members.length,
+        deliveryId: project.contractId || '内部立项',
+    };
+}
 
 export const workspaceThreads: WorkspaceThread[] = [
     { id: 'CHAT-3088', projectId: 'PJ-LEAD-Q3-02', title: '分析本周评分偏差', agentId: 'AGENT-LEAD-03', updatedAt: '10分钟前', summary: 'Prompt与知识版本不一致，建议创建P1修复任务。' },

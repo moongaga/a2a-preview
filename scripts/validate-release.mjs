@@ -6,8 +6,11 @@ const sourceRoot = path.join(root, 'src', 'aimp-platform');
 const requiredModules = [
   'workspace',
   'task-center',
+  'delivery-management',
   'knowledge-base',
   'prompt-engineering',
+  'skills',
+  'tools',
   'agent-management',
   'agent-testing',
   'agent-orchestration',
@@ -24,7 +27,13 @@ for (const moduleName of requiredModules) {
 }
 
 const forbiddenPaths = [
-  path.join(sourceRoot, 'modules', 'tools'),
+  path.join(sourceRoot, 'tests'),
+  path.join(sourceRoot, 'pages'),
+  path.join(sourceRoot, 'components', 'AnnotationHost.tsx'),
+  path.join(sourceRoot, '.spec'),
+  path.join(sourceRoot, 'docs'),
+  path.join(sourceRoot, 'scripts'),
+  path.join(sourceRoot, 'annotation-source.json'),
   path.join(root, '.axhub'),
   path.join(root, '.agents'),
   path.join(root, 'MEMORY.md'),
@@ -36,7 +45,7 @@ for (const forbiddenPath of forbiddenPaths) {
   }
 }
 
-const sensitivePattern = /Users\/chenshao|127\.0\.0\.1:51720|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY/;
+const sensitivePattern = /Users\/chenshao|127\.0\.0\.1:51720|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|(?:api[_-]?key|secret|token)\s*[:=]\s*["'][^"']{12,}["']/i;
 const scan = (directory) => {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
     const entryPath = path.join(directory, entry.name);

@@ -31,12 +31,12 @@
       "dataScope": "tenant"
     },
     "business": {
-      "modules": ["workspace", "task-center", "dynamic-plan", "orchestration", "ai-products", "delivery", "client-portal", "ai-org", "position-ai", "ticket-system", "analytics", "knowledge-base"],
+      "modules": ["workspace", "task-center", "delivery-management", "dynamic-plan", "orchestration", "ai-products", "delivery", "client-portal", "ai-org", "position-ai", "ticket-system", "analytics", "knowledge-base"],
       "actions": ["read", "create", "update", "archive", "restore", "approve", "handoff", "complete", "close"],
       "dataScope": "business"
     },
     "trainer": {
-      "modules": ["workspace", "task-center", "agents", "orchestration", "skills", "tools", "prompts", "knowledge-base", "agent-testing", "ticket-system", "mf-data-factory", "mf-experiment", "mf-model-registry", "mf-feature-store", "mf-model-monitor", "mf-pipeline", "data-methodology", "evolution", "analytics"],
+      "modules": ["workspace", "task-center", "delivery-management", "agents", "orchestration", "skills", "tools", "prompts", "knowledge-base", "agent-testing", "ticket-system", "mf-data-factory", "mf-experiment", "mf-model-registry", "mf-feature-store", "mf-model-monitor", "mf-pipeline", "data-methodology", "evolution", "analytics"],
       "actions": ["read", "create", "update", "archive", "restore", "test", "publish", "degrade", "offline", "recover", "retry"],
       "dataScope": "trainer"
     },

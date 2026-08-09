@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useReducer } from 'react';
 import { AtSign, Bot, CheckCircle2, ChevronDown, Clock3, FilePlus2, GitBranch, Paperclip, Send, Share2, ShieldCheck, Sparkles, X } from 'lucide-react';
 import type { PermissionDecision, RoleId } from '../../types';
-import { workspaceAgents, workspaceProjects, workspaceRoleAgentIds, workspaceRoleProfiles, workspaceRuntimeTraces, workspaceThreads } from './workspace-contract';
+import { workspaceAgents, workspaceRoleAgentIds, workspaceRoleProfiles, workspaceRuntimeTraces, workspaceThreads, toWorkspaceProject } from './workspace-contract';
+import { useDeliveryProjectRegistry } from '../delivery-management/delivery-registry-store';
 import type { WorkspaceDialogState } from './WorkspaceDialogHost';
 import { workspaceConversationReducer, type WorkspaceMessage } from './workspace-reducer';
 
@@ -35,7 +36,8 @@ export function WorkspaceConversation({
     permissionFor: (action: string) => PermissionDecision;
 }) {
     const profile = workspaceRoleProfiles[role];
-    const project = workspaceProjects.find((item) => item.id === projectId) || workspaceProjects[0];
+    const registry = useDeliveryProjectRegistry();
+    const project = toWorkspaceProject(registry.getProject(projectId) || registry.getVisibleProjects(role)[0]);
     const thread = workspaceThreads.find((item) => item.id === threadId);
     const agent = workspaceAgents.find((item) => item.id === agentId) || workspaceAgents[0];
     const [state, dispatch] = useReducer(workspaceConversationReducer, {

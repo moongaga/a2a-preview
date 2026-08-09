@@ -1,9 +1,10 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Info, PanelRightOpen, Search } from 'lucide-react';
 import { ModuleHeader } from '../../components/ModuleHeader';
 import type { RouteState } from '../../model/router';
 import type { DeepModuleProps } from '../types';
-import { workspaceAgents, workspaceNotices, workspaceProjects, workspaceRoleProfiles, workspaceThreads, type WorkspaceNavigateAction, type WorkspaceNotice, type WorkspaceProject, type WorkspaceThread } from './workspace-contract';
+import { workspaceAgents, workspaceNotices, workspaceRoleProfiles, workspaceThreads, toWorkspaceProject, type WorkspaceNavigateAction, type WorkspaceNotice, type WorkspaceProject, type WorkspaceThread } from './workspace-contract';
+import { useDeliveryProjectRegistry } from '../delivery-management/delivery-registry-store';
 import { WorkspaceNavigation } from './WorkspaceNavigation';
 import { WorkspaceConversation } from './WorkspaceConversation';
 import { WorkspaceContextPanel } from './WorkspaceContextPanel';
@@ -17,7 +18,10 @@ export type WorkspacePageProps = DeepModuleProps & {
 
 export function WorkspacePage({ role, permissionFor }: WorkspacePageProps) {
     const profile = workspaceRoleProfiles[role];
-    const initialProjectId = profile.projectId || workspaceProjects[0].id;
+    const registry = useDeliveryProjectRegistry();
+    const actor = profile.identity.split(' · ')[0];
+    const workspaceProjects = useMemo(() => registry.getVisibleProjects(role, actor).filter((project) => project.status !== '已归档').map(toWorkspaceProject), [registry, role, actor]);
+    const initialProjectId = workspaceProjects.some((project) => project.id === profile.projectId) ? profile.projectId! : workspaceProjects[0]?.id || '';
     const initialThread = workspaceThreads.find((item) => item.projectId === initialProjectId);
     const [projectId, setProjectId] = useState(initialProjectId);
     const [threadId, setThreadId] = useState(initialThread?.id || 'new');
@@ -27,20 +31,28 @@ export function WorkspacePage({ role, permissionFor }: WorkspacePageProps) {
     const [contextOpen, setContextOpen] = useState(false);
     const [feedback, setFeedback] = useState<WorkspaceFeedback | null>(null);
     const [noticeReadIds, setNoticeReadIds] = useState<string[]>([]);
-    const actor = profile.identity.split(' · ')[0];
-    const currentProject = useMemo(() => workspaceProjects.find((item) => item.id === projectId) || workspaceProjects[0], [projectId]);
+    const currentProject = useMemo(() => workspaceProjects.find((item) => item.id === projectId) || workspaceProjects[0], [workspaceProjects, projectId]);
+
+    useEffect(() => {
+        if (!workspaceProjects.length || workspaceProjects.some((project) => project.id === projectId)) return;
+        const next = workspaceProjects[0];
+        const firstThread = workspaceThreads.find((item) => item.projectId === next.id);
+        setProjectId(next.id);
+        setThreadId(firstThread?.id || 'new');
+        setAgentId(profile.defaultAgentId || firstThread?.agentId || workspaceAgents[0].id);
+    }, [workspaceProjects, projectId, profile.defaultAgentId]);
 
     if (role === 'client') return <section className="m04-client-gate">
         <Info size={30} /><h1>当前身份不使用内部工作空间</h1>
         <p>客户管理员不查看内部项目、Agent能力、运行证据和协作任务。</p>
     </section>;
+    if (!currentProject) return <section className="m04-client-gate"><Info size={30} /><h1>暂无可用项目</h1><p>请由 M10 项目管理员将你加入有效项目后再进入工作空间。</p></section>;
 
     const selectProject = (project: WorkspaceProject) => {
         setProjectId(project.id);
         const firstThread = workspaceThreads.find((item) => item.projectId === project.id);
         setThreadId(firstThread?.id || 'new');
         setAgentId(profile.defaultAgentId || firstThread?.agentId || workspaceAgents[0].id);
-        setProjectOpen(true);
     };
     const selectThread = (thread: WorkspaceThread) => {
         setThreadId(thread.id);
@@ -77,7 +89,7 @@ export function WorkspacePage({ role, permissionFor }: WorkspacePageProps) {
             <button type="button" onClick={() => setFeedback(null)}>关闭</button>
         </div>}
         <div className="m04-workspace" data-role={role}>
-            <WorkspaceNavigation projectId={projectId} threadId={threadId} onProject={selectProject} onThread={selectThread} onNewChat={newChat} onPlan={() => setDialog({ id: 'plan-detail' })} />
+            <WorkspaceNavigation projects={workspaceProjects} projectId={projectId} threadId={threadId} onProject={selectProject} onThread={selectThread} onNewChat={newChat} onPlan={() => setDialog({ id: 'plan-detail' })} />
             <WorkspaceConversation key={`${role}-${threadId}`} projectId={projectId} threadId={threadId} agentId={agentId} role={role} onNewChat={newChat} onAgent={setAgentId} onDialog={setDialog} permissionFor={permissionFor} />
             <WorkspaceContextPanel projectId={projectId} threadId={threadId} agentId={agentId} role={role} onDialog={setDialog} onProject={() => setProjectOpen(true)} />
         </div>

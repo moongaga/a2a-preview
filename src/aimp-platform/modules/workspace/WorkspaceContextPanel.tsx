@@ -1,7 +1,8 @@
 import React from 'react';
 import { AlertTriangle, Bot, ChevronRight, FolderKanban, ShieldCheck } from 'lucide-react';
 import type { RoleId } from '../../types';
-import { workspaceAgents, workspaceProjects, workspaceRoleProfiles, workspaceRuntimeTraces } from './workspace-contract';
+import { workspaceAgents, workspaceRoleProfiles, workspaceRuntimeTraces, toWorkspaceProject } from './workspace-contract';
+import { useDeliveryProjectRegistry } from '../delivery-management/delivery-registry-store';
 import type { WorkspaceDialogState } from './WorkspaceDialogHost';
 
 export function WorkspaceContextPanel({
@@ -21,7 +22,9 @@ export function WorkspaceContextPanel({
     onProject: () => void;
     drawer?: boolean;
 }) {
-    const project = workspaceProjects.find((item) => item.id === projectId) || workspaceProjects[0];
+    const registry = useDeliveryProjectRegistry();
+    const projectRecord = registry.getProject(projectId) || registry.getVisibleProjects(role)[0];
+    const project = toWorkspaceProject(projectRecord);
     const agent = workspaceAgents.find((item) => item.id === agentId) || workspaceAgents[0];
     const profile = workspaceRoleProfiles[role];
     const trace = workspaceRuntimeTraces.find((item) => item.threadId === threadId);

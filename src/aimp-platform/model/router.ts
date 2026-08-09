@@ -21,12 +21,12 @@ export type RouteState = {
 export function workspaceRoute(role?: RoleId): RouteState {
     return { page: 'module', module: 'workspace', view: 'agent-chat', role: normalizeRole(role) };
 }
-export const runtimeModules = ['workspace', 'task-center', 'agent-management', 'agent-testing', 'agent-orchestration', 'dynamic-plan', 'incident-center', 'knowledge-base', 'prompt-engineering', 'platform-foundation', 'access-control'] as const;
+export const runtimeModules = ['workspace', 'task-center', 'delivery-management', 'agent-management', 'agent-testing', 'agent-orchestration', 'dynamic-plan', 'incident-center', 'knowledge-base', 'prompt-engineering', 'skills', 'tools', 'platform-foundation', 'access-control'] as const;
 function runtime(route: Partial<RouteState>): RouteState {
     const module: typeof runtimeModules[number] = runtimeModules.includes(route.module as typeof runtimeModules[number])
         ? route.module as typeof runtimeModules[number]
         : 'workspace';
-    return { page: 'module', module, view: module === 'workspace' ? 'agent-chat' : module === 'task-center' ? 'kanban' : module === 'agent-management' ? 'registry' : module === 'agent-testing' ? 'projects' : module === 'agent-orchestration' ? 'workflows' : module === 'dynamic-plan' ? 'digital-workforce' : module === 'incident-center' ? 'overview' : module === 'prompt-engineering' ? 'templates' : module === 'platform-foundation' ? 'organizations' : module === 'access-control' ? 'roles' : 'assets', role: normalizeRole(route.role) };
+    return { page: 'module', module, view: module === 'workspace' ? 'agent-chat' : module === 'task-center' ? 'kanban' : module === 'delivery-management' ? 'projects' : module === 'agent-management' ? 'registry' : module === 'agent-testing' ? 'projects' : module === 'agent-orchestration' ? 'workflows' : module === 'dynamic-plan' ? 'digital-workforce' : module === 'incident-center' ? 'overview' : module === 'prompt-engineering' ? 'templates' : module === 'skills' ? 'catalog' : module === 'tools' ? 'catalog' : module === 'platform-foundation' ? 'organizations' : module === 'access-control' ? 'roles' : 'assets', role: normalizeRole(route.role) };
 }
 
 export function readRoute(): RouteState {

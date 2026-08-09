@@ -1,6 +1,6 @@
 export type GateStatus = '可发布' | '阻断发布' | '待运行' | '待批准';
 export type Lifecycle = '草稿' | '已提交' | '灰度中' | '已归档';
-export type TestCase = { id: string; name: string; agent: string; type: '能力' | '知识' | '工具' | '安全'; status: Lifecycle; expected: string; updatedAt: string; audit: string[] };
+export type TestCase = { id: string; name: string; agent: string; type: '能力' | '知识' | '工具' | 'Skill' | '安全'; status: Lifecycle; expected: string; updatedAt: string; audit: string[] };
 export type IntegrationScenario = { id: string; name: string; chain: string; status: Lifecycle; passRate: string; sla: string; detail: string; audit: string[] };
 export type AttackVector = { id: string; type: string; payload: string; target: string; status: Lifecycle; result: '防御' | '暴露'; detail: string; audit: string[] };
 export type ReleaseRequest = { id: string; name: string; agent: string; unit: string; integration: string; adversarial: string; status: Lifecycle | '待审批' | '已批准'; gray: string; owner: string; audit: string[] };

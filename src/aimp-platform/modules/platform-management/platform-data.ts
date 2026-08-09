@@ -2,7 +2,6 @@ import type { RoleId } from '../../types';
 
 export type RecordStatus = '草稿' | '启用' | '停用' | '归档';
 export type DataScopeLevel = '本人' | '项目' | '部门' | '组织' | '租户' | '平台' | '全租户';
-export type AccessRequestStatus = '草稿' | '待审批' | '审批中' | '已生效' | '已驳回' | '已撤回' | '已到期' | '已回收';
 export type RiskLevel = '低' | '中' | '高' | '极高';
 
 export interface TenantProfile { id:string; name:string; status:'启用'|'停用'; defaultOrganizationId:string; contact:string }
@@ -14,7 +13,6 @@ export interface PlatformConfig { id:string; category:'模型供应商'|'模型�
 export interface Role { id:string; name:string; kind:'系统内置'|'自定义'; risk:RiskLevel; status:RecordStatus; memberCount:number; description:string; systemRole?:RoleId }
 export interface PermissionPolicy { id:string; roleId:string; moduleId:string; moduleName:string; page:string; actions:string[]; fields:string[]; effect:'允许'|'显式拒绝'; dataScope:DataScopeLevel; risk:RiskLevel }
 export interface RoleBinding { id:string; subjectType:'用户'|'岗位'|'组织'; subjectId:string; roleId:string; validFrom:string; validTo:string; source:'直接授权'|'岗位继承'|'组织继承'|'临时申请'; status:'生效'|'到期'|'回收' }
-export interface AccessRequest { id:string; applicantId:string; applicantName:string; targetRoleId:string; permission:string; dataScope:DataScopeLevel; scopeTarget:string; reason:string; temporary:boolean; validTo:string; risk:RiskLevel; status:AccessRequestStatus; approvers:string[]; conflictIds:string[]; createdAt:string }
 export interface ConflictRule { id:string; name:string; leftPermission:string; rightPermission:string; risk:RiskLevel; handling:'阻断'|'例外审批'; hitCount:number; status:'启用'|'停用' }
 export interface AccessReview { id:string; name:string; scope:string; owner:string; dueAt:string; status:'待开始'|'进行中'|'已完成'; total:number; reviewed:number; revokeSuggested:number }
 export interface DecisionLog { id:string; at:string; subject:string; module:string; action:string; resource:string; result:'允许'|'拒绝'; dataScope:DataScopeLevel; matchedPolicies:string[]; reason:string }
@@ -22,7 +20,7 @@ export interface AuditItem { id:string; at:string; actor:string; action:string; 
 export interface BudgetPolicy { id:string; organizationId:string; name:string; period:string; quota:number; used:number; threshold:number; status:RecordStatus; ownerId:string; alerts:number }
 export interface Delegation { id:string; subjectId:string; objectTypes:string[]; actions:string[]; dataScope:DataScopeLevel; scopeTargets:string[]; validFrom:string; validTo:string; riskCeiling:RiskLevel; status:'生效'|'到期'|'回收' }
 export interface ConflictHit { id:string; ruleId:string; subjectId:string; objectId:string; status:'待整改'|'例外审批中'|'已解决'; at:string; resolution:string }
-export interface ReviewItem { id:string; reviewId:string; subjectId:string; permission:string; lastUsed:string; recommendation:'保留'|'回收'|'转交复核'; status:'待复核'|'已保留'|'已回收'|'已转交' }
+export interface ReviewItem { id:string; reviewId:string; subjectId:string; permission:string; lastUsed:string; recommendation:'保留'|'回收'|'转交复核'|'批准'|'驳回'; status:'待复核'|'已保留'|'已回收'|'已转交'|'已批准'|'已驳回'; trigger?:'周期复核'|'高风险授权'|'职责冲突'|'历史申请迁移'|'越权委派'; sourceId?:string; requestedBy?:string; targetRoleId?:string; validTo?:string; risk?:RiskLevel; reasons?:string[]; conflictIds?:string[]; proposedDelegation?:Omit<Delegation,'id'|'validFrom'|'status'> }
 
 export const tenantSeed:TenantProfile[] = [
   { id:'TENANT-AIMP', name:'AIMP 内部平台', status:'启用', defaultOrganizationId:'ORG-AIMP', contact:'顾川' },
@@ -93,12 +91,6 @@ export const bindingSeed:RoleBinding[] = [
   { id:'BIND-002',subjectType:'用户',subjectId:'USR-TRAINER',roleId:'ROLE-TRAINER',validFrom:'2026-01-01',validTo:'长期',source:'岗位继承',status:'生效' },
 ];
 
-export const requestSeed:AccessRequest[] = [
-  { id:'AR-2026-0088',applicantId:'USR-TRAINER',applicantName:'周芮',targetRoleId:'ROLE-ADMIN',permission:'M06 知识分类删除',dataScope:'部门',scopeTarget:'数字营销能力中台',reason:'季度知识分类治理',temporary:true,validTo:'2026-08-31',risk:'高',status:'审批中',approvers:['赵岑','顾川'],conflictIds:['CONFLICT-002'],createdAt:'10:20' },
-  { id:'AR-2026-0087',applicantId:'USR-EMP',applicantName:'陈屿',targetRoleId:'ROLE-LEAD-QA',permission:'线索质量复核',dataScope:'项目',scopeTarget:'PJ-LEAD-Q3-02',reason:'参与本周线索抽检',temporary:true,validTo:'2026-08-12',risk:'低',status:'待审批',approvers:['李沐'],conflictIds:[],createdAt:'09:40' },
-  { id:'AR-2026-0081',applicantId:'USR-BIZ',applicantName:'李沐',targetRoleId:'ROLE-ADMIN',permission:'M08 工作流发布',dataScope:'组织',scopeTarget:'线索中心',reason:'线索工作流灰度发布',temporary:true,validTo:'2026-08-15',risk:'中',status:'已生效',approvers:['赵岑'],conflictIds:[],createdAt:'昨天' },
-];
-
 export const conflictSeed:ConflictRule[] = [
   { id:'CONFLICT-001',name:'开发与生产发布职责分离',leftPermission:'Agent/工作流编辑',rightPermission:'生产发布',risk:'高',handling:'例外审批',hitCount:3,status:'启用' },
   { id:'CONFLICT-002',name:'知识分类维护与删除审批分离',leftPermission:'知识分类编辑',rightPermission:'知识分类删除',risk:'高',handling:'阻断',hitCount:1,status:'启用' },
@@ -106,6 +98,7 @@ export const conflictSeed:ConflictRule[] = [
 ];
 
 export const reviewSeed:AccessReview[] = [
+  { id:'REVIEW-PERMISSION-CHANGE',name:'权限变更复核队列',scope:'高风险、越权与职责冲突授权',owner:'顾川',dueAt:'2026-08-15',status:'进行中',total:2,reviewed:0,revokeSuggested:0 },
   { id:'REVIEW-Q3-PLATFORM',name:'Q3 平台高权限复核',scope:'平台管理员与超级管理员',owner:'顾川',dueAt:'2026-08-15',status:'进行中',total:18,reviewed:11,revokeSuggested:2 },
   { id:'REVIEW-TEMP-AUG',name:'8月临时授权到期复核',scope:'全部临时授权',owner:'赵岑',dueAt:'2026-08-31',status:'待开始',total:36,reviewed:0,revokeSuggested:5 },
 ];
@@ -128,7 +121,8 @@ export const budgetSeed:BudgetPolicy[] = [
 
 export const delegationSeed:Delegation[] = [
   { id:'DEL-LEAD-OPS',subjectId:'USR-BIZ',objectTypes:['organization','position','user','reporting','budget'],actions:['create','read','update','delete','disable','restore','archive'],dataScope:'组织',scopeTargets:['ORG-LEAD','ORG-LEAD-CULTIVATE','ORG-CFT-LEAD'],validFrom:'2026-08-01',validTo:'2026-12-31',riskCeiling:'中',status:'生效' },
-  { id:'DEL-CAP-OPS',subjectId:'USR-TRAINER',objectTypes:['config','budget','request','review','decision'],actions:['create','read','update','delete','disable','restore','archive'],dataScope:'部门',scopeTargets:['ORG-CAPABILITY'],validFrom:'2026-08-01',validTo:'2026-10-31',riskCeiling:'中',status:'生效' },
+  { id:'DEL-CAP-OPS',subjectId:'USR-TRAINER',objectTypes:['config','budget','modelConnection','modelVersion','review','decision'],actions:['read'],dataScope:'部门',scopeTargets:['ORG-CAPABILITY'],validFrom:'2026-08-01',validTo:'2026-10-31',riskCeiling:'中',status:'生效' },
+  { id:'DEL-LEAD-WORKFLOW-PUBLISH',subjectId:'USR-BIZ',objectTypes:['workflow'],actions:['publish'],dataScope:'组织',scopeTargets:['ORG-LEAD'],validFrom:'2026-08-01',validTo:'2026-08-15',riskCeiling:'中',status:'生效' },
 ];
 
 export const conflictHitSeed:ConflictHit[] = [
@@ -136,6 +130,8 @@ export const conflictHitSeed:ConflictHit[] = [
 ];
 
 export const reviewItemSeed:ReviewItem[] = [
+  { id:'REVITEM-LEGACY-0088',reviewId:'REVIEW-PERMISSION-CHANGE',subjectId:'USR-TRAINER',permission:'M06 知识分类删除',lastUsed:'尚未生效',recommendation:'驳回',status:'待复核',trigger:'历史申请迁移',sourceId:'AR-2026-0088',requestedBy:'周芮',targetRoleId:'ROLE-ADMIN',validTo:'2026-08-31',risk:'高',reasons:['季度知识分类治理','知识分类维护与删除审批分离'],conflictIds:['CONFLICT-002'] },
+  { id:'REVITEM-LEGACY-0087',reviewId:'REVIEW-PERMISSION-CHANGE',subjectId:'USR-EMP',permission:'线索质量复核',lastUsed:'尚未生效',recommendation:'批准',status:'待复核',trigger:'历史申请迁移',sourceId:'AR-2026-0087',requestedBy:'陈屿',targetRoleId:'ROLE-LEAD-QA',validTo:'2026-08-12',risk:'低',reasons:['参与本周线索抽检'],conflictIds:[] },
   { id:'REVITEM-001',reviewId:'REVIEW-Q3-PLATFORM',subjectId:'USR-ADMIN',permission:'M16 低风险授权审批',lastUsed:'今天',recommendation:'保留',status:'待复核' },
   { id:'REVITEM-002',reviewId:'REVIEW-Q3-PLATFORM',subjectId:'USR-TRAINER',permission:'M06 知识分类维护',lastUsed:'32天前',recommendation:'转交复核',status:'待复核' },
 ];

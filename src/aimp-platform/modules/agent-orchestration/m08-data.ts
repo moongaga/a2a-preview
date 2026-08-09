@@ -1,5 +1,5 @@
 export type WorkflowStatus = '草稿' | '测试中' | '已发布' | '已归档';
-export type NodeKind = '开始' | 'Agent' | '人工审批' | '条件分支' | '工具' | '异常处理' | '结束';
+export type NodeKind = '开始' | 'Agent' | 'Skill' | '人工审批' | '条件分支' | '工具' | '异常处理' | '结束';
 export type EdgeKind = '默认' | '成功' | '失败' | '条件' | '审批';
 
 export type NodePosition = { x: number; y: number };
@@ -18,6 +18,8 @@ export type WorkflowNode = {
   approver?: string;
   expression?: string;
   toolContract?: string;
+  skillContract?: string;
+  modelContract?: string;
 };
 
 export type WorkflowEdge = {
@@ -94,7 +96,7 @@ export const workflows: Workflow[] = [
 ];
 
 export function createNode(kind: NodeKind, index: number): WorkflowNode {
-  return { id: `N-${Date.now()}`, name: `${kind}节点`, kind, position: { x: 80 + (index % 4) * 215, y: 70 + Math.floor(index / 4) * 165 }, input: '上游节点输出', output: '待配置输出', timeout: kind === '人工审批' ? '4h' : '60s', retry: kind === 'Agent' || kind === '工具' ? '1次' : '—' };
+  return { id: `N-${Date.now()}`, name: `${kind}节点`, kind, position: { x: 80 + (index % 4) * 215, y: 70 + Math.floor(index / 4) * 165 }, input: '上游节点输出', output: '待配置输出', timeout: kind === '人工审批' ? '4h' : '60s', retry: kind === 'Agent' || kind === 'Skill' || kind === '工具' ? '1次' : '—' };
 }
 
 export function validateWorkflow(workflow: Workflow): string[] {

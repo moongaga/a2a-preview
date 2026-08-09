@@ -1,10 +1,11 @@
 import React from 'react';
 import { CalendarClock, ChevronRight, FolderKanban, MessageSquareText, Plus } from 'lucide-react';
-import { workspacePlan, workspaceProjects, workspaceThreads, type WorkspaceProject, type WorkspaceThread } from './workspace-contract';
+import { workspacePlan, workspaceThreads, type WorkspaceProject, type WorkspaceThread } from './workspace-contract';
 
 export function WorkspaceNavigation({
     projectId,
     threadId,
+    projects,
     onProject,
     onThread,
     onNewChat,
@@ -12,6 +13,7 @@ export function WorkspaceNavigation({
 }: {
     projectId: string;
     threadId: string;
+    projects: WorkspaceProject[];
     onProject: (project: WorkspaceProject) => void;
     onThread: (thread: WorkspaceThread) => void;
     onNewChat: () => void;
@@ -23,8 +25,8 @@ export function WorkspaceNavigation({
             <button type="button" className="m04-primary" onClick={onNewChat}><Plus size={16} />新建对话</button>
         </header>
         <section>
-            <div className="m04-section-title" title="选择项目后可查看项目详情与授权信息源"><span>项目</span><small>{workspaceProjects.length}</small></div>
-            {workspaceProjects.map((project) => <button
+            <div className="m04-section-title" title="选择项目并切换工作上下文"><span>项目</span><small>{projects.length}</small></div>
+            {projects.map((project) => <button
                 type="button"
                 key={project.id}
                 className={`m04-list-button ${project.id === projectId ? 'is-active' : ''}`}
@@ -32,7 +34,6 @@ export function WorkspaceNavigation({
             >
                 <FolderKanban size={17} />
                 <span><strong>{project.name}</strong><small>{project.taskCount}个任务 · {project.agentCount}个Agent</small></span>
-                <ChevronRight size={15} />
             </button>)}
         </section>
         <section className="m04-thread-section">

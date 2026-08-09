@@ -1,7 +1,7 @@
 import type { RoleId } from '../../types';
 import type { DataScopeLevel, RiskLevel } from './platform-data';
 
-export type ManagementObjectType = 'organization'|'position'|'user'|'reporting'|'config'|'budget'|'role'|'policy'|'scope'|'request'|'conflict'|'review'|'decision';
+export type ManagementObjectType = 'organization'|'position'|'user'|'reporting'|'config'|'budget'|'modelConnection'|'modelVersion'|'pricing'|'supplierBill'|'reconciliation'|'budgetPolicy'|'role'|'policy'|'scope'|'review'|'decision';
 export type ManagementAction = 'create'|'read'|'update'|'delete'|'disable'|'restore'|'archive'|'approve'|'publish'|'revoke'|'delegate';
 
 export interface ManagementCapability {
@@ -33,16 +33,15 @@ export interface ManagementDecision { allowed:boolean; reason:string; auditId:st
 
 const rank:Record<RiskLevel,number>={低:0,中:1,高:2,极高:3};
 const allActions:ManagementAction[]=['create','read','update','delete','disable','restore','archive','approve','publish','revoke','delegate'];
-const allTypes:ManagementObjectType[]=['organization','position','user','reporting','config','budget','role','policy','scope','request','conflict','review','decision'];
+const allTypes:ManagementObjectType[]=['organization','position','user','reporting','config','budget','modelConnection','modelVersion','pricing','supplierBill','reconciliation','budgetPolicy','role','policy','scope','review','decision'];
 
 const systemCapabilities:ManagementCapability[]=[
   {subjectId:'USR-SUPER',objectType:'*',actions:['*'],dataScope:'全租户',scopeTargets:['*'],validFrom:'2026-01-01',validTo:'长期',riskCeiling:'极高',source:'系统角色'},
   ...allTypes.map(objectType=>({subjectId:'USR-ADMIN',objectType,actions:objectType==='decision'?['read'] as ManagementAction[]:allActions,dataScope:'平台' as DataScopeLevel,scopeTargets:['TENANT-AIMP'],validFrom:'2026-01-01',validTo:'长期',riskCeiling:'高' as RiskLevel,source:'系统角色' as const})),
   ...(['organization','position','user','reporting','budget'] as ManagementObjectType[]).map(objectType=>({subjectId:'USR-BIZ',objectType,actions:['create','read','update','delete','disable','restore','archive'] as ManagementAction[],dataScope:'组织' as DataScopeLevel,scopeTargets:['ORG-LEAD','ORG-LEAD-CULTIVATE','ORG-CFT-LEAD'],validFrom:'2026-08-01',validTo:'2026-12-31',riskCeiling:'中' as RiskLevel,source:'直接委派' as const})),
-  ...(['request','review','decision'] as ManagementObjectType[]).map(objectType=>({subjectId:'USR-BIZ',objectType,actions:objectType==='decision'?['read'] as ManagementAction[]:['create','read','update','delete','approve','revoke'] as ManagementAction[],dataScope:'组织' as DataScopeLevel,scopeTargets:['ORG-LEAD','ORG-LEAD-CULTIVATE','ORG-CFT-LEAD','USR-BIZ'],validFrom:'2026-08-01',validTo:'2026-12-31',riskCeiling:'中' as RiskLevel,source:'直接委派' as const})),
-  ...(['config','budget','request','review','decision'] as ManagementObjectType[]).map(objectType=>({subjectId:'USR-TRAINER',objectType,actions:objectType==='decision'?['read'] as ManagementAction[]:['create','read','update','delete','disable','restore','archive'] as ManagementAction[],dataScope:'部门' as DataScopeLevel,scopeTargets:['ORG-CAPABILITY','USR-TRAINER'],validFrom:'2026-08-01',validTo:'2026-10-31',riskCeiling:'中' as RiskLevel,source:'直接委派' as const})),
-  {subjectId:'USR-EMP',objectType:'user',actions:['read','update'],dataScope:'本人',scopeTargets:['USR-EMP'],validFrom:'2026-01-01',validTo:'长期',riskCeiling:'低',source:'系统角色'},
-  {subjectId:'USR-EMP',objectType:'request',actions:['create','read','update','delete'],dataScope:'本人',scopeTargets:['USR-EMP'],validFrom:'2026-01-01',validTo:'长期',riskCeiling:'中',source:'系统角色'},
+  ...(['review','decision'] as ManagementObjectType[]).map(objectType=>({subjectId:'USR-BIZ',objectType,actions:['read'] as ManagementAction[],dataScope:'组织' as DataScopeLevel,scopeTargets:['ORG-LEAD','ORG-LEAD-CULTIVATE','ORG-CFT-LEAD','USR-BIZ'],validFrom:'2026-08-01',validTo:'2026-12-31',riskCeiling:'中' as RiskLevel,source:'直接委派' as const})),
+  ...(['config','budget','review','decision','modelConnection','modelVersion'] as ManagementObjectType[]).map(objectType=>({subjectId:'USR-TRAINER',objectType,actions:['read'] as ManagementAction[],dataScope:'部门' as DataScopeLevel,scopeTargets:['ORG-CAPABILITY','USR-TRAINER'],validFrom:'2026-08-01',validTo:'2026-10-31',riskCeiling:'中' as RiskLevel,source:'直接委派' as const})),
+  {subjectId:'USR-EMP',objectType:'user',actions:['read'],dataScope:'本人',scopeTargets:['USR-EMP'],validFrom:'2026-01-01',validTo:'长期',riskCeiling:'低',source:'系统角色'},
   {subjectId:'USR-EMP',objectType:'decision',actions:['read'],dataScope:'本人',scopeTargets:['USR-EMP'],validFrom:'2026-01-01',validTo:'长期',riskCeiling:'低',source:'系统角色'},
 ];
 
@@ -54,7 +53,7 @@ export function getManagementDecision(context:ManagementContext,object:Manageabl
   const reject=(reason:string,blockedBy:string[]=[]):ManagementDecision=>({allowed:false,reason,auditId,blockedBy});
   if(context.role==='client') return reject('客户管理员无权访问内部平台管理。',['InternalPlatformBoundary']);
   if(context.accountStatus==='停用'||context.accountStatus==='锁定') return reject(`账号${context.accountStatus}，不能执行管理操作。`,['AccountStatus']);
-  if(object.protected&&context.role!=='superadmin'&&['update','delete','disable','archive','delegate'].includes(action)) return reject('系统内置对象仅允许超级管理员维护。',['ProtectedObject']);
+  if(object.protected&&context.role!=='superadmin'&&['update','delete','disable','archive'].includes(action)) return reject('系统内置角色定义仅允许超级管理员维护；成员授权仍需经过风险与冲突校验。',['ProtectedObject']);
   if(action==='delete'&&object.protected) return reject('系统根对象或最高权限对象受保护，不能删除。',['RootObjectProtected']);
   if(action==='publish'&&object.risk==='高'&&context.role!=='superadmin') return reject('高风险配置必须由超级管理员审批发布。',['HighRiskNeedsSuperadmin']);
   if(action==='delete'&&object.dependencies?.length) return reject(`存在 ${object.dependencies.length} 项依赖，不能删除。`,object.dependencies);
@@ -75,5 +74,5 @@ export function getManagementDecision(context:ManagementContext,object:Manageabl
 export function canSeeManagementModule(role:RoleId,module:'M15'|'M16') {
   if(role==='client') return false;
   const userId=roleUserId[role];
-  return systemCapabilities.some(cap=>cap.subjectId===userId&&(cap.objectType==='*'||(module==='M15'?['organization','position','user','reporting','config','budget'].includes(cap.objectType):['role','policy','scope','request','conflict','review','decision'].includes(cap.objectType))));
+  return systemCapabilities.some(cap=>cap.subjectId===userId&&(cap.objectType==='*'||(module==='M15'?['organization','position','user','reporting','config','budget'].includes(cap.objectType):['role','policy','scope','review','decision'].includes(cap.objectType))));
 }

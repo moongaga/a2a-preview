@@ -20,6 +20,13 @@ import { M12IncidentCenterPage } from './modules/incident-center/M12IncidentCent
 import { M15PlatformFoundationPage } from './modules/platform-management/M15PlatformFoundationPage';
 import { M16AccessControlPage } from './modules/platform-management/M16AccessControlPage';
 import { PlatformManagementProvider } from './modules/platform-management/platform-management-store';
+import { ModelBillingProvider } from './modules/platform-management/model-billing-store';
+import { MToolsPage } from './modules/tools/MToolsPage';
+import { ToolRegistryProvider } from './modules/tools/tool-registry-store';
+import { MSkillsPage } from './modules/skills/MSkillsPage';
+import { SkillRegistryProvider } from './modules/skills/skill-registry-store';
+import { M10DeliveryManagementPage } from './modules/delivery-management/M10DeliveryManagementPage';
+import { DeliveryProjectRegistryProvider } from './modules/delivery-management/delivery-registry-store';
 import './style.css';
 import './readability.css';
 import './module-layout.css';
@@ -68,8 +75,8 @@ export default function AimpPrototype() {
     };
 
     if (!workspaceModule || !workspacePage) return null;
-    return <PlatformManagementProvider><AppShell role={role} activeModule={activeModule} onRole={changeRole} onModule={(module) => navigate({ module, role }, true)}>
-        {activeModule === 'task-center' ? <M05TaskCenterPage role={role} /> : activeModule === 'agent-management' ? <M03AgentManagementPage role={role} /> : activeModule === 'agent-testing' ? <M11AgentTestSandboxPage role={role} /> : activeModule === 'agent-orchestration' ? <M08AgentOrchestrationPage role={role} /> : activeModule === 'dynamic-plan' ? <M09DynamicPlanPage role={role} /> : activeModule === 'incident-center' ? <M12IncidentCenterPage role={role} /> : activeModule === 'knowledge-base' ? <M06KnowledgeBasePage role={role} /> : activeModule === 'prompt-engineering' ? <M07PromptEngineeringPage role={role} /> : activeModule === 'platform-foundation' ? <M15PlatformFoundationPage role={role} /> : activeModule === 'access-control' ? <M16AccessControlPage role={role} /> : <WorkspacePage
+    return <DeliveryProjectRegistryProvider><PlatformManagementProvider><ModelBillingProvider><ToolRegistryProvider><SkillRegistryProvider><AppShell role={role} activeModule={activeModule} onRole={changeRole} onModule={(module) => navigate({ module, role }, true)}>
+        {activeModule === 'task-center' ? <M05TaskCenterPage role={role} /> : activeModule === 'delivery-management' ? <M10DeliveryManagementPage role={role} /> : activeModule === 'agent-management' ? <M03AgentManagementPage role={role} /> : activeModule === 'agent-testing' ? <M11AgentTestSandboxPage role={role} /> : activeModule === 'agent-orchestration' ? <M08AgentOrchestrationPage role={role} /> : activeModule === 'dynamic-plan' ? <M09DynamicPlanPage role={role} /> : activeModule === 'incident-center' ? <M12IncidentCenterPage role={role} /> : activeModule === 'knowledge-base' ? <M06KnowledgeBasePage role={role} /> : activeModule === 'prompt-engineering' ? <M07PromptEngineeringPage role={role} /> : activeModule === 'skills' ? <MSkillsPage role={role} /> : activeModule === 'tools' ? <MToolsPage role={role} /> : activeModule === 'platform-foundation' ? <M15PlatformFoundationPage role={role} /> : activeModule === 'access-control' ? <M16AccessControlPage role={role} /> : <WorkspacePage
             key={`workspace-${role}`}
             module={workspaceModule}
             page={workspacePage}
@@ -80,5 +87,5 @@ export default function AimpPrototype() {
             onAction={executeTransition}
             permissionFor={(action) => canPerformAction(context, workspaceModule.id, action)}
         />}
-    </AppShell></PlatformManagementProvider>;
+    </AppShell></SkillRegistryProvider></ToolRegistryProvider></ModelBillingProvider></PlatformManagementProvider></DeliveryProjectRegistryProvider>;
 }
