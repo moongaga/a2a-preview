@@ -2,7 +2,7 @@ import React, { type ReactNode } from 'react';
 
 export type ModuleHeaderProps = {
   title: string;
-  subtitle: string;
+  subtitle: ReactNode;
   actions?: ReactNode;
   className?: string;
 };
