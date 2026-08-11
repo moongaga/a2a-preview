@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { AlertTriangle, Bot, CheckCircle2, Download, FileSearch, Link2, Search, ShieldCheck, X } from 'lucide-react';
 import type { PermissionDecision, RoleId } from '../../types';
-import { workspaceAgentRuntimeConfigs, workspaceAgents, workspaceBindings, workspaceNotices, workspacePlan, workspaceRoleAgentIds, workspaceRoleProfiles, workspaceRuntimeTraces, type WorkspaceNavigateAction, type WorkspaceNotice } from './workspace-contract';
+import { workspaceAgentRuntimeConfigs, workspaceAgents, workspaceBindings, workspaceNotices, workspacePlan, workspaceRoleAgentIds, workspaceRoleProfiles, workspaceRuntimeTraces, type WorkspaceNavigateAction, type WorkspaceNotice, type WorkspaceRuntimeTrace } from './workspace-contract';
 import { createRepairTask, createResultFeedback, describeShare } from './workspace-actions';
+import { prototypeStore } from '../../model/store';
 
 export type WorkspaceDialogId =
     | 'agent-picker'
@@ -74,7 +75,16 @@ export function WorkspaceDialogHost({
     const source = workspaceBindings.find((item) => item.id === dialog.payload);
     const detailAgent = workspaceAgents.find((item) => item.id === dialog.payload);
     const runtimeConfig = detailAgent ? workspaceAgentRuntimeConfigs[detailAgent.id] : undefined;
-    const trace = workspaceRuntimeTraces.find((item) => item.id === dialog.payload || item.threadId === threadId);
+    const storedTrace = dialog.payload ? prototypeStore.list('run-trace').find((item) => item.id === dialog.payload || item.fields.traceId === dialog.payload) : undefined;
+    const dynamicTrace: WorkspaceRuntimeTrace | undefined = storedTrace ? {
+        id: String(storedTrace.fields.traceId || storedTrace.name), threadId: String(storedTrace.fields.threadId || threadId),
+        agentId: String(storedTrace.fields.agentId || agentId),
+        consumedSources: (Array.isArray(storedTrace.fields.consumedSources) ? storedTrace.fields.consumedSources : []).map((value) => {
+            const [bindingId, operation, result] = String(value).split('|');
+            return { bindingId, operation, result };
+        }),
+    } : undefined;
+    const trace = workspaceRuntimeTraces.find((item) => item.id === dialog.payload || (!dialog.payload && item.threadId === threadId)) || dynamicTrace;
     const activeRuntimeConfig = workspaceAgentRuntimeConfigs[trace?.agentId || agentId];
     const availableAgents = workspaceAgents.filter((agent) => workspaceRoleAgentIds[role].includes(agent.id));
     const set = (key: keyof typeof initialForm, value: string) => { setDialogError(null); setForm((current) => ({ ...current, [key]: value })); };
@@ -84,11 +94,12 @@ export function WorkspaceDialogHost({
         if (!permission.allowed || !profile.canCreateTask) return finish({ tone: 'error', message: permission.reason || '当前身份不能创建修复任务。' });
         if (!form.title.trim()) return setDialogError('请填写任务标题。');
         if (!form.deadline) return setDialogError('请选择截止时间。');
+        if (!trace) return setDialogError('当前回答没有真实 Trace，不能创建依赖证据的修复任务。');
         const result = createRepairTask({
             title: form.title.trim(), taskType: form.taskType, priority: form.priority, assignee: form.assignee,
             completionGate: form.completionGate, deadline: form.deadline, approver: form.approver,
             sourceConversationId: threadId, sourceProjectId: projectId, sourceAgentId: agentId,
-            traceId: trace?.id || `trace-${threadId.toLowerCase()}`, actor, role,
+            traceId: trace.id, actor, role,
         });
         finish(result.ok
             ? {
@@ -101,9 +112,10 @@ export function WorkspaceDialogHost({
         const permission = permissionFor('feedback');
         if (!permission.allowed) return finish({ tone: 'error', message: permission.reason || '当前身份不能提交问题反馈。' });
         if (!form.detail.trim()) return setDialogError('请填写问题说明。');
+        if (!trace) return setDialogError('当前回答没有真实 Trace，不能提交依赖证据的问题反馈。');
         const result = createResultFeedback({
             feedbackType: form.feedbackType, detail: form.detail.trim(), sourceConversationId: threadId,
-            sourceProjectId: projectId, sourceAgentId: agentId, traceId: trace?.id || `trace-${threadId.toLowerCase()}`, actor, role,
+            sourceProjectId: projectId, sourceAgentId: agentId, traceId: trace.id, actor, role,
         });
         finish(result.ok
             ? { tone: 'success', message: `问题反馈 ${result.entity.id} 已提交，并关联当前回答与运行证据。` }

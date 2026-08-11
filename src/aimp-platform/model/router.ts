@@ -12,11 +12,19 @@ export type RouteState = {
     type?: string;
     id?: string;
     source?: string;
+    projectId?: string;
+    threadId?: string;
+    messageId?: string;
+    agentId?: string;
+    traceId?: string;
+    action?: string;
     version?: VersionId;
     role?: RoleId;
     notice?: string;
     mode?: 'use' | 'review';
 };
+
+export type WorkspaceHandoff = Required<Pick<RouteState, 'source' | 'projectId' | 'threadId' | 'messageId' | 'agentId' | 'traceId' | 'action'>>;
 
 export function workspaceRoute(role?: RoleId): RouteState {
     return { page: 'module', module: 'workspace', view: 'agent-chat', role: normalizeRole(role) };
@@ -26,21 +34,32 @@ function runtime(route: Partial<RouteState>): RouteState {
     const module: typeof runtimeModules[number] = runtimeModules.includes(route.module as typeof runtimeModules[number])
         ? route.module as typeof runtimeModules[number]
         : 'workspace';
-    return { page: 'module', module, view: module === 'workspace' ? 'agent-chat' : module === 'task-center' ? 'kanban' : module === 'delivery-management' ? 'projects' : module === 'agent-management' ? 'registry' : module === 'agent-testing' ? 'projects' : module === 'agent-orchestration' ? 'workflows' : module === 'dynamic-plan' ? 'digital-workforce' : module === 'incident-center' ? 'overview' : module === 'prompt-engineering' ? 'templates' : module === 'skills' ? 'catalog' : module === 'tools' ? 'catalog' : module === 'platform-foundation' ? 'organizations' : module === 'access-control' ? 'roles' : 'assets', role: normalizeRole(route.role) };
+    return { ...route, page: 'module', module, view: route.view || (module === 'workspace' ? 'agent-chat' : module === 'task-center' ? 'kanban' : module === 'delivery-management' ? 'projects' : module === 'agent-management' ? 'registry' : module === 'agent-testing' ? 'projects' : module === 'agent-orchestration' ? 'workflows' : module === 'dynamic-plan' ? 'digital-workforce' : module === 'incident-center' ? 'overview' : module === 'prompt-engineering' ? 'templates' : module === 'skills' ? 'catalog' : module === 'tools' ? 'catalog' : module === 'platform-foundation' ? 'organizations' : module === 'access-control' ? 'roles' : 'assets'), role: normalizeRole(route.role) };
 }
 
 export function readRoute(): RouteState {
     const params = new URLSearchParams(window.location.hash.replace(/^#/, ''));
-    return runtime({module:params.get('module')||undefined,role:(params.get('role')||undefined)as RoleId|undefined});
+    const value = (key: string) => params.get(key) || undefined;
+    return runtime({
+        module: value('module'), view: value('view'), role: value('role') as RoleId | undefined,
+        source: value('source'), projectId: value('projectId'), threadId: value('threadId'), messageId: value('messageId'),
+        agentId: value('agentId'), traceId: value('traceId'), action: value('action'),
+    });
 }
 
-function writeRoute(route: RouteState) {
+function routeHash(route: RouteState) {
     const params = new URLSearchParams();
-    for (const key of ['page', 'module', 'view', 'role'] as const) {
+    for (const key of ['page', 'module', 'view', 'role', 'source', 'projectId', 'threadId', 'messageId', 'agentId', 'traceId', 'action'] as const) {
         const value = route[key];
         if (value) params.set(key, value);
     }
-    window.location.hash = params.toString();
+    return `#${params.toString()}`;
+}
+
+function writeRoute(route: RouteState, replace = false) {
+    const hash = routeHash(route);
+    if (replace) window.history.replaceState(null, '', hash);
+    else window.location.hash = hash.slice(1);
 }
 
 export function useAimpRoute() {
@@ -52,12 +71,14 @@ export function useAimpRoute() {
     }, []);
     useEffect(() => {
         const normalized = runtime(route);
-        const expected = `#page=${normalized.page}&module=${normalized.module}&view=${normalized.view}&role=${normalized.role}`;
+        const expected = routeHash(normalized);
         if (window.location.hash !== expected) writeRoute(normalized);
     }, [route]);
     const navigate = useCallback((patch: Partial<RouteState>, replace = false) => {
         const current = readRoute();
-        writeRoute(runtime({...current,...patch}));
+        const next = runtime({ ...current, ...patch });
+        writeRoute(next, replace);
+        if (replace) setRoute(next);
     }, []);
     return { route, navigate };
 }

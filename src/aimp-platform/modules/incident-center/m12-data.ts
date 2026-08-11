@@ -1,6 +1,6 @@
 export type IncidentSeverity = 'P0' | 'P1' | 'P2' | 'P3';
 export type IncidentStatus = '待确认' | '待指派' | '处理中' | '待验证' | '已解决' | '已关闭' | '误报' | '已归档';
-export type IncidentSource = 'M03 Agent管理' | 'M06 知识库' | 'M08 编排引擎' | 'M09 动态计划' | 'M11 测试沙箱' | 'M13 模型工厂' | '平台监控';
+export type IncidentSource = 'M03 Agent管理' | 'M04 工作空间' | 'M06 知识库' | 'M08 编排引擎' | 'M09 动态计划' | 'M11 测试沙箱' | 'M13 模型工厂' | '平台监控';
 export type IncidentAction = '确认异常' | '标记误报' | '指派' | '升级' | '降级' | '添加处置' | '提交验证' | '验证通过' | '验证失败' | '确认恢复' | '解决' | '关闭' | '重开' | '归档';
 
 export type Evidence = { id: string; type: 'Trace' | '测试报告' | '指标快照' | '日志' | '版本' | '告警规则'; title: string; detail: string; time: string };

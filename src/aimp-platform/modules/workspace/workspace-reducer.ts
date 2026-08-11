@@ -1,9 +1,13 @@
+import type { WorkspaceConversationActionId } from './workspace-conversation-policy';
+
 export interface WorkspaceMessage {
     id: string;
     from: 'user' | 'agent';
     text: string;
     status: 'completed' | 'running' | 'failed';
     traceId?: string;
+    focus?: string;
+    nextActionIds?: WorkspaceConversationActionId[];
 }
 
 export interface WorkspaceConversationState {
@@ -16,7 +20,7 @@ export type WorkspaceConversationAction =
     | { type: 'set-draft'; value: string }
     | { type: 'replace'; messages: WorkspaceMessage[] }
     | { type: 'send'; userMessage: WorkspaceMessage; agentMessage: WorkspaceMessage }
-    | { type: 'complete'; messageId: string; text: string; traceId: string }
+    | { type: 'complete'; messageId: string; text: string; traceId?: string; focus: string; nextActionIds: WorkspaceConversationActionId[] }
     | { type: 'fail'; messageId: string; reason: string }
     | { type: 'feedback'; tone: 'success' | 'error' | 'info'; message: string }
     | { type: 'clear-feedback' };
@@ -31,7 +35,7 @@ export function workspaceConversationReducer(
     if (action.type === 'complete') return {
         ...state,
         messages: state.messages.map((item) => item.id === action.messageId
-            ? { ...item, status: 'completed', text: action.text, traceId: action.traceId }
+            ? { ...item, status: 'completed', text: action.text, traceId: action.traceId, focus: action.focus, nextActionIds: action.nextActionIds }
             : item),
     };
     if (action.type === 'fail') return {

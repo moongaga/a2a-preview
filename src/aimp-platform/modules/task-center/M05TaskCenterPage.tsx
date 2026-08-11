@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useSyncExternalStore } from 'react';
 import { Plus, X } from 'lucide-react';
 import { ModuleHeader } from '../../components/ModuleHeader';
 import type { RoleId } from '../../types';
+import type { WorkspaceHandoff } from '../../model/router';
+import { prototypeStore } from '../../model/store';
 import { useDeliveryProjectRegistry } from '../delivery-management/delivery-registry-store';
 import './m05.css';
 
 type TaskStatus = '待处理' | '进行中' | '待审核' | '已完成';
 type TaskPriority = 'P0' | 'P1' | 'P2';
-type Task = { id: string; name: string; priority: TaskPriority; status: TaskStatus; assignee: string; creator: string; deadline: string; description: string; projectId?: string };
+type Task = { id: string; name: string; priority: TaskPriority; status: TaskStatus; assignee: string; creator: string; deadline: string; description: string; projectId?: string; sourceModuleId?: string };
 type TaskRoleProfile = { label: string; scope: string; ids: string[] | 'all'; canCreate: boolean; canReassign: boolean; canAdvance: (task: Task) => boolean; defaultFilter: '全部任务' | '我的任务' | '我创建的' | '我分发的' };
 
 const people = ['李明远', '张伟国', '王晓芳', '赵志强', '陈思敏'];
@@ -40,8 +42,9 @@ function nextAction(status: TaskStatus) {
     return null;
 }
 
-export function M05TaskCenterPage({ role }: { role: RoleId }) {
+export function M05TaskCenterPage({ role, handoff, onConsumeHandoff }: { role: RoleId; handoff?: WorkspaceHandoff; onConsumeHandoff?: () => void }) {
     const projectRegistry = useDeliveryProjectRegistry();
+    const storeSnapshot = useSyncExternalStore(prototypeStore.subscribe, prototypeStore.snapshot);
     const [tasks, setTasks] = useState<Task[]>(initialTasks);
     const [view, setView] = useState<'看板视图' | '列表视图'>('看板视图');
     const [createOpen, setCreateOpen] = useState(false);
@@ -56,7 +59,15 @@ export function M05TaskCenterPage({ role }: { role: RoleId }) {
     const availableProjects = projectRegistry.getVisibleProjects(role, actors[role]).filter((project) => !['已完成', '已归档'].includes(project.status));
     const projectName = (projectId?: string) => projectId ? projectRegistry.getProject(projectId)?.name || `已失效项目（${projectId}）` : '未关联项目';
     const isAgent = (value: string) => value.includes('Agent') || value === '系统自动' || value === '知识库';
-    const scopedTasks = profile.ids === 'all' ? tasks : tasks.filter((task) => profile.ids.includes(task.id) || task.creator === '陈琳');
+    const runtimeTasks: Task[] = storeSnapshot.entities.filter((entity) => entity.type === 'task').map((entity) => ({
+        id: entity.id, name: entity.name, priority: (['P0', 'P1', 'P2'].includes(String(entity.fields.priority)) ? entity.fields.priority : 'P2') as TaskPriority,
+        status: entity.status === 'completed' ? '已完成' : entity.status === 'in_progress' ? '进行中' : entity.status === 'review' ? '待审核' : '待处理',
+        assignee: String(entity.fields.assignee || entity.ownerId), creator: String(entity.fields.actor || 'M04 工作空间'),
+        deadline: String(entity.fields.deadline || '待安排'), description: String(entity.fields.description || entity.fields.completionGate || '来自工作空间的协作任务'),
+        projectId: String(entity.fields.sourceProjectId || entity.fields.projectId || '') || undefined, sourceModuleId: String(entity.fields.sourceModuleId || ''),
+    }));
+    const mergedTasks = [...runtimeTasks, ...tasks].filter((task, index, all) => all.findIndex((item) => item.id === task.id) === index);
+    const scopedTasks = profile.ids === 'all' ? mergedTasks : mergedTasks.filter((task) => profile.ids.includes(task.id) || task.creator === '陈琳' || task.sourceModuleId === 'workspace');
     const visibleTasks = filter === '我创建的' ? scopedTasks.filter((task) => task.creator === '陈琳') : filter === '我分发的' ? scopedTasks.filter((task) => task.creator === '陈琳') : scopedTasks;
 
     useEffect(() => {
@@ -65,16 +76,32 @@ export function M05TaskCenterPage({ role }: { role: RoleId }) {
         setReassigning(false);
     }, [role]);
 
-    const closeCreate = () => setCreateOpen(false);
+    useEffect(() => {
+        if (!handoff || handoff.action !== 'create-acceptance-task') return;
+        setDraft({
+            name: 'Q3 线索项目业务验收', priority: 'P1', deadline: '', assigneeType: '人类员工', assignee: people[0], projectId: handoff.projectId,
+            description: `来自 M04：按连续 7 天达标门槛完成业务验收。会话 ${handoff.threadId} · Trace ${handoff.traceId}`,
+        });
+        setCreateOpen(true);
+    }, [handoff]);
+
+    const closeCreate = () => { setCreateOpen(false); if (handoff) onConsumeHandoff?.(); };
     const createTask = () => {
         if (!draft.name.trim()) { setNotice('请输入任务名称'); return; }
-        const id = `TASK-${String(15 + tasks.length).padStart(3, '0')}`;
         const selectedProject = draft.projectId ? projectRegistry.getProject(draft.projectId) : undefined;
         if (draft.projectId && (!selectedProject || ['已完成', '已归档'].includes(selectedProject.status))) { setNotice('所选项目已关闭，不能创建新任务。'); return; }
-        setTasks((current) => [{ id, name: draft.name.trim(), priority: draft.priority, status: '待处理', assignee: draft.assignee, creator: '陈琳', deadline: draft.deadline || '今日', description: draft.description || '新建任务，等待处理', projectId: draft.projectId || undefined }, ...current]);
+        const result = prototypeStore.createEntity({
+            type: 'task', name: draft.name.trim(), status: 'draft', ownerId: draft.assignee, moduleId: 'task-center',
+            fields: { priority: draft.priority, assignee: draft.assignee, actor: actors[role], deadline: draft.deadline || '今日', description: draft.description || '新建任务，等待处理', projectId: draft.projectId, sourceModuleId: handoff ? 'workspace' : 'task-center', traceId: handoff?.traceId || '', threadId: handoff?.threadId || '' },
+            relations: [
+                ...(draft.projectId ? [{ type: 'project', targetType: 'project', targetId: draft.projectId }] : []),
+                ...(handoff ? [{ type: 'trace', targetType: 'run-trace', targetId: handoff.traceId }, { type: 'conversation', targetType: 'conversation', targetId: handoff.threadId }] : []),
+            ],
+        }, actors[role]);
+        if (!result.ok) { setNotice(result.message); return; }
         setDraft({ name: '', priority: 'P2', deadline: '', description: '', assigneeType: '人类员工', assignee: people[0], projectId: '' });
         closeCreate();
-        setNotice(`任务“${draft.name.trim()}”已创建并分配`);
+        setNotice(`任务“${draft.name.trim()}”已创建并分配 · ${result.entity.id}`);
     };
     const advanceTask = () => {
         if (!detail || !profile.canAdvance(detail)) { setNotice('当前身份只能处理职责范围内的任务。'); return; }
@@ -118,6 +145,7 @@ export function M05TaskCenterPage({ role }: { role: RoleId }) {
 
         {createOpen && <div className="m05-mask" onMouseDown={closeCreate}><form onMouseDown={(event) => event.stopPropagation()} onSubmit={(event) => { event.preventDefault(); createTask(); }}>
             <header><h2>📋 创建任务</h2><button type="button" aria-label="关闭创建任务" onClick={closeCreate}><X size={19} /></button></header>
+            {handoff && <div className="m05-handoff wide">来自 M04 · {handoff.projectId} / {handoff.threadId} / {handoff.traceId}<small>仅预填表单，确认“创建任务”后才写入。</small></div>}
             <label className="wide">任务名称 *<input autoFocus value={draft.name} placeholder="输入任务名称..." onChange={(event) => setDraft({ ...draft, name: event.target.value })} /></label>
             <label>优先级<select value={draft.priority} onChange={(event) => setDraft({ ...draft, priority: event.target.value as TaskPriority })}><option value="P2">P2 普通</option><option value="P1">P1 重要</option><option value="P0">P0 紧急</option></select></label>
             <label>截止时间<input type="datetime-local" value={draft.deadline} onChange={(event) => setDraft({ ...draft, deadline: event.target.value })} /></label>

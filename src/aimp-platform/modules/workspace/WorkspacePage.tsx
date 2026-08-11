@@ -10,19 +10,29 @@ import { WorkspaceConversation } from './WorkspaceConversation';
 import { WorkspaceContextPanel } from './WorkspaceContextPanel';
 import { WorkspaceDialogHost, type WorkspaceDialogState, type WorkspaceFeedback } from './WorkspaceDialogHost';
 import { WorkspaceProjectDrawer } from './WorkspaceProjectDrawer';
+import { workspaceRoleConversationPolicies, type WorkspaceConversationActionId, type WorkspaceActionContext } from './workspace-conversation-policy';
+import type { WorkspaceMessage } from './workspace-reducer';
+import { recordWorkspaceDecision } from './workspace-actions';
 import './workspace.css';
 
 export type WorkspacePageProps = DeepModuleProps & {
     navigate?: (patch: Partial<RouteState>, replace?: boolean) => void;
 };
 
-export function WorkspacePage({ role, permissionFor }: WorkspacePageProps) {
+export function WorkspacePage({ role, permissionFor, navigate }: WorkspacePageProps) {
     const profile = workspaceRoleProfiles[role];
     const registry = useDeliveryProjectRegistry();
     const actor = profile.identity.split(' · ')[0];
-    const workspaceProjects = useMemo(() => registry.getVisibleProjects(role, actor).filter((project) => project.status !== '已归档').map(toWorkspaceProject), [registry, role, actor]);
-    const initialProjectId = workspaceProjects.some((project) => project.id === profile.projectId) ? profile.projectId! : workspaceProjects[0]?.id || '';
-    const initialThread = workspaceThreads.find((item) => item.projectId === initialProjectId);
+    const policy = workspaceRoleConversationPolicies[role];
+    const visibleThreads = useMemo(() => workspaceThreads.filter((item) => item.visibleRoles?.includes(role)), [role]);
+    const workspaceProjects = useMemo(() => {
+        const scenarioProjectIds = new Set(visibleThreads.map((thread) => thread.projectId));
+        const projects = [...registry.getVisibleProjects(role, actor), ...registry.projects.filter((project) => scenarioProjectIds.has(project.id))];
+        return projects.filter((project, index, all) => project.status !== '已归档' && all.findIndex((item) => item.id === project.id) === index).map(toWorkspaceProject);
+    }, [registry, role, actor, visibleThreads]);
+    const defaultThread = visibleThreads.find((item) => item.id === policy.defaultThreadId) || visibleThreads[0];
+    const initialProjectId = workspaceProjects.some((project) => project.id === defaultThread?.projectId) ? defaultThread!.projectId : workspaceProjects[0]?.id || '';
+    const initialThread = defaultThread?.projectId === initialProjectId ? defaultThread : visibleThreads.find((item) => item.projectId === initialProjectId);
     const [projectId, setProjectId] = useState(initialProjectId);
     const [threadId, setThreadId] = useState(initialThread?.id || 'new');
     const [agentId, setAgentId] = useState(profile.defaultAgentId || initialThread?.agentId || workspaceAgents[0].id);
@@ -36,11 +46,11 @@ export function WorkspacePage({ role, permissionFor }: WorkspacePageProps) {
     useEffect(() => {
         if (!workspaceProjects.length || workspaceProjects.some((project) => project.id === projectId)) return;
         const next = workspaceProjects[0];
-        const firstThread = workspaceThreads.find((item) => item.projectId === next.id);
+        const firstThread = visibleThreads.find((item) => item.projectId === next.id);
         setProjectId(next.id);
         setThreadId(firstThread?.id || 'new');
         setAgentId(profile.defaultAgentId || firstThread?.agentId || workspaceAgents[0].id);
-    }, [workspaceProjects, projectId, profile.defaultAgentId]);
+    }, [workspaceProjects, projectId, profile.defaultAgentId, visibleThreads]);
 
     if (role === 'client') return <section className="m04-client-gate">
         <Info size={30} /><h1>当前身份不使用内部工作空间</h1>
@@ -50,7 +60,7 @@ export function WorkspacePage({ role, permissionFor }: WorkspacePageProps) {
 
     const selectProject = (project: WorkspaceProject) => {
         setProjectId(project.id);
-        const firstThread = workspaceThreads.find((item) => item.projectId === project.id);
+        const firstThread = visibleThreads.find((item) => item.projectId === project.id);
         setThreadId(firstThread?.id || 'new');
         setAgentId(profile.defaultAgentId || firstThread?.agentId || workspaceAgents[0].id);
     };
@@ -61,6 +71,20 @@ export function WorkspacePage({ role, permissionFor }: WorkspacePageProps) {
         setFeedback({ tone: 'info', message: `已载入会话“${thread.title}”及其运行证据。` });
     };
     const newChat = () => { setThreadId('new'); setFeedback({ tone: 'success', message: '已创建空白对话，选择快捷任务或直接描述目标。' }); };
+    const handleConversationAction = (message: WorkspaceMessage, actionId: WorkspaceConversationActionId) => {
+        if (!message.traceId) return setFeedback({ tone: 'error', message: '当前回答没有真实 Trace，相关动作已阻止。' });
+        const context: WorkspaceActionContext = { role, actor, projectId, threadId, messageId: message.id, agentId, traceId: message.traceId, actionId };
+        if (actionId === 'confirm-result' || actionId === 'approve-change' || actionId === 'reject-change') {
+            const decision = actionId === 'confirm-result' ? 'confirmed' : actionId === 'approve-change' ? 'approved' : 'rejected';
+            const result = recordWorkspaceDecision(context, decision);
+            setFeedback(result.ok
+                ? { tone: 'success', message: `${actionId === 'confirm-result' ? '结果确认' : actionId === 'approve-change' ? '治理批准' : '治理驳回'}记录 ${result.entity.id} 已写入审计。` }
+                : { tone: 'error', message: result.message });
+            return;
+        }
+        const targetModule = actionId === 'create-acceptance-task' ? 'task-center' : actionId === 'open-m11' ? 'agent-testing' : actionId === 'open-m12' ? 'incident-center' : 'task-center';
+        navigate?.({ module: targetModule, source: 'workspace', projectId, threadId, messageId: message.id, agentId, traceId: message.traceId, action: actionId }, true);
+    };
     const navigateFromAssist = (action: WorkspaceNavigateAction, notice?: WorkspaceNotice) => {
         if (notice) {
             const thread = workspaceThreads.find((item) => item.id === notice.threadId);
@@ -89,8 +113,8 @@ export function WorkspacePage({ role, permissionFor }: WorkspacePageProps) {
             <button type="button" onClick={() => setFeedback(null)}>关闭</button>
         </div>}
         <div className="m04-workspace" data-role={role}>
-            <WorkspaceNavigation projects={workspaceProjects} projectId={projectId} threadId={threadId} onProject={selectProject} onThread={selectThread} onNewChat={newChat} onPlan={() => setDialog({ id: 'plan-detail' })} />
-            <WorkspaceConversation key={`${role}-${threadId}`} projectId={projectId} threadId={threadId} agentId={agentId} role={role} onNewChat={newChat} onAgent={setAgentId} onDialog={setDialog} permissionFor={permissionFor} />
+            <WorkspaceNavigation projects={workspaceProjects} threads={visibleThreads} projectId={projectId} threadId={threadId} onProject={selectProject} onThread={selectThread} onNewChat={newChat} onPlan={() => setDialog({ id: 'plan-detail' })} />
+            <WorkspaceConversation key={`${role}-${threadId}`} projectId={projectId} threadId={threadId} agentId={agentId} role={role} onNewChat={newChat} onAgent={setAgentId} onDialog={setDialog} onAction={handleConversationAction} permissionFor={permissionFor} />
             <WorkspaceContextPanel projectId={projectId} threadId={threadId} agentId={agentId} role={role} onDialog={setDialog} onProject={() => setProjectOpen(true)} />
         </div>
         {dialog && <WorkspaceDialogHost dialog={dialog} role={role} actor={actor} projectId={projectId} threadId={threadId} agentId={agentId} permissionFor={permissionFor} noticeReadIds={noticeReadIds} onMarkNoticeRead={markNoticeRead} onNavigate={navigateFromAssist} onClose={() => setDialog(null)} onAgent={setAgentId} onFeedback={setFeedback} />}

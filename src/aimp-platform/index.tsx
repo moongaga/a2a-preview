@@ -4,7 +4,7 @@
 import React, { useSyncExternalStore } from 'react';
 import { AppShell } from './components/AppShell';
 import { prototypeStore } from './model/store';
-import { useAimpRoute } from './model/router';
+import { useAimpRoute, type WorkspaceHandoff } from './model/router';
 import { canPerformAction, filterEntitiesForContext, normalizeRole } from './model/access-policy';
 import { getModule } from './model/registry';
 import { getModuleEntities } from './model/queries';
@@ -37,6 +37,10 @@ export default function AimpPrototype() {
     const snapshot = useSyncExternalStore(prototypeStore.subscribe, prototypeStore.snapshot);
     const role = normalizeRole(route.role);
     const activeModule = route.module || 'workspace';
+    const handoff: WorkspaceHandoff | undefined = route.source === 'workspace' && route.projectId && route.threadId && route.messageId && route.agentId && route.traceId && route.action
+        ? { source: route.source, projectId: route.projectId, threadId: route.threadId, messageId: route.messageId, agentId: route.agentId, traceId: route.traceId, action: route.action }
+        : undefined;
+    const clearHandoff = () => navigate({ source: undefined, projectId: undefined, threadId: undefined, messageId: undefined, agentId: undefined, traceId: undefined, action: undefined }, true);
     const context: ProductContext = {
         versionId: 'v7',
         role,
@@ -59,7 +63,7 @@ export default function AimpPrototype() {
     const workspaceEntities = workspaceModule ? getModuleEntities(contextualEntities, workspaceModule.id) : [];
     const changeRole = (nextRole: RoleId) => {
         prototypeStore.setRole(nextRole);
-        navigate({ role: nextRole }, true);
+        navigate({ role: nextRole, source: undefined, projectId: undefined, threadId: undefined, messageId: undefined, agentId: undefined, traceId: undefined, action: undefined }, true);
     };
     const executeTransition = (entity: EntityRecord, action: string, reason?: string) => {
         const permissionAction = entity.moduleId === 'agents' && action === 'approve' ? 'publish' : action;
@@ -75,8 +79,8 @@ export default function AimpPrototype() {
     };
 
     if (!workspaceModule || !workspacePage) return null;
-    return <DeliveryProjectRegistryProvider><PlatformManagementProvider><ModelBillingProvider><ToolRegistryProvider><SkillRegistryProvider><AppShell role={role} activeModule={activeModule} onRole={changeRole} onModule={(module) => navigate({ module, role }, true)}>
-        {activeModule === 'task-center' ? <M05TaskCenterPage role={role} /> : activeModule === 'delivery-management' ? <M10DeliveryManagementPage role={role} /> : activeModule === 'agent-management' ? <M03AgentManagementPage role={role} /> : activeModule === 'agent-testing' ? <M11AgentTestSandboxPage role={role} /> : activeModule === 'agent-orchestration' ? <M08AgentOrchestrationPage role={role} /> : activeModule === 'dynamic-plan' ? <M09DynamicPlanPage role={role} /> : activeModule === 'incident-center' ? <M12IncidentCenterPage role={role} /> : activeModule === 'knowledge-base' ? <M06KnowledgeBasePage role={role} /> : activeModule === 'prompt-engineering' ? <M07PromptEngineeringPage role={role} /> : activeModule === 'skills' ? <MSkillsPage role={role} /> : activeModule === 'tools' ? <MToolsPage role={role} /> : activeModule === 'platform-foundation' ? <M15PlatformFoundationPage role={role} /> : activeModule === 'access-control' ? <M16AccessControlPage role={role} /> : <WorkspacePage
+    return <DeliveryProjectRegistryProvider><PlatformManagementProvider><ModelBillingProvider><ToolRegistryProvider><SkillRegistryProvider><AppShell role={role} activeModule={activeModule} onRole={changeRole} onModule={(module) => navigate({ module, role, source: undefined, projectId: undefined, threadId: undefined, messageId: undefined, agentId: undefined, traceId: undefined, action: undefined }, true)}>
+        {activeModule === 'task-center' ? <M05TaskCenterPage role={role} handoff={handoff} onConsumeHandoff={clearHandoff} /> : activeModule === 'delivery-management' ? <M10DeliveryManagementPage role={role} /> : activeModule === 'agent-management' ? <M03AgentManagementPage role={role} /> : activeModule === 'agent-testing' ? <M11AgentTestSandboxPage role={role} handoff={handoff} onConsumeHandoff={clearHandoff} /> : activeModule === 'agent-orchestration' ? <M08AgentOrchestrationPage role={role} /> : activeModule === 'dynamic-plan' ? <M09DynamicPlanPage role={role} /> : activeModule === 'incident-center' ? <M12IncidentCenterPage role={role} handoff={handoff} onConsumeHandoff={clearHandoff} /> : activeModule === 'knowledge-base' ? <M06KnowledgeBasePage role={role} /> : activeModule === 'prompt-engineering' ? <M07PromptEngineeringPage role={role} /> : activeModule === 'skills' ? <MSkillsPage role={role} /> : activeModule === 'tools' ? <MToolsPage role={role} /> : activeModule === 'platform-foundation' ? <M15PlatformFoundationPage role={role} /> : activeModule === 'access-control' ? <M16AccessControlPage role={role} /> : <WorkspacePage
             key={`workspace-${role}`}
             module={workspaceModule}
             page={workspacePage}
@@ -86,6 +90,7 @@ export default function AimpPrototype() {
             openEntity={() => undefined}
             onAction={executeTransition}
             permissionFor={(action) => canPerformAction(context, workspaceModule.id, action)}
+            navigate={navigate}
         />}
     </AppShell></SkillRegistryProvider></ToolRegistryProvider></ModelBillingProvider></PlatformManagementProvider></DeliveryProjectRegistryProvider>;
 }

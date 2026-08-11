@@ -1,18 +1,21 @@
-import React, { useEffect, useMemo, useReducer } from 'react';
-import { AtSign, Bot, CheckCircle2, ChevronDown, Clock3, FilePlus2, GitBranch, Paperclip, Send, Share2, ShieldCheck, Sparkles, X } from 'lucide-react';
+import React, { useEffect, useReducer } from 'react';
+import { AtSign, Bot, CheckCircle2, ChevronDown, Clock3, GitBranch, Paperclip, Send, Share2, ShieldCheck, Sparkles, X } from 'lucide-react';
 import type { PermissionDecision, RoleId } from '../../types';
 import { workspaceAgents, workspaceRoleAgentIds, workspaceRoleProfiles, workspaceRuntimeTraces, workspaceThreads, toWorkspaceProject } from './workspace-contract';
 import { useDeliveryProjectRegistry } from '../delivery-management/delivery-registry-store';
 import type { WorkspaceDialogState } from './WorkspaceDialogHost';
 import { workspaceConversationReducer, type WorkspaceMessage } from './workspace-reducer';
+import { prototypeStore } from '../../model/store';
+import { resolveWorkspaceReply, workspaceActionLabels, workspaceConversationScenarios, workspaceRoleConversationPolicies, type WorkspaceConversationActionId } from './workspace-conversation-policy';
 
 function initialMessages(role: RoleId, threadId: string): WorkspaceMessage[] {
-    const profile = workspaceRoleProfiles[role];
-    const thread = workspaceThreads.find((item) => item.id === threadId);
-    const trace = workspaceRuntimeTraces.find((item) => item.threadId === threadId);
+    const scenario = workspaceConversationScenarios.find((item) => item.id === threadId);
+    const trace = workspaceRuntimeTraces.find((item) => item.id === scenario?.traceId);
+    const policy = workspaceRoleConversationPolicies[role];
+    if (!scenario) return [];
     return [
-        { id: `${threadId}-user`, from: 'user', text: profile.defaultQuestion || '请分析当前项目风险。', status: 'completed' },
-        { id: `${threadId}-agent`, from: 'agent', text: thread?.summary || profile.answer, status: 'completed', traceId: trace?.id },
+        { id: `${threadId}-user`, from: 'user', text: scenario.userPrompt, status: 'completed' },
+        { id: `${threadId}-agent`, from: 'agent', text: scenario.factSummary, status: 'completed', traceId: trace?.id, focus: policy.resultFocus, nextActionIds: policy.allowedActionIds },
     ];
 }
 
@@ -24,6 +27,7 @@ export function WorkspaceConversation({
     onNewChat,
     onAgent,
     onDialog,
+    onAction,
     permissionFor,
 }: {
     projectId: string;
@@ -33,6 +37,7 @@ export function WorkspaceConversation({
     onNewChat: () => void;
     onAgent: (agentId: string) => void;
     onDialog: (dialog: WorkspaceDialogState) => void;
+    onAction: (message: WorkspaceMessage, actionId: WorkspaceConversationActionId) => void;
     permissionFor: (action: string) => PermissionDecision;
 }) {
     const profile = workspaceRoleProfiles[role];
@@ -48,27 +53,59 @@ export function WorkspaceConversation({
     }, [role, threadId]);
     const createDecision = permissionFor('create');
     const title = threadId === 'new' ? '新对话' : thread?.title || 'Agent 协作会话';
-    const quickPrompts = useMemo(() => role === 'trainer'
-        ? ['定位失败样本共同特征', '比较候选能力版本', '准备组合测试清单']
-        : role === 'admin' || role === 'superadmin'
-            ? ['分析生产告警影响', '检查权限与审计风险', '生成回滚准备清单']
-            : ['分析本周AI质量变化', '生成项目进展摘要', '整理异常样本并分类'], [role]);
+    const policy = workspaceRoleConversationPolicies[role];
+    const quickPrompts = policy.quickPrompts;
 
     const send = () => {
         if (!state.draft.trim()) {
             dispatch({ type: 'feedback', tone: 'error', message: '请输入问题，或先选择一个快捷任务。' });
             return;
         }
+        const prompt = state.draft.trim();
         const stamp = Date.now();
         const runningId = `agent-${stamp}`;
         dispatch({
             type: 'send',
-            userMessage: { id: `user-${stamp}`, from: 'user', text: state.draft.trim(), status: 'completed' },
+            userMessage: { id: `user-${stamp}`, from: 'user', text: prompt, status: 'completed' },
             agentMessage: { id: runningId, from: 'agent', text: '正在检查权限、读取授权上下文并生成结果……', status: 'running' },
         });
+        const reply = resolveWorkspaceReply(role, prompt, agentId, stamp);
+        prototypeStore.createEntity({
+            type: 'conversation-message', name: prompt, status: 'completed', ownerId: profile.identity,
+            moduleId: 'workspace', fields: { projectId, threadId, messageId: `user-${stamp}`, agentId, role, content: prompt },
+            relations: [{ type: 'conversation', targetType: 'conversation', targetId: threadId }],
+        }, profile.identity);
+        if (reply.trace) prototypeStore.createEntity({
+            type: 'run-trace', name: reply.trace.id, status: 'completed', ownerId: agentId, moduleId: 'workspace',
+            fields: {
+                traceId: reply.trace.id, projectId, threadId, agentId,
+                consumedSourceIds: reply.trace.consumedSources.map((item) => item.bindingId),
+                consumedSources: reply.trace.consumedSources.map((item) => `${item.bindingId}|${item.operation}|${item.result}`),
+            },
+            relations: [{ type: 'conversation', targetType: 'conversation', targetId: threadId }],
+        }, profile.identity);
+        prototypeStore.createEntity({
+            type: 'conversation-message', name: reply.message, status: 'completed', ownerId: agentId,
+            moduleId: 'workspace', fields: { projectId, threadId, messageId: runningId, agentId, role, content: reply.message, focus: reply.focus, traceId: reply.trace?.id || '' },
+            relations: [
+                { type: 'conversation', targetType: 'conversation', targetId: threadId },
+                ...(reply.trace ? [{ type: 'trace', targetType: 'run-trace', targetId: reply.trace.id }] : []),
+            ],
+        }, profile.identity);
         window.setTimeout(() => dispatch({
-            type: 'complete', messageId: runningId, text: `${profile.answer} 已保留输入、能力版本、运行证据和当前角色权限。`, traceId: 'trace-9ab8-73c',
+            type: 'complete', messageId: runningId, text: reply.message, traceId: reply.trace?.id, focus: reply.focus, nextActionIds: reply.nextActionIds,
         }), 650);
+    };
+
+    const runAction = (message: WorkspaceMessage, actionId: WorkspaceConversationActionId) => {
+        if (actionId === 'view-evidence') return onDialog({ id: 'evidence', payload: message.traceId });
+        if (!message.traceId) {
+            dispatch({ type: 'feedback', tone: 'error', message: '当前回答没有真实 Trace，不能创建任务、反馈、测试或工单。' });
+            return;
+        }
+        if (actionId === 'submit-feedback') return onDialog({ id: 'result-feedback', payload: message.traceId });
+        if (actionId === 'create-task') return onDialog({ id: 'repair-task', payload: message.traceId });
+        onAction(message, actionId);
     };
 
     return <main className="workspace-conversation" aria-label="与 Agent 对话">
@@ -97,14 +134,13 @@ export function WorkspaceConversation({
                     <p>{message.text}</p>
                     {message.status === 'running' && <div className="m04-running"><i />读取授权上下文并校验证据</div>}
                     {message.from === 'agent' && message.status === 'completed' && <>
-                        <button type="button" className="m04-trace-link" onClick={() => onDialog({ id: 'evidence' })}><GitBranch size={15} />执行过程 · 查看完整追踪</button>
+                        <button type="button" className="m04-trace-link" onClick={() => onDialog({ id: 'evidence', payload: message.traceId })}><GitBranch size={15} />{message.traceId ? '执行过程 · 查看完整追踪' : '证据缺失 · 查看限制说明'}</button>
                         <section className="m04-result-block">
-                            <strong>下一步</strong>
-                            <p>结果可追踪，可直接形成任务、问题反馈或进一步分析。</p>
+                            <strong>{message.focus || '职责边界'}</strong>
+                            <p>{message.traceId ? '结果已关联真实运行证据；后续动作会保留项目、会话、Agent 与 Trace。' : '本问题超出当前角色职责或无法匹配；请选择下方快捷问题，不生成虚假结论。'}</p>
                             <div>
-                                <button type="button" className="m04-primary" disabled={!createDecision.allowed} title={createDecision.reason} onClick={() => onDialog({ id: 'repair-task' })}><FilePlus2 size={15} />创建修复任务</button>
-                                <button type="button" onClick={() => onDialog({ id: 'evidence' })}>查看证据</button>
-                                <button type="button" onClick={() => onDialog({ id: 'result-feedback' })}>反馈结果问题</button>
+                                {(message.nextActionIds || []).map((actionId, index) => <button type="button" key={actionId} className={index === 0 ? 'm04-primary' : ''} disabled={actionId.includes('task') && !createDecision.allowed} title={actionId.includes('task') ? createDecision.reason : undefined} onClick={() => runAction(message, actionId)}>{workspaceActionLabels[actionId]}</button>)}
+                                {!message.traceId && quickPrompts.map((prompt) => <button type="button" key={prompt} onClick={() => dispatch({ type: 'set-draft', value: prompt })}>{prompt}</button>)}
                             </div>
                         </section>
                     </>}

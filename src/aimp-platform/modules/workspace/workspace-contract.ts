@@ -1,5 +1,6 @@
 import type { RoleId } from '../../types';
 import type { ProjectRecord } from '../delivery-management/delivery-types';
+import { workspaceConversationScenarios } from './workspace-conversation-policy';
 
 export type WorkspaceBindingKind = 'knowledge' | 'data' | 'content';
 export type WorkspaceNavigateAction =
@@ -69,6 +70,9 @@ export interface WorkspaceThread {
     agentId: string;
     updatedAt: string;
     summary: string;
+    visibleRoles?: RoleId[];
+    userPrompt?: string;
+    traceId?: string;
 }
 
 export interface WorkspaceAgent {
@@ -158,7 +162,7 @@ export const workspaceRoleProfiles: Record<RoleId, WorkspaceRoleProfile> = {
     },
     business: {
         role: 'business', identity: '李沐 · 业务负责人', organization: 'DNDC线索中心', jobTitle: '线索中心经理',
-        dataScope: '负责项目与部门', projectId: 'PJ-LEAD-OPS-01', defaultAgentId: 'AGENT-BIZ-08',
+        dataScope: '负责项目与部门', projectId: 'PJ-LEAD-Q3-02', defaultAgentId: 'AGENT-BIZ-08',
         defaultQuestion: '评估评分Agent恢复上线对转化率、人工复核量和SLA的影响。',
         answer: '已聚合业务效果投影、测试报告和风险窗口。你可以形成审批意见、调整灰度范围或创建业务验收任务。',
         duty: '业务目标、效果口径、灰度与验收审批',
@@ -218,12 +222,17 @@ export function toWorkspaceProject(project: ProjectRecord): WorkspaceProject {
     };
 }
 
-export const workspaceThreads: WorkspaceThread[] = [
-    { id: 'CHAT-3088', projectId: 'PJ-LEAD-Q3-02', title: '分析本周评分偏差', agentId: 'AGENT-LEAD-03', updatedAt: '10分钟前', summary: 'Prompt与知识版本不一致，建议创建P1修复任务。' },
-    { id: 'CHAT-3072', projectId: 'PJ-LEAD-Q3-02', title: '生成业务影响摘要', agentId: 'AGENT-BIZ-08', updatedAt: '昨天', summary: '生成转化率、人工复核量和SLA影响摘要。' },
-    { id: 'CHAT-3051', projectId: 'PJ-LEAD-Q3-02', title: '整理异常样本', agentId: 'AGENT-QUALITY-11', updatedAt: '周一', summary: '完成126条脱敏低置信样本分类。' },
-    { id: 'CHAT-4012', projectId: 'PJ-LEAD-OPS-01', title: '分析P1告警与保护策略', agentId: 'AGENT-RUNTIME-06', updatedAt: '8分钟前', summary: '生产保护已生效，等待评估降级范围。' },
-];
+export const workspaceThreads: WorkspaceThread[] = workspaceConversationScenarios.map((scenario) => ({
+    id: scenario.id,
+    projectId: scenario.projectId,
+    title: scenario.title,
+    agentId: scenario.agentId,
+    updatedAt: scenario.updatedAt,
+    summary: scenario.factSummary,
+    visibleRoles: scenario.visibleRoles,
+    userPrompt: scenario.userPrompt,
+    traceId: scenario.traceId,
+}));
 
 export const workspaceAgents: WorkspaceAgent[] = [
     { id: 'AGENT-LEAD-03', name: '线索分析 Agent', version: 'v3.7', owner: 'AI能力运营组', status: '在线', capabilities: ['数据分析', '质量诊断'], permission: '项目数据只读' },
@@ -324,12 +333,23 @@ export const workspaceRuntimeTraces: WorkspaceRuntimeTrace[] = [
             trigger: 'ALT-518连续触发且生产保护已生效',
         },
     },
+    {
+        id: 'trace-gov-5010',
+        threadId: 'CHAT-5010',
+        agentId: 'AGENT-GOV-01',
+        consumedSources: [
+            { bindingId: 'AUDIT-CHANGE-LOG', operation: '核对租户影响、特权访问与灾备记录', result: '重大变更证据完整' },
+            { bindingId: 'DS-RUNTIME-METRICS', operation: '读取路由变更与灾备恢复指标', result: '满足受控灰度门槛' },
+        ],
+    },
 ];
 
 export const workspaceBindings: WorkspaceBinding[] = [
     { kind: 'knowledge', id: 'KB-LEAD-001', name: '车型与线索判定知识库', version: '2026.08', status: '已发布', purpose: '车型标签、配置、政策与线索判定规则', consumerAgentIds: ['AGENT-LEAD-03', 'AGENT-QUALITY-11'], access: '项目成员检索与只读引用', evidence: '本周引用1,284次 · 最近命中10分钟前' },
     { kind: 'data', id: 'DS-CRM-PROJECTION', name: 'CRM脱敏线索事件投影', version: 'schema-2.1', status: '健康', purpose: '聚合质量指标、脱敏评分特征与异常样本', consumerAgentIds: ['AGENT-LEAD-03', 'AGENT-BIZ-08'], access: '项目字段级脱敏只读', evidence: '最近同步4分钟前 · 本次读取126条样本' },
     { kind: 'content', id: 'CONTENT-PACK-018', name: '车型Z售前内容资产包', version: 'v5.0', status: '内容中心已审核', purpose: '车型卖点、活动信息、合规话术与摘要模板', consumerAgentIds: ['AGENT-LEAD-03', 'AGENT-BIZ-08'], access: '项目内预览、引用与反馈', evidence: '近7天36次运行引用 · 有效期至2026-08-31' },
+    { kind: 'data', id: 'DS-RUNTIME-METRICS', name: '生产运行与告警指标', version: 'schema-3.4', status: '健康', purpose: '运行实例、告警窗口、灰度流量与恢复指标', consumerAgentIds: ['AGENT-RUNTIME-06', 'AGENT-GOV-01'], access: '平台运行范围只读', evidence: '最近同步1分钟前 · 告警窗口持续采集' },
+    { kind: 'data', id: 'AUDIT-CHANGE-LOG', name: '重大变更审计记录', version: 'audit-2.6', status: '受审计', purpose: '租户影响、特权访问、审批与灾备证据', consumerAgentIds: ['AGENT-GOV-01'], access: '治理角色受审计读取', evidence: '访问理由与审批链完整记录' },
 ];
 
 export const workspaceMilestones: WorkspaceProjectRecord[] = [

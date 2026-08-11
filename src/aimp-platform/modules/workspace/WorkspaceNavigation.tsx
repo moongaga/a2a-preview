@@ -1,11 +1,12 @@
 import React from 'react';
 import { CalendarClock, ChevronRight, FolderKanban, MessageSquareText, Plus } from 'lucide-react';
-import { workspacePlan, workspaceThreads, type WorkspaceProject, type WorkspaceThread } from './workspace-contract';
+import { workspacePlan, type WorkspaceProject, type WorkspaceThread } from './workspace-contract';
 
 export function WorkspaceNavigation({
     projectId,
     threadId,
     projects,
+    threads,
     onProject,
     onThread,
     onNewChat,
@@ -14,12 +15,13 @@ export function WorkspaceNavigation({
     projectId: string;
     threadId: string;
     projects: WorkspaceProject[];
+    threads: WorkspaceThread[];
     onProject: (project: WorkspaceProject) => void;
     onThread: (thread: WorkspaceThread) => void;
     onNewChat: () => void;
     onPlan: () => void;
 }) {
-    const threads = workspaceThreads.filter((item) => item.projectId === projectId);
+    const projectThreads = threads.filter((item) => item.projectId === projectId);
     return <aside className="workspace-navigation" aria-label="工作空间导航">
         <header>
             <button type="button" className="m04-primary" onClick={onNewChat}><Plus size={16} />新建对话</button>
@@ -37,8 +39,8 @@ export function WorkspaceNavigation({
             </button>)}
         </section>
         <section className="m04-thread-section">
-            <div className="m04-section-title" title="切换最近对话并查看对应运行证据"><span>最近对话</span><small>{threads.length}</small></div>
-            {threads.map((thread) => <button
+            <div className="m04-section-title" title="切换最近对话并查看对应运行证据"><span>最近对话</span><small>{projectThreads.length}</small></div>
+            {projectThreads.map((thread) => <button
                 type="button"
                 key={thread.id}
                 className={`m04-list-button ${thread.id === threadId ? 'is-active' : ''}`}
